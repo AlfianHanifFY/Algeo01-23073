@@ -50,4 +50,12 @@ public class Matrix {
 
     }
 
+    public float[] getCol(int col) {
+        float[] result = new float[cols];
+        for (int i = 0; i < cols; i++) {
+            result[i] = content[i][col];
+        }
+        return result;
+    }
+
 }
