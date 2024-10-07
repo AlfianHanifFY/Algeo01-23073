@@ -41,4 +41,13 @@ public class Matrix {
         }
     }
 
+    public float[] getRow(int row) {
+        float[] result = new float[rows];
+        for (int i = 0; i < cols; i++) {
+            result[i] = content[row][i];
+        }
+        return result;
+
+    }
+
 }
