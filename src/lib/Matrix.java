@@ -3,7 +3,7 @@ package lib;
 import java.util.Scanner;
 
 public class Matrix {
-    float[][] content;
+    double[][] matrix;
     int rows;
     int cols;
 
@@ -15,10 +15,29 @@ public class Matrix {
     // m1.printMatrix();
     // }
 
+    // Konstruktor
     public Matrix(int rows, int cols) {
         this.rows = rows;
         this.cols = cols;
-        content = new float[rows][cols];
+        matrix = new double[rows][cols];
+    }
+
+    // Selektor
+    public double[] getRow(int row) {
+        double[] result = new double[rows];
+        for (int i = 0; i < cols; i++) {
+            result[i] = matrix[row][i];
+        }
+        return result;
+
+    }
+
+    public double[] getCol(int col) {
+        double[] result = new double[cols];
+        for (int i = 0; i < cols; i++) {
+            result[i] = matrix[i][col];
+        }
+        return result;
     }
 
     public void readMatrix() {
@@ -26,7 +45,7 @@ public class Matrix {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                content[i][j] = scanner.nextFloat();
+                matrix[i][j] = scanner.nextDouble();
             }
         }
         scanner.close();
@@ -35,27 +54,10 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.print(content[i][j] + " ");
+                System.out.print(matrix[i][j] + " ");
             }
             System.out.print("\n");
         }
-    }
-
-    public float[] getRow(int row) {
-        float[] result = new float[rows];
-        for (int i = 0; i < cols; i++) {
-            result[i] = content[row][i];
-        }
-        return result;
-
-    }
-
-    public float[] getCol(int col) {
-        float[] result = new float[cols];
-        for (int i = 0; i < cols; i++) {
-            result[i] = content[i][col];
-        }
-        return result;
     }
 
 }
