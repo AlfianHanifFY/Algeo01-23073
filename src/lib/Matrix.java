@@ -32,4 +32,13 @@ public class Matrix {
         scanner.close();
     }
 
+    public void printMatrix() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                System.out.print(content[i][j] + " ");
+            }
+            System.out.print("\n");
+        }
+    }
+
 }
