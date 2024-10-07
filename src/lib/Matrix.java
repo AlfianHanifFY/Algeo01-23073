@@ -21,4 +21,15 @@ public class Matrix {
         content = new float[rows][cols];
     }
 
+    public void readMatrix() {
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                content[i][j] = scanner.nextFloat();
+            }
+        }
+        scanner.close();
+    }
+
 }
