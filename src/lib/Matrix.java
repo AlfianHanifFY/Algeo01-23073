@@ -139,9 +139,12 @@ public class Matrix {
 
 public int colLength(int col) {
         int i, sum = 0;
+        boolean valid = true;
         for (i = 0; i < getRow(); i++) {
-            if (getElmt(i, col) != 0) {
+            if (getElmt(i, col) == 0 && valid) {
                 sum += 1;
+            } else {
+                valid = false;
             }
         }
         return sum;
