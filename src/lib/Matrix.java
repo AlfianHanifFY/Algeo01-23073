@@ -15,20 +15,20 @@ public class Matrix {
         System.out.println();
         m1.printMatrix();
         System.out.println();
-        a = m1.colLength(0);
-        b = m1.rowLength(0);
-        System.out.println("list legth = " + b + " " + a);
-        m1.sortRowByZero();
+        m1.generateEselon();
         m1.printMatrix();
-        System.out.println("plusKRow");
-        m1.plusKRow(0, 2, 1);
-        m1.printMatrix();
-        System.out.println("transpose");
-        m1.transpose();
-        m1.printMatrix();
-
-    }
-
+        // System.out.println();
+        // a = m1.colLength(0);
+        // b = m1.rowLength(0);
+        // System.out.println("list legth = " + b + " " + a);
+        // m1.sortRowByZero();
+        // m1.printMatrix();
+        // System.out.println("plusKRow");
+        // m1.plusKRow(0, 2, 1);
+        // m1.printMatrix();
+        // System.out.println("transpose");
+        // m1.transpose();
+        // m1.printMatrix();
     // Konstruktor
     public Matrix(int _rows, int _cols) {
         this.rows = _rows;
