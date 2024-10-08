@@ -131,4 +131,14 @@ public class Matrix {
         return sum;
     }
 
+public int colLength(int col) {
+        int i, sum = 0;
+        for (i = 0; i < getRow(); i++) {
+            if (getElmt(i, col) != 0) {
+                sum += 1;
+            }
+        }
+        return sum;
+    }
+
 }
