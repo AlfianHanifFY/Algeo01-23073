@@ -23,9 +23,9 @@ public class Matrix {
     }
 
     // Selektor
-    public double[] getRow(int row) {
+    public double[] getRowContent(int row) {
         double[] result = new double[rows];
-        for (int i = 0; i < cols; i++) {
+        for (int i = 0; i < this.cols; i++) {
             result[i] = matrix[row][i];
         }
         return result;
