@@ -71,7 +71,7 @@ public class Matrix {
         return this.cols;
     }
 
-public int getRow() {
+    public int getRow() {
         return this.rows;
     }
 
@@ -93,6 +93,13 @@ public int getRow() {
 
     }
 
+    // plusKRow
+    public void plusKRow(int row, double k, int krow) {
+        int i;
+        for (i = 0; i < getCol(); i++) {
+            setElMT(row, i, getElmt(row, i) + getElmt(krow, i) * k);
+        }
+    }
     // transpose
 
 }
