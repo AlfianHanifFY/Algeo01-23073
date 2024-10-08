@@ -10,15 +10,20 @@ public class Matrix {
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
         Matrix m1 = new Matrix(3, 3);
+        int a, b;
         m1.readMatrix();
         System.out.println();
         m1.printMatrix();
         System.out.println();
+        a = m1.colLength(0);
+        b = m1.rowLength(0);
+        System.out.println(a + " " + b);
         m1.plusKRow(0, 2, 1);
         m1.printMatrix();
         System.out.println();
         m1.transpose();
         m1.printMatrix();
+
     }
 
     // Konstruktor
