@@ -17,7 +17,10 @@ public class Matrix {
         System.out.println();
         a = m1.colLength(0);
         b = m1.rowLength(0);
-        System.out.println(a + " " + b);
+        System.out.println("list legth = " + b + " " + a);
+        m1.sortRowByZero();
+        m1.printMatrix();
+        System.out.println("plusKRow");
         m1.plusKRow(0, 2, 1);
         m1.printMatrix();
         System.out.println();
