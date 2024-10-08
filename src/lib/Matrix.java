@@ -16,10 +16,10 @@ public class Matrix {
     // }
 
     // Konstruktor
-    public Matrix(int rows, int cols) {
-        this.rows = rows;
-        this.cols = cols;
-        matrix = new double[rows][cols];
+    public Matrix(int _rows, int _cols) {
+        this.rows = _rows;
+        this.cols = _cols;
+        this.matrix = new double[_rows][_cols];
     }
 
     // Selektor
