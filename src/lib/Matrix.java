@@ -72,4 +72,12 @@ public int getRow() {
         return this.rows;
     }
 
+    public void setElMT(int row, int col, double val) {
+        this.matrix[row][col] = val;
+    }
+
+    
+
+    // transpose
+
 }
