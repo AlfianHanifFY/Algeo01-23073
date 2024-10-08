@@ -120,4 +120,15 @@ public class Matrix {
         this.matrix = newM.matrix;
     }
 
+    // cek elemen baris yang ga 0
+    public int rowLength(int row) {
+        int i, sum = 0;
+        for (i = 0; i < getCol(); i++) {
+            if (getElmt(row, i) != 0) {
+                sum += 1;
+            }
+        }
+        return sum;
+    }
+
 }
