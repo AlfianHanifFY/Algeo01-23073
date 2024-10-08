@@ -150,4 +150,15 @@ public int colLength(int col) {
         return sum;
     }
 
+    public void sortRowByZero() {
+        // pokoknya nanti urut berdasarkan jumlah 0 dari yang dikit sampe banyak
+        int i, j;
+        for (i = 0; i < getRow(); i++) {
+            for (j = i; j < getRow(); j++) {
+                if (rowLength(i) > rowLength(j)) {
+                    swapRow(i, j);
+                }
+            }
+        }
+    }
 }
