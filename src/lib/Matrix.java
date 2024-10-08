@@ -13,6 +13,9 @@ public class Matrix {
     // m1.readMatrix();
     // System.out.println();
     // m1.printMatrix();
+    // System.out.println();
+    // m1.plusKRow(0, 2, 1);
+    // m1.printMatrix();
     // }
 
     // Konstruktor
