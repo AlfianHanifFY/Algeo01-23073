@@ -60,8 +60,8 @@ public class Matrix {
         }
     }
 
-    public double getElmt(int col, int row) {
-        return this.matrix[col][row];
+    public double getElmt(int row, int col) {
+        return this.matrix[row][col];
     }
 
     public int getCol() {
