@@ -68,5 +68,8 @@ public class Matrix {
         return this.cols;
     }
 
+public int getRow() {
+        return this.rows;
+    }
 
 }
