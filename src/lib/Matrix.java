@@ -32,10 +32,10 @@ public class Matrix {
 
     }
 
-    public double[] getCol(int col) {
-        double[] result = new double[cols];
-        for (int i = 0; i < cols; i++) {
-            result[i] = matrix[i][col];
+    public double[] getColContent(int col) {
+        double[] result = new double[this.cols];
+        for (int i = 0; i < this.cols; i++) {
+            result[i] = this.matrix[i][col];
         }
         return result;
     }
