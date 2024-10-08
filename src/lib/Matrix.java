@@ -126,9 +126,12 @@ public class Matrix {
     // cek elemen baris yang ga 0
     public int rowLength(int row) {
         int i, sum = 0;
+        boolean valid = true;
         for (i = 0; i < getCol(); i++) {
-            if (getElmt(row, i) != 0) {
+            if (getElmt(row, i) == 0 && valid) {
                 sum += 1;
+            } else {
+                valid = false;
             }
         }
         return sum;
