@@ -76,7 +76,19 @@ public int getRow() {
         this.matrix[row][col] = val;
     }
 
-    
+    // OBE
+
+    // swap lane
+    public void swapRow(int row1, int row2) {
+        double temp;
+        int i;
+        for (i = 0; i < getCol(); i++) {
+            temp = getElmt(row1, i);
+            setElMT(row1, i, getElmt(row2, i));
+            setElMT(row2, i, temp);
+        }
+
+    }
 
     // transpose
 
