@@ -23,7 +23,7 @@ public class Matrix {
         System.out.println("plusKRow");
         m1.plusKRow(0, 2, 1);
         m1.printMatrix();
-        System.out.println();
+        System.out.println("transpose");
         m1.transpose();
         m1.printMatrix();
 
@@ -111,6 +111,7 @@ public class Matrix {
             setElMT(row, i, getElmt(row, i) + getElmt(krow, i) * k);
         }
     }
+
     // transpose
     public void transpose() {
         Matrix newM = new Matrix(getRow(), getCol());
@@ -137,7 +138,7 @@ public class Matrix {
         return sum;
     }
 
-public int colLength(int col) {
+    public int colLength(int col) {
         int i, sum = 0;
         boolean valid = true;
         for (i = 0; i < getRow(); i++) {
