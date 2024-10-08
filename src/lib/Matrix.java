@@ -64,5 +64,9 @@ public class Matrix {
         return this.matrix[col][row];
     }
 
+    public int getCol() {
+        return this.cols;
+    }
+
 
 }
