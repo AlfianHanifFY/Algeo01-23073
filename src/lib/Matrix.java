@@ -29,6 +29,9 @@ public class Matrix {
         // System.out.println("transpose");
         // m1.transpose();
         // m1.printMatrix();
+
+    }
+
     // Konstruktor
     public Matrix(int _rows, int _cols) {
         this.rows = _rows;
@@ -109,6 +112,17 @@ public class Matrix {
         int i;
         for (i = 0; i < getCol(); i++) {
             setElMT(row, i, getElmt(row, i) + getElmt(krow, i) * k);
+        }
+    }
+
+    public void divideRow(int row, double k) {
+        // ngebagi row pake k
+        int i;
+        for (i = 0; i < getCol(); i++) {
+            if (getElmt(row, i) != 0) {
+                setElMT(row, i, getElmt(row, i) / k);
+            }
+
         }
     }
 
