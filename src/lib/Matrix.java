@@ -104,5 +104,15 @@ public class Matrix {
         }
     }
     // transpose
+    public void transpose() {
+        Matrix newM = new Matrix(getRow(), getCol());
+        int i, j;
+        for (i = 0; i < getRow(); i++) {
+            for (j = 0; j < getCol(); j++) {
+                newM.matrix[i][j] = getElmt(j, i);
+            }
+        }
+        this.matrix = newM.matrix;
+    }
 
 }
