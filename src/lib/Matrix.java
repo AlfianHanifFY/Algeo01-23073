@@ -1,6 +1,7 @@
 package lib;
 
 import java.util.Scanner;
+import java.util.Locale;
 
 public class Matrix {
     double[][] matrix;
@@ -71,7 +72,8 @@ public class Matrix {
     public void printMatrix() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                System.out.print(matrix[i][j] + " ");
+                // format 2 angka dibelakang koma
+                System.out.print(String.format(Locale.US, "%.2f ", matrix[i][j]));
             }
             System.out.print("\n");
         }
