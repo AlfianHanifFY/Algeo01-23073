@@ -180,11 +180,11 @@ public class Matrix {
     }
 
     public void generateEselon() {
-        int i, j;
+        int i;
         double k;
         sortRowByZero();
         for (i = 1; i < getRow(); i++) {
-            if (rowLength(i) == rowLength(i - 1)) {
+            if (rowLength(i) == rowLength(i - 1) && rowLength(i) != getCol()) {
                 k = getElmt(i, rowLength(i)) / getElmt(i - 1, rowLength(i - 1));
                 plusKRow(i, -k, i - 1);
                 sortRowByZero();
@@ -194,7 +194,7 @@ public class Matrix {
             }
         }
         for (i = 0; i < getRow(); i++) {
-            if (rowLength(i) != getRow()) {
+            if (rowLength(i) != getCol()) {
                 k = getElmt(i, rowLength(i));
                 divideRow(i, k);
             }
