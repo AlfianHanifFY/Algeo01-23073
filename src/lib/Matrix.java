@@ -202,4 +202,19 @@ public class Matrix {
         }
 
     }
+
+    public void generateEselonReduksi() {
+        int i, j;
+        double k;
+        generateEselon();
+        for (i = 1; i < getRow(); i++) {
+            for (j = i - 1; j >= 0; j--) {
+                printMatrix();
+                System.out.println();
+                k = getElmt(j, rowLength(i));
+                plusKRow(j, -k, i);
+            }
+        }
+
+    }
 }
