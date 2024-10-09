@@ -10,13 +10,13 @@ public class Matrix {
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
-        Matrix m1 = new Matrix(3, 3);
+        Matrix m1 = new Matrix(3, 4);
         int a, b;
         m1.readMatrix();
         System.out.println();
         m1.printMatrix();
         System.out.println();
-        m1.generateEselon();
+        m1.generateEselonReduksi();
         m1.printMatrix();
         // System.out.println();
         // a = m1.colLength(0);
