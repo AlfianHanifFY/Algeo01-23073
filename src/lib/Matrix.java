@@ -220,13 +220,10 @@ public class Matrix {
         generateEselon();
         for (i = 1; i < getRow(); i++) {
             for (j = i - 1; j >= 0; j--) {
-                printMatrix();
-                System.out.println();
                 if (rowLength(i) != getCol()) {
                 k = getElmt(j, rowLength(i));
                     plusKRow(j, -k, i);
                 }
-
             }
         }
     }
