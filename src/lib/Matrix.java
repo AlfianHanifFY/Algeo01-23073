@@ -27,8 +27,11 @@ public class Matrix {
         // m2.readMatrix(scanner);
         // System.out.println("augmented:");
         // M = Matrix.createAugmented(m1, m2);
-        M = Matrix.createMatrixIdentitas(5);
-        M.printMatrix();
+        // M = Matrix.createMatrixIdentitas(3);
+        // m2 = Matrix.createAugmented(M, m1);
+        // m2.printMatrix();
+        // m2 = Matrix.getHalfLeft(m2);
+        // m2.printMatrix();
         // M.generateEselonReduksi();
         // M.printMatrix();
         // M = Matrix.getHalfRigth(M);
