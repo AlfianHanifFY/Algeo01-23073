@@ -285,6 +285,18 @@ public class Matrix {
         return M;
     }
 
+    public static Matrix getHalfLeft(Matrix m) {
+        // inputnya
+        Matrix M = new Matrix(m.getRow(), m.getCol() / 2);
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol() / 2; j++) {
+                M.setElMT(i, j, m.getElmt(i, j));
+            }
+        }
+        return M;
+    }
+
     public static Matrix createMatrixIdentitas(int nRowCol) {
         Matrix M = new Matrix(nRowCol, nRowCol);
         int i, j;
