@@ -14,8 +14,9 @@ public class Matrix {
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Matrix m1 = new Matrix(3, 1);
-        Matrix m2 = new Matrix(2, 3);
+        Matrix m1 = new Matrix(3, 3);
+        Matrix m2 = new Matrix(3, 3);
+        Matrix M;
         Matrix res;
         int a, b;
         System.out.println("matrix 1");
