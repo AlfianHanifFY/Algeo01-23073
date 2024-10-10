@@ -71,15 +71,14 @@ public class Matrix {
         return result;
     }
 
-    public void readMatrix() {
-        Scanner scanner = new Scanner(System.in);
+    public void readMatrix(Scanner scanner) {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 matrix[i][j] = scanner.nextDouble();
             }
         }
-        scanner.close();
+
     }
 
     public void printMatrix() {
