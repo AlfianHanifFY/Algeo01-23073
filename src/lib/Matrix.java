@@ -14,7 +14,7 @@ public class Matrix {
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Matrix m1 = new Matrix(3, 1);
+        Matrix m1 = new Matrix(3, 4);
         Matrix m2 = new Matrix(2, 3);
         Matrix res;
         int a, b;
@@ -22,15 +22,15 @@ public class Matrix {
         m1.readMatrix(scanner);
         System.out.println();
         m1.printMatrix();
-        System.out.println("matrix 2");
-        m2.readMatrix(scanner);
-        System.out.println();
-        m2.printMatrix();
-        res = Matrix.multiplyMatrix(m1, m2);
-        System.out.println();
-        res.printMatrix();
-        // m1.generateEselonReduksi();
-        // m1.printMatrix();
+        // System.out.println("matrix 2");
+        // m2.readMatrix(scanner);
+        // System.out.println();
+        // m2.printMatrix();
+        // res = Matrix.multiplyMatrix(m1, m2);
+        // System.out.println();
+        // res.printMatrix();
+        m1.generateEselonReduksi();
+        m1.printMatrix();
         // System.out.println();
         // a = m1.colLength(0);
         // b = m1.rowLength(0);
@@ -220,11 +220,12 @@ public class Matrix {
         for (i = 1; i < getRow(); i++) {
             for (j = i - 1; j >= 0; j--) {
                 if (rowLength(i) != getCol()) {
-                k = getElmt(j, rowLength(i));
+                    k = getElmt(j, rowLength(i));
                     plusKRow(j, -k, i);
                 }
             }
         }
+        printMatrix();
     }
 
     public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
