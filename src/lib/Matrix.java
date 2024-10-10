@@ -267,4 +267,16 @@ public class Matrix {
         }
         return M;
     }
+
+    public static Matrix getHalfRigth(Matrix m) {
+        // inputnya
+        Matrix M = new Matrix(m.getRow(), m.getCol() / 2);
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = m.getCol() / 2; j < m.getCol(); j++) {
+                M.setElMT(i, j - m.getCol() / 2, m.getElmt(i, j));
+            }
+        }
+        return M;
+    }
 }
