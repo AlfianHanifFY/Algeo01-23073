@@ -222,8 +222,11 @@ public class Matrix {
             for (j = i - 1; j >= 0; j--) {
                 printMatrix();
                 System.out.println();
+                if (rowLength(i) != getCol()) {
                 k = getElmt(j, rowLength(i));
-                plusKRow(j, -k, i);
+                    plusKRow(j, -k, i);
+                }
+
             }
         }
     }
