@@ -201,7 +201,6 @@ public class Matrix {
                 plusKRow(i, -k, i - 1);
                 sortRowByZero();
                 i--;
-                System.out.println();
             }
         }
         for (i = 0; i < getRow(); i++) {
