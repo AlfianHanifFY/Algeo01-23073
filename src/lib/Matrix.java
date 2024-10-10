@@ -226,6 +226,24 @@ public class Matrix {
                 plusKRow(j, -k, i);
             }
         }
+    }
 
+    public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
+        Matrix resM = new Matrix(m1.getRow(), m2.getCol());
+        int i, j, k;
+        double val;
+        // kalo ga valid nanti muncul matrix kosong :D
+        if (m1.getCol() == m2.getRow()) {
+            for (i = 0; i < resM.getRow(); i++) {
+                for (j = 0; j < resM.getCol(); j++) {
+                    val = 0;
+                    for (k = 0; k < m1.getCol(); k++) {
+                        val += m1.getElmt(i, k) * m2.getElmt(k, j);
+                        resM.setElMT(i, j, val);
+                    }
+                }
+            }
+        }
+        return resM;
     }
 }
