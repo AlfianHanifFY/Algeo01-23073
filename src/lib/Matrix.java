@@ -220,7 +220,7 @@ public class Matrix {
         for (i = 1; i < getRow(); i++) {
             for (j = i - 1; j >= 0; j--) {
                 if (rowLength(i) != getCol()) {
-                k = getElmt(j, rowLength(i));
+                    k = getElmt(j, rowLength(i));
                     plusKRow(j, -k, i);
                 }
             }
