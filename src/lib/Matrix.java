@@ -249,4 +249,19 @@ public class Matrix {
         }
         return resM;
     }
+
+    public static Matrix createAugmented(Matrix m1, Matrix m2) {
+        Matrix M = new Matrix(m1.getRow(), m1.getCol() + m2.getCol());
+        int i, j;
+        for (i = 0; i < M.getRow(); i++) {
+            for (j = 0; j < M.getCol(); j++) {
+                if (j < m1.getCol()) {
+                    M.setElMT(i, j, m1.getElmt(i, j));
+                } else {
+                    M.setElMT(i, j, m2.getElmt(i, j - m1.getCol()));
+                }
+            }
+        }
+        return M;
+    }
 }
