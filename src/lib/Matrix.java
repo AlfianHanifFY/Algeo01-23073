@@ -281,4 +281,19 @@ public class Matrix {
         }
         return M;
     }
+
+    public static Matrix createMatrixIdentitas(int nRowCol) {
+        Matrix M = new Matrix(nRowCol, nRowCol);
+        int i, j;
+        for (i = 0; i < M.getRow(); i++) {
+            for (j = 0; j < M.getCol(); j++) {
+                if (i == j) {
+                    M.setElMT(i, j, 1);
+                } else {
+                    M.setElMT(i, j, 0);
+                }
+            }
+        }
+        return M;
+    }
 }
