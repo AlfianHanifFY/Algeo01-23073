@@ -86,4 +86,14 @@ public class SPL {
         return false;
     }
 
+    public static boolean isNoSulution(Matrix m) {
+        // m adalah matrix augmented
+        int i;
+        for (i = 0; i < m.getRow(); i++) {
+            if (m.rowLength(i) == m.getCol() - 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
