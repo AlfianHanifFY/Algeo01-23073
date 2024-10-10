@@ -61,39 +61,4 @@ public class SPL {
 
     }
 
-    public static boolean isUnique(Matrix m) {
-        // m adalah matrix augmented
-        int i;
-        for (i = 0; i < m.getRow(); i++) {
-            if (m.rowLength(i) == m.getCol()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static boolean isLotSolution(Matrix m) {
-        // m adalah matrix augmented
-        int i;
-        if (m.getRow() < m.getCol() - 1) {
-            return true;
-        }
-        for (i = 0; i < m.getRow(); i++) {
-            if (m.rowLength(i) == m.getCol()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isNoSulution(Matrix m) {
-        // m adalah matrix augmented
-        int i;
-        for (i = 0; i < m.getRow(); i++) {
-            if (m.rowLength(i) == m.getCol() - 1) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
