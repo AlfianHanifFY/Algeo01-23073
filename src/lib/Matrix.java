@@ -1,6 +1,9 @@
 package lib;
 
 import java.util.Scanner;
+
+import javax.security.sasl.SaslException;
+
 import java.util.Locale;
 
 public class Matrix {
@@ -10,14 +13,24 @@ public class Matrix {
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
-        Matrix m1 = new Matrix(3, 4);
+        Scanner scanner = new Scanner(System.in);
+        Matrix m1 = new Matrix(3, 1);
+        Matrix m2 = new Matrix(2, 3);
+        Matrix res;
         int a, b;
-        m1.readMatrix();
+        System.out.println("matrix 1");
+        m1.readMatrix(scanner);
         System.out.println();
         m1.printMatrix();
+        System.out.println("matrix 2");
+        m2.readMatrix(scanner);
         System.out.println();
-        m1.generateEselonReduksi();
-        m1.printMatrix();
+        m2.printMatrix();
+        res = Matrix.multiplyMatrix(m1, m2);
+        System.out.println();
+        res.printMatrix();
+        // m1.generateEselonReduksi();
+        // m1.printMatrix();
         // System.out.println();
         // a = m1.colLength(0);
         // b = m1.rowLength(0);
@@ -30,7 +43,7 @@ public class Matrix {
         // System.out.println("transpose");
         // m1.transpose();
         // m1.printMatrix();
-
+        scanner.close();
     }
 
     // Konstruktor
