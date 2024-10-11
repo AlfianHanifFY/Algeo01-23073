@@ -13,4 +13,14 @@ public class invers {
         showInversOBE(m);
     }
 
+    public static boolean isInversValid(Matrix leftM) {
+        // m adalah matrix yang sudah di invers melalui OBE
+        int i;
+        for (i = 0; i < leftM.getRow(); i++) {
+            if (leftM.rowLength(i) == leftM.getRow()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
