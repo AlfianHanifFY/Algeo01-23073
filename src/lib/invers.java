@@ -30,6 +30,18 @@ public class invers {
         return M;
     }
 
+    public static void showInversOBE(Matrix m) {
+        // buat nge print invers matrix
+        Matrix M;
+        M = getInversOBE(m);
+        if (isInversValid(M)) {
+            M.printMatrix();
+        } else {
+            System.out.println("matrix tidak memiliki invers !");
+        }
+
+    }
+
     public static boolean isInversValid(Matrix leftM) {
         // m adalah matrix yang sudah di invers melalui OBE
         int i;
