@@ -98,6 +98,7 @@ public class SPL {
     }
 
     public static void gaussSolution(Matrix m) {
+        // SOLUSI BANYAKNYA MASIH KEOS -- NANTI DI CEK
         int i, j, n, ex = 0;
         double[] res = new double[m.getCol() - 1];
         double val;
