@@ -1,9 +1,6 @@
 package lib;
 
 import java.util.Scanner;
-
-import javax.security.sasl.SaslException;
-
 import java.util.Locale;
 
 public class Matrix {
@@ -13,24 +10,36 @@ public class Matrix {
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Matrix m1 = new Matrix(3, 4);
-        Matrix m2 = new Matrix(2, 3);
-        Matrix res;
-        int a, b;
-        System.out.println("matrix 1");
-        m1.readMatrix(scanner);
-        System.out.println();
-        m1.printMatrix();
+        // Scanner scanner = new Scanner(System.in);
+        // Matrix m1 = new Matrix(3, 3);
+        // Matrix m2 = new Matrix(3, 3);
+        // Matrix M;
+        // Matrix res;
+        // int a, b;
+        // System.out.println("matrix 1");
+        // m1.readMatrix(scanner);
+        // System.out.println();
+        // m1.printMatrix();
         // System.out.println("matrix 2");
         // m2.readMatrix(scanner);
+        // System.out.println("augmented:");
+        // M = Matrix.createAugmented(m1, m2);
+        // M = Matrix.createMatrixIdentitas(3);
+        // m2 = Matrix.createAugmented(M, m1);
+        // m2.printMatrix();
+        // m2 = Matrix.getHalfLeft(m2);
+        // m2.printMatrix();
+        // M.generateEselonReduksi();
+        // M.printMatrix();
+        // M = Matrix.getHalfRigth(M);
+        // M.printMatrix();
         // System.out.println();
         // m2.printMatrix();
         // res = Matrix.multiplyMatrix(m1, m2);
         // System.out.println();
         // res.printMatrix();
-        m1.generateEselonReduksi();
-        m1.printMatrix();
+        // m1.generateEselonReduksi();
+        // m1.printMatrix();
         // System.out.println();
         // a = m1.colLength(0);
         // b = m1.rowLength(0);
@@ -43,7 +52,7 @@ public class Matrix {
         // System.out.println("transpose");
         // m1.transpose();
         // m1.printMatrix();
-        scanner.close();
+        // scanner.close();
     }
 
     // Konstruktor
@@ -245,5 +254,70 @@ public class Matrix {
             }
         }
         return resM;
+    }
+
+    public static Matrix createAugmented(Matrix m1, Matrix m2) {
+        Matrix M = new Matrix(m1.getRow(), m1.getCol() + m2.getCol());
+        int i, j;
+        for (i = 0; i < M.getRow(); i++) {
+            for (j = 0; j < M.getCol(); j++) {
+                if (j < m1.getCol()) {
+                    M.setElMT(i, j, m1.getElmt(i, j));
+                } else {
+                    M.setElMT(i, j, m2.getElmt(i, j - m1.getCol()));
+                }
+            }
+        }
+        return M;
+    }
+
+    public static Matrix getHalfRigth(Matrix m) {
+        // inputnya
+        Matrix M = new Matrix(m.getRow(), m.getCol() / 2);
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = m.getCol() / 2; j < m.getCol(); j++) {
+                M.setElMT(i, j - m.getCol() / 2, m.getElmt(i, j));
+            }
+        }
+        return M;
+    }
+
+    public static Matrix getHalfLeft(Matrix m) {
+        // inputnya
+        Matrix M = new Matrix(m.getRow(), m.getCol() / 2);
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol() / 2; j++) {
+                M.setElMT(i, j, m.getElmt(i, j));
+            }
+        }
+        return M;
+    }
+
+    public static Matrix createMatrixIdentitas(int nRowCol) {
+        Matrix M = new Matrix(nRowCol, nRowCol);
+        int i, j;
+        for (i = 0; i < M.getRow(); i++) {
+            for (j = 0; j < M.getCol(); j++) {
+                if (i == j) {
+                    M.setElMT(i, j, 1);
+                } else {
+                    M.setElMT(i, j, 0);
+                }
+            }
+        }
+        return M;
+    }
+
+    public static Matrix createMatrixKosong(int nRowCol) {
+        Matrix M = new Matrix(nRowCol, nRowCol);
+        int i, j;
+        for (i = 0; i < M.getRow(); i++) {
+            for (j = 0; j < M.getCol(); j++) {
+                M.setElMT(i, j, 0);
+            }
+        }
+        return M;
     }
 }
