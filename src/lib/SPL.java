@@ -11,7 +11,7 @@ public class SPL {
         Scanner scanner = new Scanner(System.in);
         Matrix m1 = new Matrix(4, 5);
         m1.readMatrix(scanner);
-        gaussJordanSolution(m1);
+        gaussSolution(m1);
         scanner.close();
     }
 
