@@ -13,6 +13,23 @@ public class invers {
         showInversOBE(m);
     }
 
+    // func and proc
+    public static Matrix getInversOBE(Matrix m) {
+        // m.col harus == m.row
+        // bakal ngirim hasil OBE buat dapet invers
+        // kalo ga punya invers bakal kirim matrix kosong
+        Matrix M, IM;
+        IM = Matrix.createMatrixIdentitas(m.getCol());
+        M = Matrix.createAugmented(m, IM);
+        M.generateEselonReduksi();
+        if (isInversValid(Matrix.getHalfLeft(M))) {
+            M = Matrix.getHalfRigth(M);
+        } else {
+            M = Matrix.createMatrixKosong(m.getCol());
+        }
+        return M;
+    }
+
     public static boolean isInversValid(Matrix leftM) {
         // m adalah matrix yang sudah di invers melalui OBE
         int i;
