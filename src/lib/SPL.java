@@ -9,9 +9,16 @@ public class SPL {
     // buat nge tes
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        double[] res;
+        int i;
         Matrix m1 = new Matrix(4, 5);
         m1.readMatrix(scanner);
-        gaussSolution(m1);
+        // gaussSolution(m1);
+        res = getSolution(m1);
+        gaussJordanSolution(m1);
+        for (i = 0; i < 4; i++) {
+            System.out.println(res[i]);
+        }
         scanner.close();
     }
 
