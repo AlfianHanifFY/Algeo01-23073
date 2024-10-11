@@ -22,6 +22,19 @@ public class SPL {
         scanner.close();
     }
 
+    public static double[] getSolution(Matrix m) {
+        // solusi harus unik
+        int i;
+        double[] res = new double[m.getCol() - 1];
+        m.generateEselonReduksi();
+        if (isUnique(m)) {
+            for (i = 0; i < m.getRow(); i++) {
+                res[i] = m.getElmt(i, m.getCol() - 1);
+            }
+        }
+        return res;
+    }
+
     // func and proc
     public static void gaussJordanSolution(Matrix m) {
         // co ini harus dalam bentuk matrix augmented
