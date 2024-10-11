@@ -188,16 +188,18 @@ public class Matrix {
         return sum;
     }
 
-    public void sortRowByZero() {
+    public int sortRowByZero() {
         // pokoknya nanti urut berdasarkan jumlah 0 dari yang dikit sampe banyak
-        int i, j;
+        int i, j, swapCount = 0;
         for (i = 0; i < getRow(); i++) {
             for (j = i; j < getRow(); j++) {
                 if (rowLength(i) > rowLength(j)) {
                     swapRow(i, j);
+                    swapCount += 1;
                 }
             }
         }
+        return swapCount;
     }
 
     public void generateEselon() {
