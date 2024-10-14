@@ -6,7 +6,7 @@ import java.io.*;
 public class IO {
     private String fileName;
     private Scanner fileScanner;
-    private static final Scanner inputScanner = new Scanner(System.in); // General input scanner
+    public static final Scanner inputScanner = new Scanner(System.in);
     
     // Constructor
     public IO(String fileName) {
@@ -139,24 +139,31 @@ public class IO {
     // Write string array to file
     public void writeStringArrayToFile(String[] content) {
         try {
-            System.out.print(">> Enter output file name: ");
-            String outputFileName = inputScanner.nextLine();
-            File outputFile = new File("test/output/" + outputFileName);
-
-            // Ensure file creation
-            if (outputFile.createNewFile() || outputFile.exists()) {
-                FileWriter writer = new FileWriter(outputFile);
-                for (int i = 0; i < content.length; i++) {
-                    writer.write(content[i]);
-                    if (i != content.length - 1) {
-                        writer.write("\n");
-                    }
-                }
-                writer.close();
-                System.out.println(">> Output written to " + outputFileName);
-            }
-        } catch (IOException e) {
-            System.out.println(">> Error writing to file.");
+        System.out.print(">> Enter output file name: ");
+        
+        if (inputScanner.hasNextLine()) {
+            inputScanner.nextLine();
         }
+
+        String outputFileName = inputScanner.nextLine();
+
+        File outputFile = new File("test/output/" + outputFileName);
+
+        if (outputFile.exists() || outputFile.createNewFile()) {
+            FileWriter writer = new FileWriter(outputFile);
+            for (int i = 0; i < content.length; i++) {
+                writer.write(content[i]);
+                if (i != content.length - 1) {
+                    writer.write("\n");
+                }
+            }
+            writer.close();
+            System.out.println(">> Output written to test/output/" + outputFileName);
+        } else {
+            System.out.println(">> Could not create file: " + outputFileName);
+        }
+    } catch (IOException e) {
+        System.out.println(">> Error writing to file.");
+    }
     }
 }
