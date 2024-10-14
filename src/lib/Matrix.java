@@ -236,7 +236,6 @@ public class Matrix {
                 }
             }
         }
-        printMatrix();
     }
 
     public static Matrix multiplyMatrix(Matrix m1, Matrix m2) {
