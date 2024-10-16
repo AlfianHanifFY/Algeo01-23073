@@ -10,18 +10,18 @@ public class Matrix {
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
-        // Scanner scanner = new Scanner(System.in);
-        // Matrix m1 = new Matrix(3, 3);
-        // Matrix m2 = new Matrix(3, 3);
+        Scanner scanner = new Scanner(System.in);
+        Matrix m1 = new Matrix(3, 3);
+        Matrix m2 = new Matrix(3, 1);
         // Matrix M;
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
-        // m1.readMatrix(scanner);
+        m1.readMatrix(scanner);
         // System.out.println();
         // m1.printMatrix();
         // System.out.println("matrix 2");
-        // m2.readMatrix(scanner);
+        m2.readMatrix(scanner);
         // System.out.println("augmented:");
         // M = Matrix.createAugmented(m1, m2);
         // M = Matrix.createMatrixIdentitas(3);
@@ -52,7 +52,9 @@ public class Matrix {
         // System.out.println("transpose");
         // m1.transpose();
         // m1.printMatrix();
-        // scanner.close();
+        m1 = changeCol(m1, 1, m2);
+        m1.printMatrix();
+        scanner.close();
     }
 
     // Konstruktor
@@ -127,6 +129,24 @@ public class Matrix {
             setElMT(row1, i, getElmt(row2, i));
             setElMT(row2, i, temp);
         }
+
+    }
+
+    public static Matrix changeCol(Matrix m, int nCol, Matrix newCol) {
+        // newCol merupakan matrix n x 1
+        int i, j;
+        Matrix M = new Matrix(m.getRow(), m.getCol());
+        for (i = 0; i < M.getRow(); i++) {
+            for (j = 0; j < M.getCol(); j++) {
+                if (j == nCol) {
+                    M.setElMT(i, j, newCol.getElmt(i, 0));
+                } else {
+                    M.setElMT(i, j, m.getElmt(i, j));
+                }
+            }
+
+        }
+        return M;
 
     }
 
