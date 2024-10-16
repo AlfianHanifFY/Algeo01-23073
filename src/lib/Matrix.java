@@ -10,18 +10,18 @@ public class Matrix {
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
-        // Scanner scanner = new Scanner(System.in);
-        // Matrix m1 = new Matrix(3, 3);
-        // Matrix m2 = new Matrix(3, 3);
+        Scanner scanner = new Scanner(System.in);
+        Matrix m1 = new Matrix(3, 3);
+        Matrix m2 = new Matrix(3, 1);
         // Matrix M;
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
-        // m1.readMatrix(scanner);
+        m1.readMatrix(scanner);
         // System.out.println();
         // m1.printMatrix();
         // System.out.println("matrix 2");
-        // m2.readMatrix(scanner);
+        m2.readMatrix(scanner);
         // System.out.println("augmented:");
         // M = Matrix.createAugmented(m1, m2);
         // M = Matrix.createMatrixIdentitas(3);
@@ -52,7 +52,9 @@ public class Matrix {
         // System.out.println("transpose");
         // m1.transpose();
         // m1.printMatrix();
-        // scanner.close();
+        m1 = changeCol(m1, 1, m2);
+        m1.printMatrix();
+        scanner.close();
     }
 
     // Konstruktor
