@@ -11,14 +11,15 @@ public class SPL {
         Scanner scanner = new Scanner(System.in);
         double[] res;
         int i;
-        Matrix m1 = new Matrix(4, 5);
+        Matrix m1 = new Matrix(3, 4);
+        Matrix A = new Matrix(3, 3);
+        Matrix B = new Matrix(3, 1);
         m1.readMatrix(scanner);
+        A.readMatrix(scanner);
+        B.readMatrix(scanner);
         // gaussSolution(m1);
-        res = getSolution(m1);
         gaussJordanSolution(m1);
-        for (i = 0; i < 4; i++) {
-            System.out.println(res[i]);
-        }
+        balikanSolution(A, B);
         scanner.close();
     }
 
