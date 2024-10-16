@@ -41,4 +41,27 @@ public class determinan {
     public static double determinan2x2(Matrix m) {
         return m.getElmt(0, 0) * m.getElmt(1, 1) - m.getElmt(0, 1) * m.getElmt(1, 0);
     }
+
+    // Function to get the minor matrix by removing a specified row and column
+    public static Matrix getMinorEntri(Matrix m, int row, int col) {
+        int minorRow = 0, minorCol;
+
+        Matrix M = new Matrix(m.getRow() - 1, m.getCol() - 1);
+
+        for (int i = 0; i < m.getRow(); i++) {
+            if (i == row)
+                continue;
+            minorCol = 0;
+            for (int j = 0; j < m.getCol(); j++) {
+                if (j == col)
+                    continue;
+                M.setElMT(minorRow, minorCol, m.getElmt(i, j));
+                minorCol++;
+            }
+            minorRow++;
+        }
+
+        return M;
+    }
+
 }
