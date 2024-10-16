@@ -1,6 +1,7 @@
 package lib;
 
 import java.util.Scanner;
+import java.lang.Math;
 
 public class determinan {
     public static void main(String[] args) {
@@ -8,6 +9,7 @@ public class determinan {
         int x;
         Scanner scanner = new Scanner(System.in);
         m.readMatrix(scanner);
+        System.out.println(getDeterminanKofaktor(m));
         System.out.println(determinanReduksi(m));
     }
 
@@ -33,5 +35,10 @@ public class determinan {
         determinan *= Math.pow(-1, swapCount);
         // di buletin biar ga keos angkanya
         return Math.round(determinan * 10000) / 10000;
+    }
+
+    // Function to calculate the determinant of a 2x2 matrix
+    public static double determinan2x2(Matrix m) {
+        return m.getElmt(0, 0) * m.getElmt(1, 1) - m.getElmt(0, 1) * m.getElmt(1, 0);
     }
 }
