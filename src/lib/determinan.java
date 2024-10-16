@@ -9,8 +9,10 @@ public class determinan {
         int x;
         Scanner scanner = new Scanner(System.in);
         m.readMatrix(scanner);
-        System.out.println(getDeterminanKofaktor(m));
-        System.out.println(determinanReduksi(m));
+        // System.out.println(getDeterminanKofaktor(m));
+        // System.out.println(determinanReduksi(m));
+        m = getMatrixKofaktor(m);
+        m.printMatrix();
     }
 
     public static double determinanReduksi(Matrix m) {
@@ -62,6 +64,29 @@ public class determinan {
         }
 
         return M;
+    }
+
+    public static Matrix getMatrixKofaktor(Matrix m) {
+        Matrix M = new Matrix(m.getRow(), m.getCol()), mt;
+        double val;
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                mt = getMinorEntri(m, i, j);
+                val = getDeterminanKofaktor(mt);
+                if (((i + 1) + (j + 1)) % 2 != 0) {
+                    val *= -1;
+                }
+                M.setElMT(i, j, val);
+            }
+        }
+        return M;
+    }
+
+    public static Matrix getAdjoin(Matrix m) {
+        m = getMatrixKofaktor(m);
+        m.transpose();
+        return (m);
     }
 
     // Function to calculate the determinant using the cofactor expansion
