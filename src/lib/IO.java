@@ -6,7 +6,7 @@ import java.io.*;
 public class IO {
     public String fileName;
     public Scanner fileScanner;
-    public static final Scanner inputScanner = new Scanner(System.in);
+    public static Scanner inputScanner = new Scanner(System.in);
 
     // Constructor
     public IO(String fileName) {
