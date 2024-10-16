@@ -168,4 +168,24 @@ public class SPL {
             }
         }
     }
+
+    // metode balikan
+    public static void balikanSolution(Matrix A, Matrix B) {
+        // Ax = B
+        // x = A'B
+        Matrix x;
+        int i;
+
+        // invers matrix A
+        A = invers.getInversOBE(A);
+
+        // kalikan invers A dengan B
+        x = Matrix.multiplyMatrix(A, B);
+
+        // x adalah solusi
+        // print x
+        for (i = 0; i < x.getRow(); i++) {
+            System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), x.getElmt(i, 0));
+        }
+    }
 }
