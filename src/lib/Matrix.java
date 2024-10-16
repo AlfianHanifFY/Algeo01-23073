@@ -321,4 +321,8 @@ public class Matrix {
         }
         return M;
     }
+
+    public boolean isSquare2x2() {
+        return (getCol() == 2 && getRow() == 2);
+    }
 }
