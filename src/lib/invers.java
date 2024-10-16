@@ -53,4 +53,12 @@ public class invers {
         }
         return true;
     }
+
+    public static void showInversAdjoin(Matrix m) {
+        Matrix M;
+        // A' = 1/det(A) * adj(A)
+        M = Matrix.multiplyMatrixByConst(determinan.getAdjoin(m), (1 / determinan.determinanReduksi(m)));
+        M.printMatrix();
+    }
+
 }
