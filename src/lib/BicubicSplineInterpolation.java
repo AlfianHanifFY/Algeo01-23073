@@ -5,7 +5,7 @@ import java.lang.Math;
 
 public class BicubicSplineInterpolation {
     
-    public static void main(String[] args) {
+    public static void main() {
         // Variable declaration
         String fileName = IO.promptFileName();
         IO f = new IO(fileName);
