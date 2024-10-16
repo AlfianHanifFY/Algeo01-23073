@@ -14,12 +14,13 @@ public class SPL {
         Matrix m1 = new Matrix(3, 4);
         Matrix A = new Matrix(3, 3);
         Matrix B = new Matrix(3, 1);
-        m1.readMatrix(scanner);
+        // m1.readMatrix(scanner);
         A.readMatrix(scanner);
         B.readMatrix(scanner);
         // gaussSolution(m1);
-        gaussJordanSolution(m1);
+        // gaussJordanSolution(m1);
         balikanSolution(A, B);
+        cramerSolution(A, B);
         scanner.close();
     }
 
