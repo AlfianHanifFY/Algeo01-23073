@@ -325,4 +325,14 @@ public class Matrix {
     public boolean isSquare2x2() {
         return (getCol() == 2 && getRow() == 2);
     }
+
+    public static Matrix multiplyMatrixByConst(Matrix m, double k) {
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                m.setElMT(i, j, m.getElmt(i, j) * k);
+            }
+        }
+        return m;
+    }
 }
