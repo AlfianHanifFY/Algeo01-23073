@@ -14,12 +14,13 @@ public class SPL {
         Matrix m1 = new Matrix(3, 4);
         Matrix A = new Matrix(3, 3);
         Matrix B = new Matrix(3, 1);
-        m1.readMatrix(scanner);
+        // m1.readMatrix(scanner);
         A.readMatrix(scanner);
         B.readMatrix(scanner);
         // gaussSolution(m1);
-        gaussJordanSolution(m1);
+        // gaussJordanSolution(m1);
         balikanSolution(A, B);
+        cramerSolution(A, B);
         scanner.close();
     }
 
@@ -188,5 +189,26 @@ public class SPL {
         for (i = 0; i < x.getRow(); i++) {
             System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), x.getElmt(i, 0));
         }
+    }
+
+    // metode cramer
+    // khusus n peubah dan n persamaan
+    public static void cramerSolution(Matrix A, Matrix B) {
+        // Ax = B
+
+        // solusi :
+        // xn = det(An)/det(A)
+
+        int j;
+        double detA, detAn, x;
+        Matrix An;
+        detA = determinan.getDeterminanKofaktor(A);
+        for (j = 0; j < A.getCol(); j++) {
+            An = Matrix.changeCol(A, j, B);
+            detAn = determinan.getDeterminanKofaktor(An);
+            x = detAn / detA;
+            System.out.printf(Locale.US, "x%d = %.4f%n", (j + 1), x);
+        }
+
     }
 }

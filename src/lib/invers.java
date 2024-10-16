@@ -6,12 +6,13 @@ public class invers {
     // ga punya atribut
 
     // buat nge tes
-    // public static void main(String[] args) {
-    //     Matrix m = new Matrix(3, 3);
-    //     Scanner scanner = new Scanner(System.in);
-    //     m.readMatrix(scanner);
-    //     showInversOBE(m);
-    // }
+    public static void main(String[] args) {
+        Matrix m = new Matrix(3, 3);
+        Scanner scanner = new Scanner(System.in);
+        m.readMatrix(scanner);
+        showInversOBE(m);
+        showInversAdjoin(m);
+    }
 
     // func and proc
     public static Matrix getInversOBE(Matrix m) {
@@ -52,4 +53,12 @@ public class invers {
         }
         return true;
     }
+
+    public static void showInversAdjoin(Matrix m) {
+        Matrix M;
+        // A' = 1/det(A) * adj(A)
+        M = Matrix.multiplyMatrixByConst(determinan.getAdjoin(m), (1 / determinan.determinanReduksi(m)));
+        M.printMatrix();
+    }
+
 }
