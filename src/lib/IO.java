@@ -4,10 +4,10 @@ import java.util.*;
 import java.io.*;
 
 public class IO {
-    private String fileName;
-    private Scanner fileScanner;
+    public String fileName;
+    public Scanner fileScanner;
     public static final Scanner inputScanner = new Scanner(System.in);
-    
+
     // Constructor
     public IO(String fileName) {
         this.fileName = fileName;
@@ -98,7 +98,7 @@ public class IO {
         return matrix;
     }
 
-    // Read points from file 
+    // Read points from file
     public Matrix readPointsFromFile() {
         int row = getRowCount();
         Matrix points = new Matrix(row, 2);
@@ -139,31 +139,31 @@ public class IO {
     // Write string array to file
     public void writeStringArrayToFile(String[] content) {
         try {
-        System.out.print(">> Enter output file name: ");
-        
-        if (inputScanner.hasNextLine()) {
-            inputScanner.nextLine();
-        }
+            System.out.print(">> Enter output file name: ");
 
-        String outputFileName = inputScanner.nextLine();
-
-        File outputFile = new File("test/output/" + outputFileName);
-
-        if (outputFile.exists() || outputFile.createNewFile()) {
-            FileWriter writer = new FileWriter(outputFile);
-            for (int i = 0; i < content.length; i++) {
-                writer.write(content[i]);
-                if (i != content.length - 1) {
-                    writer.write("\n");
-                }
+            if (inputScanner.hasNextLine()) {
+                inputScanner.nextLine();
             }
-            writer.close();
-            System.out.println(">> Output written to test/output/" + outputFileName);
-        } else {
-            System.out.println(">> Could not create file: " + outputFileName);
+
+            String outputFileName = inputScanner.nextLine();
+
+            File outputFile = new File("test/output/" + outputFileName);
+
+            if (outputFile.exists() || outputFile.createNewFile()) {
+                FileWriter writer = new FileWriter(outputFile);
+                for (int i = 0; i < content.length; i++) {
+                    writer.write(content[i]);
+                    if (i != content.length - 1) {
+                        writer.write("\n");
+                    }
+                }
+                writer.close();
+                System.out.println(">> Output written to test/output/" + outputFileName);
+            } else {
+                System.out.println(">> Could not create file: " + outputFileName);
+            }
+        } catch (IOException e) {
+            System.out.println(">> Error writing to file.");
         }
-    } catch (IOException e) {
-        System.out.println(">> Error writing to file.");
-    }
     }
 }
