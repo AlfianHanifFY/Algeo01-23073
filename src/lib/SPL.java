@@ -11,14 +11,15 @@ public class SPL {
         Scanner scanner = new Scanner(System.in);
         double[] res;
         int i;
-        Matrix m1 = new Matrix(4, 5);
+        Matrix m1 = new Matrix(3, 4);
+        Matrix A = new Matrix(3, 3);
+        Matrix B = new Matrix(3, 1);
         m1.readMatrix(scanner);
+        A.readMatrix(scanner);
+        B.readMatrix(scanner);
         // gaussSolution(m1);
-        res = getSolution(m1);
         gaussJordanSolution(m1);
-        for (i = 0; i < 4; i++) {
-            System.out.println(res[i]);
-        }
+        balikanSolution(A, B);
         scanner.close();
     }
 
@@ -166,6 +167,26 @@ public class SPL {
             for (i = 0; i < m.getCol() - 1; i++) {
                 System.out.println("x" + (i + 1) + " = " + res[i]);
             }
+        }
+    }
+
+    // metode balikan
+    public static void balikanSolution(Matrix A, Matrix B) {
+        // Ax = B
+        // x = A'B
+        Matrix x;
+        int i;
+
+        // invers matrix A
+        A = invers.getInversOBE(A);
+
+        // kalikan invers A dengan B
+        x = Matrix.multiplyMatrix(A, B);
+
+        // x adalah solusi
+        // print x
+        for (i = 0; i < x.getRow(); i++) {
+            System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), x.getElmt(i, 0));
         }
     }
 }
