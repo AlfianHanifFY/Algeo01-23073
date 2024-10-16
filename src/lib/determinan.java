@@ -83,6 +83,12 @@ public class determinan {
         return M;
     }
 
+    public static Matrix getAdjoin(Matrix m) {
+        m = getMatrixKofaktor(m);
+        m.transpose();
+        return (m);
+    }
+
     // Function to calculate the determinant using the cofactor expansion
     public static double getDeterminanKofaktor(Matrix m) {
         double det = 0;
