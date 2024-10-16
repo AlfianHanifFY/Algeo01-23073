@@ -130,6 +130,24 @@ public class Matrix {
 
     }
 
+    public static Matrix changeCol(Matrix m, int nCol, Matrix newCol) {
+        // newCol merupakan matrix n x 1
+        int i, j;
+        Matrix M = new Matrix(m.getRow(), m.getCol());
+        for (i = 0; i < M.getRow(); i++) {
+            for (j = 0; j < M.getCol(); j++) {
+                if (j == nCol) {
+                    M.setElMT(i, j, newCol.getElmt(i, 0));
+                } else {
+                    M.setElMT(i, j, m.getElmt(i, j));
+                }
+            }
+
+        }
+        return M;
+
+    }
+
     // plusKRow
     public void plusKRow(int row, double k, int krow) {
         int i;
