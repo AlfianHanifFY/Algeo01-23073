@@ -7,6 +7,7 @@ public class Matrix {
     double[][] matrix;
     int rows;
     int cols;
+    static Scanner inputScanner = new Scanner(System.in);
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
@@ -17,11 +18,11 @@ public class Matrix {
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
-        m1.readMatrix(scanner);
+        m1.readMatrix();
         // System.out.println();
         // m1.printMatrix();
         // System.out.println("matrix 2");
-        m2.readMatrix(scanner);
+        m2.readMatrix();
         // System.out.println("augmented:");
         // M = Matrix.createAugmented(m1, m2);
         // M = Matrix.createMatrixIdentitas(3);
@@ -82,11 +83,11 @@ public class Matrix {
         return result;
     }
 
-    public void readMatrix(Scanner scanner) {
+    public void readMatrix() {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                matrix[i][j] = scanner.nextDouble();
+                matrix[i][j] = inputScanner.nextDouble();
             }
         }
 

@@ -6,9 +6,12 @@ import java.io.*;
 public class IO {
     public String fileName;
     public Scanner fileScanner;
-    public static final Scanner inputScanner = new Scanner(System.in);
+    public static Scanner inputScanner = new Scanner(System.in);
 
-    // Constructor
+    public static void main(String[] args) {
+        readMatrixFromKeyboard();
+    }
+    // Konstruktor
     public IO(String fileName) {
         this.fileName = fileName;
     }
@@ -23,7 +26,7 @@ public class IO {
             File file = new File(getFileName());
             this.fileScanner = new Scanner(file);
         } catch (FileNotFoundException e) {
-            System.out.println(">> File not found: " + getFileName());
+            System.out.println("File " + getFileName() + "tidak ditemukan di directory test/input.");
             System.exit(0);
         }
     }
@@ -35,18 +38,18 @@ public class IO {
     }
 
     // Read file name from input
-    public static String promptFileName() {
+    public static String readFileName() {
         String fileName = "";
         while (true) {
             try {
-                System.out.print(">> Enter file name: ");
+                System.out.print("\nMasukan nama file: ");
                 fileName = inputScanner.nextLine();
                 File file = new File("test/input/" + fileName);
                 Scanner tempScanner = new Scanner(file); // Check if file exists
                 tempScanner.close(); // Close immediately after validation
                 break;
             } catch (FileNotFoundException e) {
-                System.out.println(">> File not found: " + fileName);
+                System.out.println("File " + fileName + " tidak ditemukan di directory test/input.");
             }
         }
         return "test/input/" + fileName;
@@ -78,6 +81,34 @@ public class IO {
         }
         closeFile();
         return colCount;
+    }
+
+    // Read matrix from keyboard
+    public static Matrix readMatrixFromKeyboard() {
+        int row = 0, col = 0;
+        while (true) {
+            try {
+                System.out.print("Masukkan jumlah baris: ");
+                row = inputScanner.nextInt();
+                System.out.print("Masukkan jumlah kolom: ");
+                col = inputScanner.nextInt();
+
+                if (row > 0 && col > 0) {
+                    break;
+                } else {
+                    System.out.println("Masukan harus lebih dari 0.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Masukan harus berupa bilangan bulat lebih dari 0.");
+                inputScanner.next();
+            }
+        }
+
+        Matrix m = new Matrix(row, col);
+        System.out.println("\nMasukkan matriks: ");
+        m.readMatrix();
+        
+        return m;
     }
 
     // Read matrix from file
@@ -124,12 +155,16 @@ public class IO {
         double[] splineData = new double[18];
 
         openFile();
+
+        // Set locale to US to ensure proper decimal point handling
+        fileScanner.useLocale(Locale.US);
+        
         for (int i = 0; i < 18; i++) {
             if (fileScanner.hasNextDouble()) {
                 splineData[i] = fileScanner.nextDouble();
             } else {
-                System.out.println(">> Invalid data format encountered at index " + i);
-                break;
+                System.out.println("Data tidak valid pada index " + i);
+                System.exit(0);
             }
         }
         closeFile();
@@ -139,7 +174,7 @@ public class IO {
     // Write string array to file
     public void writeStringArrayToFile(String[] content) {
         try {
-            System.out.print(">> Enter output file name: ");
+            System.out.print("Masukkan nama file keluaran: ");
 
             if (inputScanner.hasNextLine()) {
                 inputScanner.nextLine();
@@ -158,12 +193,41 @@ public class IO {
                     }
                 }
                 writer.close();
-                System.out.println(">> Output written to test/output/" + outputFileName);
+                System.out.println("File " + outputFileName + " berhasil dibuat di directory test/output.");
             } else {
-                System.out.println(">> Could not create file: " + outputFileName);
+                System.out.println("File" + outputFileName + "gagal dibuat.");
             }
         } catch (IOException e) {
-            System.out.println(">> Error writing to file.");
+            System.out.println("Error dalam menulis file.");
         }
     }
+
+    // Save file
+    public void saveFile(String[] stringArray) {
+        while (true) {
+            System.out.print("""
+                    Apakah ingin menyimpan file?
+                    1. Ya
+                    2. Tidak
+                    """);
+            System.out.println();
+            System.out.print("Masukkan pilihan: ");
+
+            try {
+                int choice = inputScanner.nextInt(); 
+                if (choice == 1) {
+                    writeStringArrayToFile(stringArray);
+                    break; 
+                } else if (choice == 2) {
+                    break;
+                } else {
+                    System.out.println("\nInput tidak valid. Silakan masukkan angka (1-2)!\n");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\nInput tidak valid. Silakan masukkan angka!\n");
+                inputScanner.next(); 
+            }
+        }
+    }
+
 }

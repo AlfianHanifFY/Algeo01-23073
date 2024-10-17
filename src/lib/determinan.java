@@ -8,7 +8,7 @@ public class determinan {
         Matrix m = new Matrix(3, 3);
         int x;
         Scanner scanner = new Scanner(System.in);
-        m.readMatrix(scanner);
+        m.readMatrix();
         // System.out.println(getDeterminanKofaktor(m));
         // System.out.println(determinanReduksi(m));
         m = getMatrixKofaktor(m);

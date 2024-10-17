@@ -18,7 +18,7 @@ public class ImageResizing {
         Matrix invX = invers.getInversOBE(X);
         Matrix multiplier = applyMultiplier(invX, D);
 
-        String fileName = IO.promptFileName();
+        String fileName = IO.readFileName();
         BufferedImage image = ImageIO.read(new File(fileName));
 
         Matrix red = new Matrix(image.getHeight() + 4, image.getWidth() + 4);
@@ -198,7 +198,7 @@ public class ImageResizing {
 
     private static void saveResizedImage(BufferedImage resizedImage) {
         try {
-            File outputFile = new File(IO.promptFileName());
+            File outputFile = new File(IO.readFileName());
             ImageIO.write(resizedImage, "png", outputFile);
             System.out.println("Image successfully resized!");
         } catch (IOException e) {

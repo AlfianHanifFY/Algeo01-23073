@@ -5,9 +5,8 @@ import java.lang.Math;
 
 public class BicubicSplineInterpolation {
     
-    public static void main(String[] args) {
-        // Variable declaration
-        String fileName = IO.promptFileName();
+    public static void main() {
+        String fileName = IO.readFileName();
         IO f = new IO(fileName);
         double[] temp = f.readBicubicSplineData();
         Matrix M = new Matrix(16, 1);
@@ -38,18 +37,11 @@ public class BicubicSplineInterpolation {
             }
         }
         System.out.println();
-        System.out.println("f(" + a + "," + b + ") = " + val);
+        String[] s = new String[1];
+        s[0] = "f(" + a + "," + b + ") = " + val;
+        System.out.println(s[0]);
         System.out.println();
-        System.out.println(">> Apakah ingin menyimpan keluaran?");
-        System.out.println(">> 1. Ya");
-        System.out.println(">> 2. Tidak");
-        System.out.print(">> Masukkan pilihan: ");
-        int choice = IO.inputScanner.nextInt();
-        if (choice == 1){
-            String[] s = new String[1];
-            s[0] = "f(" + a + "," + b + ") = " + val;
-            f.writeStringArrayToFile(s);
-        }
+        // f.saveFile(s);
     }
 
     // Construct Matrix X
