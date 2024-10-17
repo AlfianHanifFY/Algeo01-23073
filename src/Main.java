@@ -48,12 +48,36 @@ public class Main {
         }
     }
 
-    public static void inputTypeUI(){
-        System.out.print("""
-                PILIH TIPE MASUKAN
-                1. Keyboard
-                2. File
-                """);
+    public static int inputTypeUI() throws IOException, InterruptedException{
+        boolean type = true;
+        int inputType = 0;
+
+        while (type) {
+            clearScreen();
+
+            System.out.print("""
+                    PILIH TIPE MASUKAN
+                    1. Keyboard
+                    2. File
+                    """);
+            System.out.print("Masukkan pilihan: ");
+            try {
+                inputType = inputScanner.nextInt();
+
+                if (inputType == 1 || inputType == 2) {
+                    type = false;
+                } else {
+                    System.out.println("\nInput tidak valid. Silakan masukkan angka (1-2)!\n");
+                    inputScanner.nextLine();
+                    Thread.sleep(1000);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\nInput tidak valid. Silakan masukkan angka (1-2)!\n");
+                inputScanner.nextLine();
+                Thread.sleep(1000);
+            }
+        }
+        return inputType;
     }
 
     public static void splUI() throws IOException, InterruptedException{
@@ -77,18 +101,63 @@ public class Main {
                 choice = inputScanner.nextInt();
                 System.out.println();
 
+                int inputType;
                 switch (choice) {
                     case 1:
                         System.out.println("Gauss");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Gauss dari Keyboard
+                            System.out.println("Keyboard Gauss");
+                            System.exit(0);
+                        } else {
+                            // Gauss dari File
+                            System.out.println("File Gauss");
+                            System.exit(0);
+                        }
                         break;
                     case 2:
                         System.out.println("Gauss-Jordan");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Gauss-Jordan dari Keyboard
+                            System.out.println("Keyboard Gauss-Jordan");
+                            System.exit(0);
+                        } else {
+                            // Gauss-Jordan dari File
+                            System.out.println("File Gauss-Jprdan");
+                            System.exit(0);
+                        }
                         break;
                     case 3:
                         System.out.println("Matriks Balikan");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Balikan dari Keyboard
+                            System.out.println("Keyboard Balikan");
+                            System.exit(0);
+                        } else {
+                            // Balikan dari File
+                            System.out.println("File Balikan");
+                            System.exit(0);
+                        }
                         break;
                     case 4:
-                        System.out.println("Crammer");
+                        System.out.println("Cramer");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Crammer dari Keyboard
+                            System.out.println("Keyboard Crammer");
+                            System.exit(0);
+                        } else {
+                            // Crammer dari File
+                            System.out.println("File Crammer");
+                            System.exit(0);
+                        }
                         break;
                     case 5:
                         run = false;
@@ -124,12 +193,35 @@ public class Main {
                 choice = inputScanner.nextInt();
                 System.out.println();
 
+                int inputType;
                 switch (choice) {
                     case 1:
                         System.out.println("Reduksi Baris");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Determinan Reduksi Baris dari Keyboard
+                            System.out.println("Keyboard Determinan Reduksi");
+                            System.exit(0);
+                        } else {
+                            // Determinan Reduksi Baris dari File
+                            System.out.println("File Determinan Reduksi");
+                            System.exit(0);
+                        }
                         break;
                     case 2:
                         System.out.println("Ekspansi Kofaktor");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Determinan Ekspansi Kofaktor dari Keyboard
+                            System.out.println("Keyboard Determinan Ekspansi Kofaktor");
+                            System.exit(0);
+                        } else {
+                            // Determinan Ekspansi Kofaktor dari File
+                            System.out.println("File Determinan Ekspansi Kofaktor");
+                            System.exit(0);
+                        }
                         break;
                     case 3:
                         run = false;
@@ -165,12 +257,35 @@ public class Main {
                 choice = inputScanner.nextInt();
                 System.out.println();
 
+                int inputType;
                 switch (choice) {
                     case 1:
                         System.out.println("OBE");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Invers OBE dari Keyboard
+                            System.out.println("Keyboard Invers OBE");
+                            System.exit(0);
+                        } else {
+                            // Invers OBE dari File
+                            System.out.println("File Invers OBE");
+                            System.exit(0);
+                        }
                         break;
                     case 2:
                         System.out.println("Matriks Adjoin");
+                        inputType = inputTypeUI();
+
+                        if (inputType == 1) {
+                            // Invers Adjoin dari Keyboard
+                            System.out.println("Keyboard Invers Adjoin");
+                            System.exit(0);
+                        } else {
+                            // Invers Adjoin dari File
+                            System.out.println("File Invers Adjoin");
+                            System.exit(0);
+                        }
                         break;
                     case 3:
                         run = false;
@@ -189,6 +304,17 @@ public class Main {
 
     public static void polynomialInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
+        int inputType = inputTypeUI();
+
+        if (inputType == 1) {
+            // Interpolasi Polinom dari Keyboard
+            System.out.println("Keyboard Interpolasi Polinom");
+            System.exit(0);
+        } else {
+            // Interpolasi Polinom dari File
+            System.out.println("File Interpolasi Polinom");
+            System.exit(0);
+        }
     }
 
     public static void bicubicSplineInterpolationUI() throws IOException, InterruptedException {
@@ -198,6 +324,17 @@ public class Main {
 
     public static void regressionUI() throws IOException, InterruptedException {
         clearScreen();
+        int inputType = inputTypeUI();
+
+        if (inputType == 1) {
+            // Regresi dari Keyboard
+            System.out.println("Keyboard Regresi");
+            System.exit(0);
+        } else {
+            // Regresi dari File
+            System.out.println("File Regresi");
+            System.exit(0);
+        }
     }
 
     public static void imageInterpolationUI() throws IOException, InterruptedException{
