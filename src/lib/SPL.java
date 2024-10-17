@@ -15,8 +15,8 @@ public class SPL {
         Matrix A = new Matrix(3, 3);
         Matrix B = new Matrix(3, 1);
         // m1.readMatrix(scanner);
-        A.readMatrix(scanner);
-        B.readMatrix(scanner);
+        A.readMatrix();
+        B.readMatrix();
         // gaussSolution(m1);
         // gaussJordanSolution(m1);
         balikanSolution(A, B);

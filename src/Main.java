@@ -2,6 +2,9 @@ import java.io.IOException;
 import java.util.*;
 
 import lib.BicubicSplineInterpolation;
+import lib.Matrix;
+import lib.SPL;
+import lib.IO;
 
 public class Main {
     static Scanner inputScanner = new Scanner(System.in);
@@ -101,71 +104,59 @@ public class Main {
                 choice = inputScanner.nextInt();
                 System.out.println();
 
-                int inputType;
-                switch (choice) {
-                    case 1:
-                        System.out.println("Gauss");
-                        inputType = inputTypeUI();
+                if (choice >= 1 && choice <= 4) {
+                    int inputType;
+                    String fileName;
 
-                        if (inputType == 1) {
-                            // Gauss dari Keyboard
-                            System.out.println("Keyboard Gauss");
-                            System.exit(0);
-                        } else {
-                            // Gauss dari File
-                            System.out.println("File Gauss");
-                            System.exit(0);
-                        }
-                        break;
-                    case 2:
-                        System.out.println("Gauss-Jordan");
-                        inputType = inputTypeUI();
+                    inputType = inputTypeUI();
 
-                        if (inputType == 1) {
-                            // Gauss-Jordan dari Keyboard
-                            System.out.println("Keyboard Gauss-Jordan");
-                            System.exit(0);
-                        } else {
-                            // Gauss-Jordan dari File
-                            System.out.println("File Gauss-Jprdan");
-                            System.exit(0);
-                        }
-                        break;
-                    case 3:
-                        System.out.println("Matriks Balikan");
-                        inputType = inputTypeUI();
+                    Matrix m;
+                    if (inputType == 1) {
+                        // Baca dari Keyboard
+                        m = IO.readMatrixFromKeyboard();
+                    } else {
+                        // Baca dari File
+                        fileName = IO.readFileName();
+                        IO io = new IO(fileName);
+                        System.out.println();
+                        m = io.readMatrixFromFile();
 
-                        if (inputType == 1) {
-                            // Balikan dari Keyboard
-                            System.out.println("Keyboard Balikan");
-                            System.exit(0);
-                        } else {
-                            // Balikan dari File
-                            System.out.println("File Balikan");
-                            System.exit(0);
-                        }
-                        break;
-                    case 4:
-                        System.out.println("Cramer");
-                        inputType = inputTypeUI();
+                        // kalau mau tes
+                        // m.printMatrix();
+                        // System.exit(0);
+                    }
 
-                        if (inputType == 1) {
-                            // Crammer dari Keyboard
-                            System.out.println("Keyboard Crammer");
+                    switch (choice) {
+                        case 1:
+                            // header
+                            // function gauss
                             System.exit(0);
-                        } else {
-                            // Crammer dari File
-                            System.out.println("File Crammer");
+                            break;
+                        case 2:
+                            // header
+                            // function gauss-jordan
                             System.exit(0);
-                        }
-                        break;
-                    case 5:
-                        run = false;
-                        break;
-                    default:
-                        System.out.println("Input tidak valid. Silakan masukkan angka (1-5)!\n");
-                        Thread.sleep(1000);
+                            break;
+                        case 3:
+                            // header
+                            // function balikan
+                            System.exit(0);
+                            break;
+                        case 4:
+                            // header
+                            // function cramer
+                            System.exit(0);
+                            break;
+                    }
+
+                } else if (choice == 5) {
+                    run = false;
+                    break;
+                } else {
+                    System.out.println("Input tidak valid. Silakan masukkan angka (1-5)!\n");
+                    Thread.sleep(1000);
                 }
+
             } catch (InputMismatchException e) {
                 System.out.println("\nInput tidak valid. Silakan masukkan angka (1-5)!\n");
                 inputScanner.nextLine();
@@ -193,42 +184,46 @@ public class Main {
                 choice = inputScanner.nextInt();
                 System.out.println();
 
-                int inputType;
-                switch (choice) {
-                    case 1:
-                        System.out.println("Reduksi Baris");
-                        inputType = inputTypeUI();
+                if (choice >= 1 && choice <= 2) {
+                    int inputType;
+                    String fileName;
 
-                        if (inputType == 1) {
-                            // Determinan Reduksi Baris dari Keyboard
-                            System.out.println("Keyboard Determinan Reduksi");
-                            System.exit(0);
-                        } else {
-                            // Determinan Reduksi Baris dari File
-                            System.out.println("File Determinan Reduksi");
-                            System.exit(0);
-                        }
-                        break;
-                    case 2:
-                        System.out.println("Ekspansi Kofaktor");
-                        inputType = inputTypeUI();
+                    inputType = inputTypeUI();
 
-                        if (inputType == 1) {
-                            // Determinan Ekspansi Kofaktor dari Keyboard
-                            System.out.println("Keyboard Determinan Ekspansi Kofaktor");
+                    Matrix m;
+                    if (inputType == 1) {
+                        // Baca dari Keyboard
+                        m = IO.readMatrixFromKeyboard();
+                    } else {
+                        // Baca dari File
+                        fileName = IO.readFileName();
+                        IO io = new IO(fileName);
+                        System.out.println();
+                        m = io.readMatrixFromFile();
+
+                        // kalau mau tes
+                        // m.printMatrix();
+                        // System.exit(0);
+                    }
+
+                    switch (choice) {
+                        case 1:
+                            // header
+                            // function det reduksi baris
                             System.exit(0);
-                        } else {
-                            // Determinan Ekspansi Kofaktor dari File
-                            System.out.println("File Determinan Ekspansi Kofaktor");
+                            break;
+                        case 2:
+                            // header
+                            // function det kofaktor
                             System.exit(0);
-                        }
-                        break;
-                    case 3:
-                        run = false;
-                        break;
-                    default:
-                        System.out.println("Input tidak valid. Silakan masukkan angka (1-3)!\n");
-                        Thread.sleep(1000);
+                            break;
+                    }
+                } else if (choice == 3) {
+                    run = false;
+                    break;
+                } else {
+                    System.out.println("Input tidak valid. Silakan masukkan angka (1-3)!\n");
+                    Thread.sleep(1000);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\nInput tidak valid. Silakan masukkan angka (1-3)!\n");
@@ -257,42 +252,47 @@ public class Main {
                 choice = inputScanner.nextInt();
                 System.out.println();
 
-                int inputType;
-                switch (choice) {
-                    case 1:
-                        System.out.println("OBE");
-                        inputType = inputTypeUI();
+                if (choice >= 1 && choice <= 2) {
+                    int inputType;
+                    String fileName;
 
-                        if (inputType == 1) {
-                            // Invers OBE dari Keyboard
-                            System.out.println("Keyboard Invers OBE");
-                            System.exit(0);
-                        } else {
-                            // Invers OBE dari File
-                            System.out.println("File Invers OBE");
-                            System.exit(0);
-                        }
-                        break;
-                    case 2:
-                        System.out.println("Matriks Adjoin");
-                        inputType = inputTypeUI();
+                    inputType = inputTypeUI();
 
-                        if (inputType == 1) {
-                            // Invers Adjoin dari Keyboard
-                            System.out.println("Keyboard Invers Adjoin");
+                    Matrix m;
+                    if (inputType == 1) {
+                        // Baca dari Keyboard
+                        m = IO.readMatrixFromKeyboard();
+                    } else {
+                        // Baca dari File
+                        fileName = IO.readFileName();
+                        IO io = new IO(fileName);
+                        System.out.println();
+                        m = io.readMatrixFromFile();
+
+                        // kalau mau tes
+                        // m.printMatrix();
+                        // System.exit(0);
+                    }
+
+                    switch (choice) {
+                        case 1:
+                            // header
+                            // function inverse OBE
                             System.exit(0);
-                        } else {
-                            // Invers Adjoin dari File
-                            System.out.println("File Invers Adjoin");
+                            break;
+                        case 2:
+                            // header
+                            // function inverse adjoin
                             System.exit(0);
-                        }
-                        break;
-                    case 3:
-                        run = false;
-                        break;
-                    default:
-                        System.out.println("Input tidak valid. Silakan masukkan angka (1-3)!\n");
-                        Thread.sleep(1000);
+                            break;
+                    }
+
+                } else if (choice == 3) {
+                    run = false;
+                    break;
+                } else {
+                    System.out.println("Input tidak valid. Silakan masukkan angka (1-3)!\n");
+                    Thread.sleep(1000);
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\nInput tidak valid. Silakan masukkan angka (1-3)!\n");
@@ -304,37 +304,17 @@ public class Main {
 
     public static void polynomialInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
-        int inputType = inputTypeUI();
-
-        if (inputType == 1) {
-            // Interpolasi Polinom dari Keyboard
-            System.out.println("Keyboard Interpolasi Polinom");
-            System.exit(0);
-        } else {
-            // Interpolasi Polinom dari File
-            System.out.println("File Interpolasi Polinom");
-            System.exit(0);
-        }
+        
     }
 
     public static void bicubicSplineInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
-        BicubicSplineInterpolation.main();
+        
     }
 
     public static void regressionUI() throws IOException, InterruptedException {
         clearScreen();
-        int inputType = inputTypeUI();
-
-        if (inputType == 1) {
-            // Regresi dari Keyboard
-            System.out.println("Keyboard Regresi");
-            System.exit(0);
-        } else {
-            // Regresi dari File
-            System.out.println("File Regresi");
-            System.exit(0);
-        }
+    
     }
 
     public static void imageInterpolationUI() throws IOException, InterruptedException{
