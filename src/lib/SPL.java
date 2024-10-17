@@ -38,49 +38,64 @@ public class SPL {
     }
 
     // func and proc
-    public static void gaussJordanSolution(Matrix m) {
+    public static String[] gaussJordanSolution(Matrix m) {
         // co ini harus dalam bentuk matrix augmented
         int i, j, ex = 0, n;
         double val;
         m.generateEselonReduksi();
         // karna udh eselon reduksi, jadi tinggal spam elmt terakhir row
         if (isNoSulution(m)) {
+            String[] txt = new String[1];
+            txt[0] = "Tidak ada solusi ! ";
             System.out.println("Tidak ada solusi ! ");
+            return txt;
         } else if (isLotSolution(m)) {
+            String[] txt = new String[m.getCol()];
             System.out.println("Banyak Solusi : ");
+            m.generateEselonReduksi();
             for (i = 0; i < m.getCol() - 1; i++) {
                 n = i - ex;
                 if (m.rowLength(n) == m.getCol()) {
+                    txt[n] = String.format("x" + (n + 1) + " = " + (char) (97 + i));
                     System.out.print("x" + (n + 1) + " = " + (char) (97 + i));
                 } else if (i != m.rowLength(n)) {
+                    txt[n] = String.format("x" + (n + 1) + " = " + (char) (97 + i));
                     System.out.print("x" + (n + 1) + " = " + (char) (97 + i));
                     ex += 1;
                 } else {
                     val = m.getElmt(n, m.getCol() - 1);
+                    String restxt = new String();
+                    restxt = String.format("x" + (m.rowLength(n) + 1) + " = " + val);
                     System.out.print("x" + (m.rowLength(n) + 1) + " = " + val);
                     for (j = m.rowLength(n) + 1; j < m.getCol() - 1; j++) {
                         if (m.getElmt(n, j) != 0) {
                             val = m.getElmt(n, j) * (-1);
                             if (val > 0) {
+                                restxt += String.format(" + " + val + "" + (char) (97 + j));
                                 System.out.print(" + " + val + "" + (char) (97 + j));
                             } else {
+                                restxt += String.format(" - " + val + "" + (char) (97 + j));
                                 System.out.print(" - " + (val * -1) + "" + (char) (97 + j));
                             }
 
                         }
                     }
-
+                    txt[n] = restxt;
                 }
                 System.out.println();
             }
+            return txt;
         } else if (isUnique(m)) {
+            String[] txt = new String[m.getRow()];
             System.out.println("Solusi unik : ");
             for (i = 0; i < m.getRow(); i++) {
                 // format biar ga floating point ... (keos)
+                txt[i] = String.format(Locale.US, "x%d = %.4f%n", (i + 1), m.getElmt(i, m.getCol() - 1));
                 System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), m.getElmt(i, m.getCol() - 1));
             }
+            return txt;
         }
-
+        return null;
     }
 
     public static boolean isUnique(Matrix m) {
