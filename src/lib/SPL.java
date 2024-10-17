@@ -227,7 +227,7 @@ public class SPL {
 
     // metode cramer
     // khusus n peubah dan n persamaan
-    public static void cramerSolution(Matrix A, Matrix B) {
+    public static String[] cramerSolution(Matrix A, Matrix B) {
         // Ax = B
 
         // solusi :
@@ -235,14 +235,18 @@ public class SPL {
 
         int j;
         double detA, detAn, x;
+
         Matrix An;
         detA = determinan.getDeterminanKofaktor(A);
+        String[] res = new String[A.getCol()];
         for (j = 0; j < A.getCol(); j++) {
             An = Matrix.changeCol(A, j, B);
             detAn = determinan.getDeterminanKofaktor(An);
             x = detAn / detA;
+            res[j] = String.format(Locale.US, "x%d = %.4f%n", (j + 1), x);
             System.out.printf(Locale.US, "x%d = %.4f%n", (j + 1), x);
         }
+        return res;
 
     }
 }
