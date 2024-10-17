@@ -203,7 +203,7 @@ public class SPL {
     }
 
     // metode balikan
-    public static void balikanSolution(Matrix A, Matrix B) {
+    public static String[] balikanSolution(Matrix A, Matrix B) {
         // Ax = B
         // x = A'B
         Matrix x;
@@ -217,9 +217,12 @@ public class SPL {
 
         // x adalah solusi
         // print x
+        String[] res = new String[x.getRow()];
         for (i = 0; i < x.getRow(); i++) {
+            res[i] = String.format(Locale.US, "x%d = %.4f%n", (i + 1), x.getElmt(i, 0));
             System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), x.getElmt(i, 0));
         }
+        return res;
     }
 
     // metode cramer
