@@ -2,7 +2,6 @@ package lib;
 
 import java.lang.Math;
 
-
 public class BicubicSplineInterpolation {
 
     public static String[] main(double[] temp) {

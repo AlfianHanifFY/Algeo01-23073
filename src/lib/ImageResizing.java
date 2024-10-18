@@ -128,7 +128,7 @@ public class ImageResizing {
     }
 
     private static void computeColorComponents(BufferedImage image, Matrix red, Matrix green, Matrix blue,
-        Matrix[][] redRes, Matrix[][] greenRes, Matrix[][] blueRes, Matrix multiplier) {
+            Matrix[][] redRes, Matrix[][] greenRes, Matrix[][] blueRes, Matrix multiplier) {
         Matrix tempRed = new Matrix(16, 1);
         Matrix tempGreen = new Matrix(16, 1);
         Matrix tempBlue = new Matrix(16, 1);

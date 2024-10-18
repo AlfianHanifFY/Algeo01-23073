@@ -342,6 +342,7 @@ public class Main {
                     if (inputType == 1) {
                         // Baca dari Keyboard
                         m = IO.readMatrixFromKeyboard();
+
                     } else {
                         // Baca dari File
                         fileName = IO.readFileName();
@@ -365,6 +366,7 @@ public class Main {
                                 System.out.println("Matrix tidak memiliki inverse !");
                                 s = IO.returnStringArr("Matrix tidak memiliki inverse !");
                             }
+                            IO.saveFile(s);
                             break;
                         case 2:
                             // header

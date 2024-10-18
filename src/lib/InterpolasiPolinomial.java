@@ -13,11 +13,11 @@ public class InterpolasiPolinomial {
         double[] y = new double[2];
 
         // Input kumpulan titik dan x yang ingin ditaksir
-        System.out.println("Masukkan titik-titik (x y) dan akhiri dengan satu nilai x:"); 
+        System.out.println("Masukkan titik-titik (x y) dan akhiri dengan satu nilai x:");
 
         int count = 0; // Jumlah titik yang dimasukkan
         double xi = 0.0; // x yang ingin dicari nilai y-nya
-        
+
         while (true) {
             String input = scanner.nextLine().trim();
             String[] splitInput = input.split("\\s"); // Memecah hasil input string menjadi array
@@ -38,7 +38,8 @@ public class InterpolasiPolinomial {
                 if (isNumeric(splitInput[0])) {
                     if (count < 2) {
                         // Validasi: Setidaknya dua titik harus dimasukkan sebelum xi
-                        System.out.println("Masukkan setidaknya dua titik (x y) sebelum memasukkan nilai x untuk ditaksir.");
+                        System.out.println(
+                                "Masukkan setidaknya dua titik (x y) sebelum memasukkan nilai x untuk ditaksir.");
                     } else {
                         xi = Double.parseDouble(splitInput[0]);
                         break;
@@ -52,18 +53,18 @@ public class InterpolasiPolinomial {
         }
 
         // Membuat matrix augmented
-        Matrix m = new Matrix(count, count+1);
+        Matrix m = new Matrix(count, count + 1);
         for (int i = 0; i < count; i++) {
             double elmt = 1;
             for (int j = 0; j < count; j++) {
                 m.setElMT(i, j, elmt);
                 elmt = elmt * x[i];
-            m.setElMT(i, count, y[i]);
+                m.setElMT(i, count, y[i]);
             }
         }
-        
+
         double[] solutions = SPL.getSolution(m); // Mencari variabel-variabel solusi
-    
+
         // Mencari nilai y dari xi
         double result = 0;
         double pangkatXi = 1;
@@ -76,12 +77,13 @@ public class InterpolasiPolinomial {
         StringBuilder polynomial = new StringBuilder("f(x) = ");
 
         // x dengan pangkat tertinggi
-        if (solutions.length != 2 && solutions.length != 1){ // Agar tidak tumpang tindih dengan kasus x^1 dan x^0
-            if ((solutions[solutions.length - 1] != 0) && (solutions[solutions.length - 1] != 1) && (solutions[solutions.length - 1] != -1)) {
+        if (solutions.length != 2 && solutions.length != 1) { // Agar tidak tumpang tindih dengan kasus x^1 dan x^0
+            if ((solutions[solutions.length - 1] != 0) && (solutions[solutions.length - 1] != 1)
+                    && (solutions[solutions.length - 1] != -1)) {
                 polynomial.append(String.format("%.4fx^%d", solutions[solutions.length - 1], solutions.length - 1));
-            } else if (solutions[solutions.length - 1] == 1){
+            } else if (solutions[solutions.length - 1] == 1) {
                 polynomial.append(String.format("x^%d", solutions.length - 1));
-            } else if (solutions[solutions.length - 1] == -1){
+            } else if (solutions[solutions.length - 1] == -1) {
                 polynomial.append(String.format("-x^%d", solutions.length - 1));
             }
         }
@@ -100,13 +102,13 @@ public class InterpolasiPolinomial {
                 } else {
                     polynomial.append(String.format(" + %.4fx^%d", solutions[i], i));
                 }
-            } else if (solutions[i] == 1){
+            } else if (solutions[i] == 1) {
                 if (polynomial.length() == 7) { // Kasus sebagai variabel pertama
                     polynomial.append(String.format("x^%d", i));
                 } else {
                     polynomial.append(String.format(" + x^%d", i));
                 }
-            } else if (solutions[i] == -1){
+            } else if (solutions[i] == -1) {
                 if (polynomial.length() == 7) { // Kasus sebagai variabel pertama
                     polynomial.append(String.format("-x^%d", i));
                 } else {
@@ -128,13 +130,13 @@ public class InterpolasiPolinomial {
             } else {
                 polynomial.append(String.format(" + %.4fx", solutions[1]));
             }
-        } else if (solutions[1] == 1){
+        } else if (solutions[1] == 1) {
             if (polynomial.length() == 7) { // Kasus sebagai variabel pertama
                 polynomial.append(String.format("x"));
             } else {
                 polynomial.append(String.format(" + x"));
             }
-        } else if (solutions[1] == -1){
+        } else if (solutions[1] == -1) {
             if (polynomial.length() == 7) { // Kasus sebagai variabel pertama
                 polynomial.append(String.format("-x"));
             } else {
@@ -150,18 +152,18 @@ public class InterpolasiPolinomial {
                 polynomial.append(String.format(" - %.4f", Math.abs(solutions[0])));
             }
         } else if (solutions[0] > 0) {
-            if (polynomial.length() == 7) {  // Kasus sebagai variabel pertama
+            if (polynomial.length() == 7) { // Kasus sebagai variabel pertama
                 polynomial.append(String.format("%.4f", solutions[0]));
             } else {
                 polynomial.append(String.format(" + %.4f", solutions[0]));
             }
-        } 
+        }
 
         System.out.printf("%s, f(%.1f) = %.4f%n", polynomial, xi, result);
 
         scanner.close();
-        }
-    
+    }
+
     private static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str); // Mencoba memparsing string ke double
@@ -178,5 +180,5 @@ public class InterpolasiPolinomial {
         System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
         return newArray;
     }
-    
+
 }

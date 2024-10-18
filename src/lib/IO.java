@@ -114,7 +114,7 @@ public class IO {
         Matrix m = new Matrix(row, col);
         System.out.println("\nMasukkan matriks: ");
         m.readMatrix();
-        
+
         return m;
     }
 
@@ -166,16 +166,16 @@ public class IO {
 
     // Read bicubic spline data from keyboard
     public double[] readBicubicSplineDataFromKeyboard() {
-        Matrix m = new Matrix(4,4);
+        Matrix m = new Matrix(4, 4);
         double[] temp = new double[18];
-        
+
         // Set locale to US to ensure proper decimal point handling
         inputScanner.useLocale(Locale.US);
 
         System.out.println("\nMasukkan matriks 4x4: ");
         m.readMatrix();
-        
-        int i,j,k = 0;
+
+        int i, j, k = 0;
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
                 temp[k] = m.getElmt(i, j);
@@ -185,7 +185,7 @@ public class IO {
         System.out.println();
 
         double a, b;
-        while (true){
+        while (true) {
             try {
                 System.out.print("Masukkan a: ");
                 a = inputScanner.nextDouble();
@@ -197,7 +197,7 @@ public class IO {
                 inputScanner.next();
             }
         }
-        
+
         temp[16] = a;
         temp[17] = b;
 
@@ -212,7 +212,7 @@ public class IO {
 
         // Set locale to US to ensure proper decimal point handling
         fileScanner.useLocale(Locale.US);
-        
+
         for (int i = 0; i < 18; i++) {
             if (fileScanner.hasNextDouble()) {
                 splineData[i] = fileScanner.nextDouble();
@@ -242,7 +242,9 @@ public class IO {
                 FileWriter writer = new FileWriter(outputFile);
                 for (int i = 0; i < content.length; i++) {
                     writer.write(content[i]);
-
+                    if (i != content.length - 1) {
+                        writer.write("\n");
+                    }
                 }
                 writer.close();
                 System.out.println("File " + outputFileName + " berhasil dibuat di directory test/output.");
@@ -266,10 +268,10 @@ public class IO {
             System.out.print("Masukkan pilihan: ");
 
             try {
-                int choice = inputScanner.nextInt(); 
+                int choice = inputScanner.nextInt();
                 if (choice == 1) {
                     writeStringArrayToFile(stringArray);
-                    break; 
+                    break;
                 } else if (choice == 2) {
                     break;
                 } else {
@@ -277,7 +279,7 @@ public class IO {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\nInput tidak valid. Silakan masukkan angka!\n");
-                inputScanner.next(); 
+                inputScanner.next();
             }
         }
     }
@@ -294,7 +296,7 @@ public class IO {
         int i, j;
         for (i = 0; i < m.getRow(); i++) {
             text = "";
-            for (j = 0; i < m.getCol(); j++) {
+            for (j = 0; j < m.getCol(); j++) {
                 text += String.format(Locale.US, "%.4f ", m.getElmt(i, j));
             }
             s[i] = text;
