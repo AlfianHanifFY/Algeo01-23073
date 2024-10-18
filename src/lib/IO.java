@@ -255,7 +255,7 @@ public class IO {
     }
 
     // Save file
-    public void saveFile(String[] stringArray) {
+    public static void saveFile(String[] stringArray) {
         while (true) {
             System.out.print("""
                     Apakah ingin menyimpan file?
