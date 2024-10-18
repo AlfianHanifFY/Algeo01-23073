@@ -369,7 +369,14 @@ public class Main {
                         case 2:
                             // header
                             // function inverse adjoin
-                            System.exit(0);
+                            if (Matrix.haveInverse(m)) {
+                                invers.showInversAdjoin(m);
+                                s = IO.matrixToStringArr(invers.getInversAdjoin(m));
+                            } else {
+                                System.out.println("Matrix tidak memiliki inverse !");
+                                s = IO.returnStringArr("Matrix tidak memiliki inverse !");
+                            }
+                            IO.saveFile(s);
                             break;
                     }
 
