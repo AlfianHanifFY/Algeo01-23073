@@ -190,7 +190,32 @@ public class Main {
                         case 4:
                             // header
                             // function cramer
-                            System.exit(0);
+                            String text2 = new String("");
+                            Matrix eselon2 = new Matrix(m.getRow(), m.getCol());
+                            Matrix.copyMatrix(m, eselon2);
+                            eselon2.generateEselon();
+                            if (!Matrix.haveInverse(A) || !SPL.isUnique(eselon2)) {
+                                valid = false;
+                                if (!Matrix.haveInverse(A)) {
+                                    System.out.println("\nMatrix A tidak memiliki inverse !");
+                                    text2 += "Matrix tidak memiliki inverse !";
+                                } else if (!SPL.isUnique(eselon2)) {
+                                    System.out.println("\nMatrix tidak memiliki solusi unik !");
+                                    text2 += "Matrix tidak memiliki solusi unik !";
+                                } else {
+                                    System.out.println("\nMatrix tidak memiliki inverse dan solusi tidak unik!");
+                                    text2 += "Matrix tidak memiliki inverse dan solusi tidak unik !";
+                                }
+
+                            }
+                            if (valid) {
+                                s = SPL.cramerSolution(A, B);
+                            } else {
+                                System.out.print("\nMatrix tidak dapat diselesaikan dengan metode ini !");
+                                text2 += "\nMatrix tidak dapat diselesaikan dengan metode ini !";
+                                s = IO.returnStringArr(text2);
+                            }
+                            IO.saveFile(s);
                             break;
                     }
 
