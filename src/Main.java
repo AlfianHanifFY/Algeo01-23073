@@ -4,6 +4,7 @@ import java.util.*;
 import lib.BicubicSplineInterpolation;
 import lib.Matrix;
 import lib.SPL;
+import lib.determinan;
 import lib.IO;
 
 public class Main {
