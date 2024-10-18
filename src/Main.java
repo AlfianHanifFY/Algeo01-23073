@@ -239,7 +239,8 @@ public class Main {
     public static void determinantUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
-
+        String[] s;
+        double det;
         while (run) {
             clearScreen();
             System.out.print("""
@@ -281,7 +282,10 @@ public class Main {
                         case 1:
                             // header
                             // function det reduksi baris
-                            System.exit(0);
+                            det = determinan.determinanReduksi(m);
+                            System.out.println("\nDeterminan matrix = " + det);
+                            s = IO.returnStringArr("Determinan matrix = " + det);
+                            IO.saveFile(s);
                             break;
                         case 2:
                             // header
