@@ -4,7 +4,7 @@ import java.lang.Math;
 
 public class BicubicSplineInterpolation {
 
-    public static String[] main(double[] temp) {
+    public static String[] mainBicubicInterpolation(double[] temp) {
         Matrix M = new Matrix(16, 1);
         Matrix X = new Matrix(16, 16);
         Matrix res = new Matrix(16, 1);
