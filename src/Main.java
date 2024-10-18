@@ -430,7 +430,47 @@ public class Main {
 
     public static void regressionUI() throws IOException, InterruptedException {
         clearScreen();
+        int choice;
+        boolean run = true;
+        while (run) {
+            clearScreen();
+            System.out.print("""
+                    PILIH REGRESI
+                    1. Regresi Linier Berganda
+                    2. Regresi Kuadratik Berganda
+                    3. Kembali
+                    """);
+            System.out.println();
+            System.out.print("Masukkan pilihan: ");
+            try {
+                choice = inputScanner.nextInt();
+                System.out.println();
 
+                if (choice >= 1 && choice <= 2) {
+                    int inputType = inputTypeUI();
+                    String[] s;
+
+                    if (choice == 1) {
+                        s = RegresiBerganda.RegresiLinierBerganda(inputType);
+                        IO.saveFile(s);
+                    } else {
+                        s = RegresiBerganda.RegresiKuadratikBerganda(inputType);
+                        IO.saveFile(s);
+                    }
+
+                } else if (choice == 3) {
+                    run = false;
+                    break;
+                } else {
+                    System.out.println("Input tidak valid. Silakan masukkan angka (1-3)!\n");
+                    Thread.sleep(1000);
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("\nInput tidak valid. Silakan masukkan angka (1-3)!\n");
+                inputScanner.nextLine();
+                Thread.sleep(1000);
+            }
+        }
     }
 
     public static void imageInterpolationUI() throws IOException, InterruptedException {
