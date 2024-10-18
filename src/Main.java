@@ -395,10 +395,9 @@ public class Main {
             IO f = new IO(fileName);
             temp = f.readBicubicSplineData();
             s = BicubicSplineInterpolation.main(temp);
-            f.saveFile(s);
-        }
 
-        System.exit(0);
+        }
+        IO.saveFile(s);
     }
 
     public static void regressionUI() throws IOException, InterruptedException {
