@@ -1,6 +1,8 @@
 import java.io.IOException;
 import java.util.*;
 
+import lib.InterpolasiPolinomial;
+import lib.RegresiBerganda;
 import lib.BicubicSplineInterpolation;
 import lib.Matrix;
 import lib.SPL;
