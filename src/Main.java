@@ -315,6 +315,7 @@ public class Main {
     public static void inverseMatrixUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
+        String[] s;
 
         while (run) {
             clearScreen();
@@ -357,7 +358,13 @@ public class Main {
                         case 1:
                             // header
                             // function inverse OBE
-                            System.exit(0);
+                            if (Matrix.haveInverse(m)) {
+                                invers.showInversOBE(m);
+                                s = IO.matrixToStringArr(invers.getInversOBE(m));
+                            } else {
+                                System.out.println("Matrix tidak memiliki inverse !");
+                                s = IO.returnStringArr("Matrix tidak memiliki inverse !");
+                            }
                             break;
                         case 2:
                             // header
