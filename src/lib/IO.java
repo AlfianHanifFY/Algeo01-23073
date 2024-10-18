@@ -17,6 +17,7 @@ public class IO {
         }
 
     }
+
     // Konstruktor
     public IO(String fileName) {
         this.fileName = fileName;
@@ -114,6 +115,13 @@ public class IO {
         System.out.println("\nMasukkan matriks: ");
         m.readMatrix();
         
+        return m;
+    }
+
+    public static Matrix readMxNMatrixFromKeyboard(int row, int col) {
+        Matrix m = new Matrix(row, col);
+        System.out.println("\nMasukkan matriks " + row + " x " + col + " : ");
+        m.readMatrix();
         return m;
     }
 
@@ -218,7 +226,7 @@ public class IO {
     }
 
     // Write string array to file
-    public void writeStringArrayToFile(String[] content) {
+    public static void writeStringArrayToFile(String[] content) {
         try {
             System.out.print("Masukkan nama file keluaran: ");
 
@@ -234,9 +242,7 @@ public class IO {
                 FileWriter writer = new FileWriter(outputFile);
                 for (int i = 0; i < content.length; i++) {
                     writer.write(content[i]);
-                    if (i != content.length - 1) {
-                        writer.write("\n");
-                    }
+
                 }
                 writer.close();
                 System.out.println("File " + outputFileName + " berhasil dibuat di directory test/output.");
@@ -249,7 +255,7 @@ public class IO {
     }
 
     // Save file
-    public void saveFile(String[] stringArray) {
+    public static void saveFile(String[] stringArray) {
         while (true) {
             System.out.print("""
                     Apakah ingin menyimpan file?
@@ -274,6 +280,12 @@ public class IO {
                 inputScanner.next(); 
             }
         }
+    }
+
+    public static String[] returnStringArr(String text) {
+        String[] s = new String[1];
+        s[0] = text;
+        return s;
     }
 
 }

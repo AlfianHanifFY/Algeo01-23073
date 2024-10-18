@@ -99,7 +99,7 @@ public class SPL {
     }
 
     public static boolean isUnique(Matrix m) {
-        // m adalah matrix augmented
+        // m adalah matrix augmented eselon baris
         int i;
         for (i = 0; i < m.getRow(); i++) {
             if (m.rowLength(i) == m.getCol()) {
@@ -110,7 +110,7 @@ public class SPL {
     }
 
     public static boolean isLotSolution(Matrix m) {
-        // m adalah matrix augmented
+        // m adalah matrix augmented eselon baris
         int i;
         if (m.getRow() < m.getCol() - 1) {
             return true;
@@ -124,7 +124,7 @@ public class SPL {
     }
 
     public static boolean isNoSulution(Matrix m) {
-        // m adalah matrix augmented
+        // m adalah matrix augmented eselon baris
         int i;
         for (i = 0; i < m.getRow(); i++) {
             if (m.rowLength(i) == m.getCol() - 1) {
@@ -140,7 +140,6 @@ public class SPL {
         double[] res = new double[m.getCol() - 1];
         double val;
         m.generateEselon();
-        m.printMatrix();
 
         if (isNoSulution(m)) {
             String[] txt = new String[1];
@@ -194,8 +193,8 @@ public class SPL {
                 res[i] = m.getElmt(i, m.getCol() - 1) + val;
             }
             for (i = 0; i < m.getCol() - 1; i++) {
-                txt[i] = String.format("x" + (i + 1) + " = " + res[i]);
-                System.out.println("x" + (i + 1) + " = " + res[i]);
+                txt[i] = String.format(Locale.US, "x%d = %.4f%n", (i + 1), res[i]);
+                System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), res[i]);
             }
             return txt;
         }

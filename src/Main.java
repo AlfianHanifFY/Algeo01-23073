@@ -4,6 +4,7 @@ import java.util.*;
 import lib.BicubicSplineInterpolation;
 import lib.Matrix;
 import lib.SPL;
+import lib.determinan;
 import lib.IO;
 
 public class Main {
@@ -17,8 +18,8 @@ public class Main {
         menuUI();
     }
 
-    public static void loadingUI() throws InterruptedException{
-        int progressBarLength = 30; 
+    public static void loadingUI() throws InterruptedException {
+        int progressBarLength = 30;
         int totalSteps = 100;
 
         System.out.println();
@@ -30,7 +31,7 @@ public class Main {
             System.out.print("\rLoading: [");
             for (int i = 0; i < progressBarLength; i++) {
                 if (i < completedLength) {
-                    System.out.print("#"); 
+                    System.out.print("#");
                 } else {
                     System.out.print("-");
                 }
@@ -51,7 +52,7 @@ public class Main {
         }
     }
 
-    public static int inputTypeUI() throws IOException, InterruptedException{
+    public static int inputTypeUI() throws IOException, InterruptedException {
         boolean type = true;
         int inputType = 0;
 
@@ -83,9 +84,10 @@ public class Main {
         return inputType;
     }
 
-    public static void splUI() throws IOException, InterruptedException{
+    public static void splUI() throws IOException, InterruptedException {
         int choice;
-        boolean run = true;
+        boolean run = true, valid = true;
+        String[] s;
 
         while (run) {
             clearScreen();
@@ -110,17 +112,33 @@ public class Main {
 
                     inputType = inputTypeUI();
 
-                    Matrix m;
+                    Matrix A, B, m;
                     if (inputType == 1) {
                         // Baca dari Keyboard
-                        m = IO.readMatrixFromKeyboard();
+                        // Ax = B
+                        // kalo input matrix A berlebih bakal langsung masuk ke matrix B
+                        System.out.println("\nMatrix A : ");
+                        A = IO.readMatrixFromKeyboard();
+
+                        System.out.println("\nMatrix B : ");
+                        B = IO.readMxNMatrixFromKeyboard(A.getRow(), 1);
+
+                        // augmented matrix
+                        m = Matrix.createAugmented(A, B);
+                        System.out.println("\nMatrix Augmented A dan B : ");
+                        m.printMatrix();
+
                     } else {
                         // Baca dari File
                         fileName = IO.readFileName();
                         IO io = new IO(fileName);
                         System.out.println();
+                        // augmented
                         m = io.readMatrixFromFile();
 
+                        // Ax = B
+                        A = Matrix.disassembleAugmented(m, true);
+                        B = Matrix.disassembleAugmented(m, false);
                         // kalau mau tes
                         // m.printMatrix();
                         // System.exit(0);
@@ -130,22 +148,75 @@ public class Main {
                         case 1:
                             // header
                             // function gauss
-                            System.exit(0);
+                            s = SPL.gaussSolution(m);
+                            IO.saveFile(s);
                             break;
                         case 2:
                             // header
                             // function gauss-jordan
-                            System.exit(0);
+                            s = SPL.gaussJordanSolution(m);
+                            IO.saveFile(s);
                             break;
                         case 3:
                             // header
                             // function balikan
-                            System.exit(0);
+                            // cek A kotak ga , cek dulu A punya balikan ga
+                            String text = new String("");
+                            Matrix eselon = new Matrix(m.getRow(), m.getCol());
+                            Matrix.copyMatrix(m, eselon);
+                            eselon.generateEselon();
+                            if (!Matrix.haveInverse(A) || !SPL.isUnique(eselon)) {
+                                valid = false;
+                                if (!Matrix.haveInverse(A)) {
+                                    System.out.println("\nMatrix A tidak memiliki inverse !");
+                                    text += "Matrix tidak memiliki inverse !";
+                                } else if (!SPL.isUnique(eselon)) {
+                                    System.out.println("\nMatrix tidak memiliki solusi unik !");
+                                    text += "Matrix tidak memiliki solusi unik !";
+                                } else {
+                                    System.out.println("\nMatrix tidak memiliki inverse dan solusi tidak unik!");
+                                    text += "Matrix tidak memiliki inverse dan solusi tidak unik !";
+                                }
+
+                            }
+                            if (valid) {
+                                s = SPL.balikanSolution(A, B);
+                            } else {
+                                System.out.print("\nMatrix tidak dapat diselesaikan dengan metode ini !");
+                                text += "\nMatrix tidak dapat diselesaikan dengan metode ini !";
+                                s = IO.returnStringArr(text);
+                            }
+                            IO.saveFile(s);
                             break;
                         case 4:
                             // header
                             // function cramer
-                            System.exit(0);
+                            String text2 = new String("");
+                            Matrix eselon2 = new Matrix(m.getRow(), m.getCol());
+                            Matrix.copyMatrix(m, eselon2);
+                            eselon2.generateEselon();
+                            if (!Matrix.haveInverse(A) || !SPL.isUnique(eselon2)) {
+                                valid = false;
+                                if (!Matrix.haveInverse(A)) {
+                                    System.out.println("\nMatrix A tidak memiliki inverse !");
+                                    text2 += "Matrix tidak memiliki inverse !";
+                                } else if (!SPL.isUnique(eselon2)) {
+                                    System.out.println("\nMatrix tidak memiliki solusi unik !");
+                                    text2 += "Matrix tidak memiliki solusi unik !";
+                                } else {
+                                    System.out.println("\nMatrix tidak memiliki inverse dan solusi tidak unik!");
+                                    text2 += "Matrix tidak memiliki inverse dan solusi tidak unik !";
+                                }
+
+                            }
+                            if (valid) {
+                                s = SPL.cramerSolution(A, B);
+                            } else {
+                                System.out.print("\nMatrix tidak dapat diselesaikan dengan metode ini !");
+                                text2 += "\nMatrix tidak dapat diselesaikan dengan metode ini !";
+                                s = IO.returnStringArr(text2);
+                            }
+                            IO.saveFile(s);
                             break;
                     }
 
@@ -165,7 +236,7 @@ public class Main {
         }
     }
 
-    public static void determinantUI() throws IOException, InterruptedException{
+    public static void determinantUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
 
@@ -233,7 +304,7 @@ public class Main {
         }
     }
 
-    public static void inverseMatrixUI() throws IOException, InterruptedException{
+    public static void inverseMatrixUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
 
@@ -304,7 +375,7 @@ public class Main {
 
     public static void polynomialInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
-        
+
     }
 
     public static void bicubicSplineInterpolationUI() throws IOException, InterruptedException {
@@ -312,7 +383,7 @@ public class Main {
         // Header
         int inputType = inputTypeUI();
 
-        double [] temp;
+        double[] temp;
 
         String[] s;
 
@@ -325,23 +396,22 @@ public class Main {
             IO f = new IO(fileName);
             temp = f.readBicubicSplineData();
             s = BicubicSplineInterpolation.main(temp);
-            f.saveFile(s);
-        }
 
-        System.exit(0);
+        }
+        IO.saveFile(s);
     }
 
     public static void regressionUI() throws IOException, InterruptedException {
         clearScreen();
-    
+
     }
 
-    public static void imageInterpolationUI() throws IOException, InterruptedException{
+    public static void imageInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
     }
 
-    public static void headerUI(){
-        
+    public static void headerUI() {
+
     }
 
     public static void menuUI() throws IOException, InterruptedException {
