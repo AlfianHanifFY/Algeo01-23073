@@ -226,7 +226,7 @@ public class IO {
     }
 
     // Write string array to file
-    public void writeStringArrayToFile(String[] content) {
+    public static void writeStringArrayToFile(String[] content) {
         try {
             System.out.print("Masukkan nama file keluaran: ");
 
@@ -242,9 +242,7 @@ public class IO {
                 FileWriter writer = new FileWriter(outputFile);
                 for (int i = 0; i < content.length; i++) {
                     writer.write(content[i]);
-                    if (i != content.length - 1) {
-                        writer.write("\n");
-                    }
+
                 }
                 writer.close();
                 System.out.println("File " + outputFileName + " berhasil dibuat di directory test/output.");
