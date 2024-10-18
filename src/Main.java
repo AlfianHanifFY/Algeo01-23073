@@ -111,10 +111,22 @@ public class Main {
 
                     inputType = inputTypeUI();
 
-                    Matrix m;
+                    Matrix A, B, m;
                     if (inputType == 1) {
                         // Baca dari Keyboard
-                        m = IO.readMatrixFromKeyboard();
+                        // Ax = B
+                        // kalo input matrix A berlebih bakal langsung masuk ke matrix B
+                        System.out.println("\nMatrix A : ");
+                        A = IO.readMatrixFromKeyboard();
+
+                        System.out.println("\nMatrix B : ");
+                        B = IO.readMxNMatrixFromKeyboard(A.getRow(), 1);
+
+                        // augmented matrix
+                        m = Matrix.createAugmented(A, B);
+                        System.out.println("\nMatrix Augmented A dan B : ");
+                        m.printMatrix();
+
                     } else {
                         // Baca dari File
                         fileName = IO.readFileName();
