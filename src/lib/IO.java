@@ -114,7 +114,7 @@ public class IO {
         Matrix m = new Matrix(row, col);
         System.out.println("\nMasukkan matriks: ");
         m.readMatrix();
-        
+
         return m;
     }
 
@@ -168,13 +168,13 @@ public class IO {
     public double[] readBicubicSplineDataFromKeyboard() {
         Matrix m = new Matrix(4, 4);
         double[] temp = new double[18];
-        
+
         // Set locale to US to ensure proper decimal point handling
         inputScanner.useLocale(Locale.US);
 
         System.out.println("\nMasukkan matriks 4x4: ");
         m.readMatrix();
-        
+
         int i, j, k = 0;
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
@@ -197,7 +197,7 @@ public class IO {
                 inputScanner.next();
             }
         }
-        
+
         temp[16] = a;
         temp[17] = b;
 
@@ -212,7 +212,7 @@ public class IO {
 
         // Set locale to US to ensure proper decimal point handling
         fileScanner.useLocale(Locale.US);
-        
+
         for (int i = 0; i < 18; i++) {
             if (fileScanner.hasNextDouble()) {
                 splineData[i] = fileScanner.nextDouble();
@@ -268,10 +268,10 @@ public class IO {
             System.out.print("Masukkan pilihan: ");
 
             try {
-                int choice = inputScanner.nextInt(); 
+                int choice = inputScanner.nextInt();
                 if (choice == 1) {
                     writeStringArrayToFile(stringArray);
-                    break; 
+                    break;
                 } else if (choice == 2) {
                     break;
                 } else {
@@ -279,7 +279,7 @@ public class IO {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("\nInput tidak valid. Silakan masukkan angka!\n");
-                inputScanner.next(); 
+                inputScanner.next();
             }
         }
     }
