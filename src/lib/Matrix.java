@@ -308,6 +308,26 @@ public class Matrix {
         return M;
     }
 
+    public static Matrix disassembleAugmented(Matrix m, boolean left) {
+        int i, j;
+        if (left) {
+            Matrix M = new Matrix(m.getRow(), m.getCol() - 1);
+            for (i = 0; i < M.getRow(); i++) {
+                for (j = 0; j < M.getCol(); j++) {
+                    M.setElMT(i, j, m.getElmt(i, j));
+                }
+            }
+            return M;
+        } else {
+            Matrix M = new Matrix(m.getRow(), 1);
+            for (i = 0; i < M.getRow(); i++) {
+                M.setElMT(i, 0, m.getElmt(i, m.getCol() - 1));
+            }
+            return M;
+        }
+
+    }
+
     public static Matrix getHalfRigth(Matrix m) {
         // inputnya
         Matrix M = new Matrix(m.getRow(), m.getCol() / 2);
