@@ -147,7 +147,8 @@ public class Main {
                         case 1:
                             // header
                             // function gauss
-                            System.exit(0);
+                            s = SPL.gaussSolution(m);
+                            IO.saveFile(s);
                             break;
                         case 2:
                             // header
