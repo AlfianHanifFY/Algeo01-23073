@@ -7,6 +7,7 @@ import lib.SPL;
 import lib.determinan;
 import lib.invers;
 import lib.IO;
+import lib.ImageResizing;
 
 public class Main {
     static Scanner inputScanner = new Scanner(System.in);
@@ -414,15 +415,14 @@ public class Main {
         if (inputType == 1) {
             IO io = new IO("");
             temp = io.readBicubicSplineDataFromKeyboard();
-            s = BicubicSplineInterpolation.main(temp);
         } else {
             String fileName = IO.readFileName();
             IO f = new IO(fileName);
             temp = f.readBicubicSplineData();
-            s = BicubicSplineInterpolation.main(temp);
-
         }
+        s = BicubicSplineInterpolation.mainBicubicInterpolation(temp);
         IO.saveFile(s);
+        Thread.sleep(500);
     }
 
     public static void regressionUI() throws IOException, InterruptedException {
@@ -432,6 +432,9 @@ public class Main {
 
     public static void imageInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
+        // Header
+        ImageResizing.mainImageResizing();
+        Thread.sleep(1000);
     }
 
     public static void headerUI() {

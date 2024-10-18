@@ -92,7 +92,7 @@ public class Matrix {
     public void readMatrix() {
         // Set locale to US to ensure proper decimal point handling
         inputScanner.useLocale(Locale.US);
-        
+
         while (true) {
             try {
                 for (int i = 0; i < rows; i++) {
