@@ -193,8 +193,8 @@ public class SPL {
                 res[i] = m.getElmt(i, m.getCol() - 1) + val;
             }
             for (i = 0; i < m.getCol() - 1; i++) {
-                txt[i] = String.format("x" + (i + 1) + " = " + res[i]);
-                System.out.println("x" + (i + 1) + " = " + res[i]);
+                txt[i] = String.format(Locale.US, "x%d = %.4f%n", (i + 1), res[i]);
+                System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), res[i]);
             }
             return txt;
         }
