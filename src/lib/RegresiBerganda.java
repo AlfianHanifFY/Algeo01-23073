@@ -4,25 +4,70 @@ import java.util.Scanner;
 import java.util.Locale;
 
 public class RegresiBerganda {
-    public static void RegresiLinierBerganda(String[] args) {
+    public static String[] RegresiLinierBerganda(int pilihan) {
         Locale.setDefault(Locale.US); // Set Locale ke US agar input desimal menggunakan titik (.)
-        
         Scanner scanner = new Scanner(System.in);
 
-        // Validasi jumlah peubah x dan jumlah sampel
-        int n = validasiInputInteger(scanner, "Jumlah peubah x = ");
-        int m = validasiInputInteger(scanner, "Jumlah sampel = ");
+        Matrix matrix;
+        int n;
+        int m;
+        double[] xk;
 
-        double[][] x = new double[n][m];
-        double[] y = new double[m];
-        // Input nilai x dan y
-        for (int j = 0; j < m; j++) {
-            validasiInputX(scanner, x, n, j);
-            validasiInputY(scanner, y, j);
+        if (pilihan == 1) {
+            // Input jumlah peubah x dan jumlah sampel
+            System.out.print("\nMasukkan jumlah peubah x: ");
+            n = validasiInputInteger(scanner); // Input jumlah peubah x
+            System.out.print("Masukkan jumlah sampel: ");
+            m = validasiInputInteger(scanner); // Input jumlah sampel
+
+            // Input matrix
+            matrix = new Matrix(m, n+1);
+            System.out.print("\nMasukkan " + m + " nilai-nilai x1, x2, ..., xn, dan y:\n");
+            matrix.readMatrix();
+
+            // Input nilai-nilai xk
+            System.out.print("\nMasukkan nilai-nilai xk yang ingin ditaksir: \n");
+            xk = new double[n];
+            xk = validasiInputDoubleArray(scanner, n);
+
+        } else {
+            // Input dari file
+            String fileName = IO.readFileName();
+            IO io = new IO(fileName);
+            n = io.getColCount() - 1; // Assign jumlah peubah x
+            m = io.getRowCount() - 1; // Assign jumlah sampel
+            double[] data = new double[(m * (n+1)) + n]; // Array sementara berisi nilai-nilai dalam file
+
+            io.openFile();
+            io.fileScanner.useLocale(Locale.US);
+
+            // Assign array sementara
+            for (int i = 0; i < (m * (n+1)) + n; i++) {
+                if (io.fileScanner.hasNextDouble()) {
+                    data[i] = io.fileScanner.nextDouble();
+                } else {
+                    System.out.println("Data tidak valid pada index " + i);
+                    System.exit(0);
+                }
+            }
+
+            // Assign matrix
+            matrix = new Matrix(m, n+1);
+            int k = 0;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n+1; j++) {
+                    matrix.setElMT(i, j, data[k]);
+                    k += 1;
+                }
+            }
+
+            // Assign nilai-nilai xk
+            xk = new double[n];
+            for (int i = 0; i < n; i++){
+                xk[i] = data[(m * (n+1)) + i];
+            }
+            io.closeFile();
         }
-
-        // Input nilai xk
-        double[] xk = validasiInputDoubleArray(scanner, n, "Masukkan " + n + " nilai xk yang ingin ditaksir (pisahkan dengan spasi): ");
 
         double[] arrayFirstRow = new double[n+2];
         double[][] matrixNextRow = new double[n][n+2];
@@ -31,13 +76,13 @@ public class RegresiBerganda {
         for (int i = 1; i <= n; i++) {
             double sumX = 0;
             for (int j = 0; j < m; j++){
-                sumX = sumX + x[i-1][j];
-            arrayFirstRow[i] = sumX;
+                sumX = sumX + matrix.getElmt(j, i-1);
             }
+            arrayFirstRow[i] = sumX;
         }
         double sumY = 0;
         for (int i = 0; i < m; i++){
-            sumY = sumY + y[i];
+            sumY = sumY + matrix.getElmt(i, n);
         arrayFirstRow[n+1] = sumY;
         }
 
@@ -49,13 +94,13 @@ public class RegresiBerganda {
             for (int j = 1; j < (n+1); j++){ // Kolom kedua hingga kedua terakhir
                 double sumXX = 0;
                 for (int k = 0; k < m; k++){
-                    sumXX = sumXX + (x[i][k] * x[j-1][k]);
+                    sumXX = sumXX + (matrix.getElmt(k, i) * matrix.getElmt(k, j-1));
                 }
                 matrixNextRow[i][j] = sumXX;
             }
             double sumXY = 0; // Kolom terakhir
             for (int k = 0; k < m; k++){
-                sumXY = sumXY + (x[i][k] * y[k]);
+                sumXY = sumXY + (matrix.getElmt(k, i) * matrix.getElmt(k, n));
             }
             matrixNextRow[i][n+1] = sumXY;
         }
@@ -70,56 +115,109 @@ public class RegresiBerganda {
                 matrixAugmented.setElMT(i+1, j, matrixNextRow[i][j]);
             }
         }
-        
+        // Tes: matrixAugmented.printMatrix();
+
         // Solusi
         double[] solutions = SPL.getSolution(matrixAugmented);
-        System.out.printf("f(x) = %.4f", solutions[0]);
+        
+        // StringBuilder untuk menyimpan output
+        StringBuilder outputString = new StringBuilder();
+
+        // Menyusun output f(x)
+        outputString.append(String.format("f(x) = %.4f", solutions[0]));
         for (int i = 1; i < solutions.length; i++) {
             if (solutions[i] >= 0) {
-                System.out.printf(" + %.4f X%d", solutions[i], i);
+                outputString.append(String.format(" + %.4f X%d", solutions[i], i));
             } else {
-                solutions[i] = solutions[i] * (-1);
-                System.out.printf(" - %.4f X%d", solutions[i], i);
+                outputString.append(String.format(" - %.4f X%d", -solutions[i], i));
             }
         }
-    
-        // Menghitung nilai taksiran f(xk)
+
+        // Menyusun output nilai taksiran f(xk)
         double f_xk = solutions[0];
         for (int i = 0; i < n; i++) {
             f_xk += solutions[i + 1] * xk[i];
         }
-        System.out.printf(", f(xk) = %.4f\n", f_xk);
-    
-        scanner.close();
-    }
-        // Test case:
-        // X1 = 10, 16, 20, 26; X2 = 8, 10, 16, 22; Y = 20, 30, 40, 36
+        outputString.append(String.format(", f(xk) = %.4f", f_xk));
 
-    
-    public static void RegresiKuadratikBerganda(String[] args) {
+        // Output
+        System.out.println();
+        System.out.println(outputString);
+        System.out.println();
+
+        // Mengembalikan hasil dalam bentuk String[]
+        return new String[]{outputString.toString()};
+    }
+
+        
+    public static String[] RegresiKuadratikBerganda(int pilihan) {
         Locale.setDefault(Locale.US); // Set Locale ke US agar input desimal menggunakan titik (.)
-    
         Scanner scanner = new Scanner(System.in);
-        
-        // Input jumlah peubah x dan jumlah sampel
-        int n = validasiInputInteger(scanner, "Jumlah peubah x = ");
-        int m = validasiInputInteger(scanner, "Jumlah sampel = ");
-        
-        double[][] x = new double[n][m];
-        double[] y = new double[m];
-        
-        // Input nilai x dan y
-        for (int j = 0; j < m; j++) {
-            validasiInputX(scanner, x, n, j);
-            validasiInputY(scanner, y, j);
+
+        Matrix matrix;
+        int n;
+        int m;
+        double[] xk;
+
+        if (pilihan == 1) {
+            // Input jumlah peubah x dan jumlah sampel
+            System.out.print("\nMasukkan jumlah peubah x: ");
+            n = validasiInputInteger(scanner); // Input jumlah peubah x
+            System.out.print("Masukkan jumlah sampel: ");
+            m = validasiInputInteger(scanner); // Input jumlah sampel
+            
+            // Input matrix
+            matrix = new Matrix(m, n+1);
+            System.out.print("\nMasukkan " + m + " nilai-nilai  x1, x2, ..., xn, dan y :\n");
+            matrix.readMatrix();
+            // Tes: matrix.printMatrix();
+
+            // Input nilai-nilai xk
+            System.out.print("\nMasukkan nilai-nilai xk yang ingin ditaksir: \n");
+            xk = new double[n];
+            xk = validasiInputDoubleArray(scanner, n);
+
+        } else {
+            // Input dari file
+            String fileName = IO.readFileName();
+            IO io = new IO(fileName);
+            n = io.getColCount() - 1; // Assign jumlah peubah x
+            m = io.getRowCount() - 1; // Assign jumlah sampel
+            double[] data = new double[(m * (n+1)) + n]; // Array sementara berisi nilai-nilai dalam file
+
+            io.openFile();
+            io.fileScanner.useLocale(Locale.US);
+
+            // Assign array sementara
+            for (int i = 0; i < (m * (n+1)) + n; i++) {
+                if (io.fileScanner.hasNextDouble()) {
+                    data[i] = io.fileScanner.nextDouble();
+                } else {
+                    System.out.println("Data tidak valid pada index " + i);
+                    System.exit(0);
+                }
+            }
+
+            // Assign matrix
+            matrix = new Matrix(m, n+1);
+            int k = 0;
+            for (int i = 0; i < m; i++) {
+                for (int j = 0; j < n+1; j++) {
+                    matrix.setElMT(i, j, data[k]);
+                    k += 1;
+                }
+            }
+
+            // Assign nilai-nilai xk
+            xk = new double[n];
+            for (int i = 0; i < n; i++){
+                xk[i] = data[(m * (n+1)) + i];
+            }
+            io.closeFile();
         }
-    
-        // Input nilai xk
-        double[] xk = validasiInputDoubleArray(scanner, n, "Masukkan " + n + " nilai xk yang ingin ditaksir: ");
-    
+
         int suku = (n * (n + 3)) / 2;
         Matrix matrixPembantu = new Matrix(suku, m);
-
         /* Isi matrixPembantu:
          * x1[1], x1[2], x1[3], ...
          * x2[1], x2[2], x2[3], ...
@@ -131,19 +229,19 @@ public class RegresiBerganda {
          * x1[1].x2[1], x1[2].x2[2], x1[3].x2[3], ...
          * ...
          * x(n-1)[1].xn[1], x(n-1)[2].xn[2], x(n-1)[3].xn[3], ...
-         */
+        */ 
         
         // Mengisi matrix pembantu
         // Isi x1, x2, ..., xn
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                matrixPembantu.setElMT(i, j, x[i][j]);
+                matrixPembantu.setElMT(i, j, matrix.getElmt(j, i));
             }
         }
         // Isi kuadrat dari x1^2, x2^2, ..., xn^2
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                matrixPembantu.setElMT((n+i), j, (x[i][j] * x[i][j]));
+                matrixPembantu.setElMT((n+i), j, (matrix.getElmt(j, i) * matrix.getElmt(j, i)));
             }
         }
         // Isi x1x2, x1x3, ..., xnxn
@@ -151,7 +249,7 @@ public class RegresiBerganda {
         for (int i = 0; i < n; i++) {
             for (int k = i + 1; k < n; k++) {
                 for (int j = 0; j < m; j++) {
-                    matrixPembantu.setElMT(index, j, (x[i][j] * x[k][j]));
+                    matrixPembantu.setElMT(index, j, (matrix.getElmt(j, i) * matrix.getElmt(j, k)));
                 }
                 index++;
             }
@@ -188,82 +286,101 @@ public class RegresiBerganda {
         Matrix matrix2 = new Matrix(suku + 1, 1);
         double sum = 0;
         for (int i = 0; i < m; i++) {
-            sum = sum + y[i];
+            sum = sum + matrix.getElmt(i, n);
         }
         matrix2.setElMT(0, 0, sum); // Elemen pertama
         for (int i = 1; i < (suku+1); i++) {
             sum = 0;
             for (int j = 0; j < m; j++){
-                sum = sum + (y[j] * matrixPembantu.getElmt(i-1, j));
+                sum = sum + (matrix.getElmt(j, n) * matrixPembantu.getElmt(i-1, j));
             matrix2.setElMT(i, 0, sum);
             }
         }
 
         // Matrix augmented
         Matrix matrixAugmented = Matrix.createAugmented(matrix1, matrix2);
+        // Tes: matrixAugmented.printMatrix();
 
         // Solusi
         double[] solutions = SPL.getSolution(matrixAugmented);
-        System.out.printf("f(x) = %.4f", solutions[0]);
+        // Tes: System.out.println(Arrays.toString(solutions));
+
+        // StringBuilder untuk menyimpan output
+        StringBuilder outputString = new StringBuilder();
+
+        
+        // Menyusun output penjelasan kombinasi ke output
+        outputString.append(printCombinations(n));
+
+        // Menyusun output f(x)
+        outputString.append(String.format("f(x) = %.4f", solutions[0]));
         for (int i = 1; i < solutions.length; i++) {
             if (solutions[i] >= 0) {
-                System.out.printf(" + %.4f X%d", solutions[i], i);
+                outputString.append(String.format(" + %.4f X%d", solutions[i], i));
             } else {
-                solutions[i] = solutions[i] * (-1);
-                System.out.printf(" - %.4f X%d", solutions[i], i);
+                outputString.append(String.format(" - %.4f X%d", -solutions[i], i));
             }
         }
 
         // Menghitung nilai taksiran f(xk)
         double f_xk = solutions[0];
         index = n;
-        // Tambahkan komponen linier
+        // Menambahkan variabel linier
         for (int i = 0; i < n; i++) {
             f_xk += solutions[i + 1] * xk[i];
         }
-        // Tambahkan komponen kuadrat
+        // Menambahkan variabel kuadrat
         for (int i = 0; i < n; i++) {
             f_xk += solutions[index + 1] * xk[i] * xk[i];
             index++;
         }
-        // Tambahkan komponen interaksi
+        // Menambahkan variabel interaksi
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 f_xk += solutions[index + 1] * xk[i] * xk[j];
                 index++;
             }
         }
-        System.out.printf(", f(xk) = %.4f\n", f_xk);
-        printCombinations(n);
-        scanner.close();
+
+        // Menyusun output f(xk)
+        outputString.append(String.format(", f(xk) = %.4f", f_xk));
+
+        // Output
+        System.out.println();
+        System.out.println(outputString);
+        System.out.println();
+
+        // Mengembalikan hasil dalam bentuk String[]
+        return new String[]{outputString.toString()};
     }
+    
 
-
-    public static void printCombinations(int numVariables) {
-        // Cetak variabel linier
-        for (int i = 1; i <= numVariables; i++) {
-            System.out.println("X" + i + " = X" + i);
+    public static String printCombinations(int n) {
+        StringBuilder combinations = new StringBuilder();
+        // Variabel linier
+        for (int i = 1; i <= n; i++) {
+            combinations.append(String.format("X%d = X%d\n", i, i));
         }
-        // Cetak variabel kuadrat
-        for (int i = 1; i <= numVariables; i++) {
-            System.out.println("X" + (numVariables + i) + " = X" + i + "^2");
+        // Variabel kuadrat
+        for (int i = 1; i <= n; i++) {
+            combinations.append(String.format("X%d = X%d^2\n", (n+i), i));
         }
         // Cetak variabel interaksi
-        int index = 2 * numVariables + 1;
-        for (int i = 1; i < numVariables; i++) {
-            for (int j = i + 1; j <= numVariables; j++) {
-                System.out.println("X" + index + " = X" + i + "X" + j);
+        int index = 2 * n + 1;
+        for (int i = 1; i < n; i++) {
+            for (int j = i + 1; j <= n; j++) {
+                combinations.append(String.format("X%d = X%dX%d\n", index, i, j)); // Contoh interaksi
                 index++;
             }
         }
+        return combinations.toString();
     }
 
 
     // Validasi input integer
-    public static int validasiInputInteger(Scanner scanner, String message) {
+    public static int validasiInputInteger(Scanner scanner) {
         int value;
         while (true) {
-            System.out.print(message);
             String input = scanner.nextLine().trim();
             if (input.matches("\\d+")) {
                 value = Integer.parseInt(input);
@@ -295,10 +412,9 @@ public class RegresiBerganda {
     
 
     // Validasi input double dengan jumlah elemen yang sesuai dengan n
-    public static double[] validasiInputDoubleArray(Scanner scanner, int expectedLength, String message) {
+    public static double[] validasiInputDoubleArray(Scanner scanner, int expectedLength) {
         double[] values = new double[expectedLength];
         while (true) {
-            System.out.print(message);
             String input = scanner.nextLine().trim();
             String[] splitInput = input.split("\\s+");
             if (splitInput.length == expectedLength) {
@@ -315,21 +431,6 @@ public class RegresiBerganda {
             }
         }
         return values;
-    }
-    
-
-    // Validasi input x
-    public static void validasiInputX(Scanner scanner, double[][] x, int n, int j) {
-        double[] inputX = validasiInputDoubleArray(scanner, n, "Masukkan " + n + " nilai x untuk sampel ke-" + (j + 1) + ": ");
-        for (int i = 0; i < n; i++) {
-            x[i][j] = inputX[i];
-        }
-    }
-    
-
-    // Validasi input y
-    public static void validasiInputY(Scanner scanner, double[] y, int j) {
-        y[j] = validasiInputDoubleArray(scanner, 1, "Masukkan nilai y untuk sampel ke-" + (j + 1) + ": ")[0];
     }
 
 
