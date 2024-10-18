@@ -290,7 +290,10 @@ public class Main {
                         case 2:
                             // header
                             // function det kofaktor
-                            System.exit(0);
+                            det = determinan.getDeterminanKofaktor(m);
+                            System.out.println("\nDeterminan matrix = " + det);
+                            s = IO.returnStringArr("Determinan matrix = " + det);
+                            IO.saveFile(s);
                             break;
                     }
                 } else if (choice == 3) {
