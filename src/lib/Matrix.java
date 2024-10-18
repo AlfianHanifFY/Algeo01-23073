@@ -15,7 +15,7 @@ public class Matrix {
         Scanner scanner = new Scanner(System.in);
         Matrix m1 = new Matrix(3, 3);
         Matrix m2 = new Matrix(3, 1);
-        // Matrix M;
+        Matrix M, l, r;
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
@@ -24,8 +24,13 @@ public class Matrix {
         // m1.printMatrix();
         // System.out.println("matrix 2");
         m2.readMatrix();
-        // System.out.println("augmented:");
-        // M = Matrix.createAugmented(m1, m2);
+        System.out.println("augmented:");
+        M = Matrix.createAugmented(m1, m2);
+        M.printMatrix();
+        r = Matrix.disassembleAugmented(M, false);
+        r.printMatrix();
+        l = Matrix.disassembleAugmented(M, true);
+        l.printMatrix();
         // M = Matrix.createMatrixIdentitas(3);
         // m2 = Matrix.createAugmented(M, m1);
         // m2.printMatrix();
@@ -54,8 +59,8 @@ public class Matrix {
         // System.out.println("transpose");
         // m1.transpose();
         // m1.printMatrix();
-        m1 = changeCol(m1, 1, m2);
-        m1.printMatrix();
+        // m1 = changeCol(m1, 1, m2);
+        // m1.printMatrix();
         scanner.close();
     }
 
