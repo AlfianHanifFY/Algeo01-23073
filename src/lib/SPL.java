@@ -99,7 +99,7 @@ public class SPL {
     }
 
     public static boolean isUnique(Matrix m) {
-        // m adalah matrix augmented
+        // m adalah matrix augmented eselon baris
         int i;
         for (i = 0; i < m.getRow(); i++) {
             if (m.rowLength(i) == m.getCol()) {
@@ -110,7 +110,7 @@ public class SPL {
     }
 
     public static boolean isLotSolution(Matrix m) {
-        // m adalah matrix augmented
+        // m adalah matrix augmented eselon baris
         int i;
         if (m.getRow() < m.getCol() - 1) {
             return true;
@@ -124,7 +124,7 @@ public class SPL {
     }
 
     public static boolean isNoSulution(Matrix m) {
-        // m adalah matrix augmented
+        // m adalah matrix augmented eselon baris
         int i;
         for (i = 0; i < m.getRow(); i++) {
             if (m.rowLength(i) == m.getCol() - 1) {
