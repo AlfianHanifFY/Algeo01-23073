@@ -17,6 +17,7 @@ public class IO {
         }
 
     }
+
     // Konstruktor
     public IO(String fileName) {
         this.fileName = fileName;
@@ -114,6 +115,13 @@ public class IO {
         System.out.println("\nMasukkan matriks: ");
         m.readMatrix();
         
+        return m;
+    }
+
+    public static Matrix readMxNMatrixFromKeyboard(int row, int col) {
+        Matrix m = new Matrix(row, col);
+        System.out.println("\nMasukkan matriks " + row + " x " + col + " : ");
+        m.readMatrix();
         return m;
     }
 
