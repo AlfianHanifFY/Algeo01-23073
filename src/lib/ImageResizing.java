@@ -2,6 +2,7 @@ package lib;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
@@ -9,7 +10,6 @@ import javax.imageio.ImageIO;
 public class ImageResizing {
 
     public static void mainImageResizing() throws IOException {
-        // Declare
         Matrix X = new Matrix(16, 16);
         Matrix D = new Matrix(16, 16);
         Matrix multiplier = new Matrix(16, 16);
@@ -18,10 +18,10 @@ public class ImageResizing {
         BicubicSplineInterpolation.constructX(X);
         constructD(D);
 
-        // inverse matrix and save it to inverseX
+        // Inverse matrix X
         Matrix invX = invers.getInversOBE(X);
 
-        // multiply X and D and save it to multiplier
+        // Multiply X and D
         multiplier = Matrix.multiplyMatrix(invX, D);
         for (int i = 0; i < multiplier.getRow(); i++) {
             for (int j = 0; j < multiplier.getCol(); j++) {
@@ -29,7 +29,7 @@ public class ImageResizing {
             }
         }
 
-        // get image file
+        // Get image file
         String fileName = IO.readFileName();
         File file = new File(fileName);
         BufferedImage img = ImageIO.read(file);
@@ -132,8 +132,18 @@ public class ImageResizing {
                 blueRes[i - 1][j - 1] = Matrix.multiplyMatrix(multiplier, tempBlue);
             }
         }
-        System.out.print("Masukkan perbesaran gambar: ");
-        double k = IO.inputScanner.nextDouble();
+
+        double k;
+        while (true) {
+            try {
+                System.out.print("Masukkan skala perbesaran gambar: ");
+                k = IO.inputScanner.nextDouble();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Masukan harus berupa integer.\n");
+                IO.inputScanner.next();
+            }
+        }
 
         long newHeight = Math.round(k * img.getHeight());
         long newWidth = Math.round(k * img.getWidth());
@@ -149,9 +159,9 @@ public class ImageResizing {
                 conX -= Math.floor(conX);
                 int y = (int) Math.floor(conY) - 1;
                 conY -= Math.floor(conY);
-                double r = calcRGB(redRes[x][y], conX, conY);
-                double g = calcRGB(greenRes[x][y], conX, conY);
-                double b = calcRGB(blueRes[x][y], conX, conY);
+                double r = calculateRGB(redRes[x][y], conX, conY);
+                double g = calculateRGB(greenRes[x][y], conX, conY);
+                double b = calculateRGB(blueRes[x][y], conX, conY);
                 int rgb = 0;
                 if (r >= 0 && r <= 255)
                     rgb += (int) Math.round(r);
@@ -191,12 +201,12 @@ public class ImageResizing {
         }
     }
 
-    public static double calcRGB(Matrix mult, double x, double y) {
+    public static double calculateRGB(Matrix multiplier, double x, double y) {
         double res = 0;
         int idx = 0;
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
-                res += (mult.getElmt(idx, 0) * Math.pow(x, i) * Math.pow(y, j));
+                res += (multiplier.getElmt(idx, 0) * Math.pow(x, i) * Math.pow(y, j));
                 idx++;
             }
         }
