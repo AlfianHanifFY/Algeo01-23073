@@ -153,7 +153,8 @@ public class Main {
                         case 2:
                             // header
                             // function gauss-jordan
-                            System.exit(0);
+                            s = SPL.gaussJordanSolution(m);
+                            IO.saveFile(s);
                             break;
                         case 3:
                             // header
