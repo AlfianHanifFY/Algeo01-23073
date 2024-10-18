@@ -93,7 +93,7 @@ public class Matrix {
         // Set locale to US to ensure proper decimal point handling
         inputScanner.useLocale(Locale.US);
         
-        while (true){
+        while (true) {
             try {
                 for (int i = 0; i < rows; i++) {
                     for (int j = 0; j < cols; j++) {
@@ -387,7 +387,9 @@ public class Matrix {
     }
 
     public static boolean haveInverse(Matrix m) {
-        return (determinan.determinanReduksi(m) != 0 && m.isSquare());
+        Matrix M = new Matrix(m.getRow(), m.getCol());
+        copyMatrix(m, M);
+        return (determinan.determinanReduksi(M) != 0 && m.isSquare());
     }
 
     public static Matrix multiplyMatrixByConst(Matrix m, double k) {
