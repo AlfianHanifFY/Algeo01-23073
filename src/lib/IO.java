@@ -296,7 +296,7 @@ public class IO {
         int i, j;
         for (i = 0; i < m.getRow(); i++) {
             text = "";
-            for (j = 0; i < m.getCol(); j++) {
+            for (j = 0; j < m.getCol(); j++) {
                 text += String.format(Locale.US, "%.4f ", m.getElmt(i, j));
             }
             s[i] = text;
