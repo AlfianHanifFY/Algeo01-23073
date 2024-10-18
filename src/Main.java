@@ -414,14 +414,12 @@ public class Main {
         if (inputType == 1) {
             IO io = new IO("");
             temp = io.readBicubicSplineDataFromKeyboard();
-            s = BicubicSplineInterpolation.main(temp);
         } else {
             String fileName = IO.readFileName();
             IO f = new IO(fileName);
             temp = f.readBicubicSplineData();
-            s = BicubicSplineInterpolation.main(temp);
-
         }
+        s = BicubicSplineInterpolation.main(temp);
         IO.saveFile(s);
     }
 
