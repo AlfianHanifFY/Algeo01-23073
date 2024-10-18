@@ -5,6 +5,7 @@ import lib.BicubicSplineInterpolation;
 import lib.Matrix;
 import lib.SPL;
 import lib.determinan;
+import lib.invers;
 import lib.IO;
 
 public class Main {
