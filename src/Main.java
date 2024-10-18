@@ -421,6 +421,7 @@ public class Main {
         }
         s = BicubicSplineInterpolation.main(temp);
         IO.saveFile(s);
+        Thread.sleep(500);
     }
 
     public static void regressionUI() throws IOException, InterruptedException {
