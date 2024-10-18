@@ -1,5 +1,6 @@
 package lib;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Locale;
 
@@ -7,23 +8,29 @@ public class Matrix {
     double[][] matrix;
     int rows;
     int cols;
+    static Scanner inputScanner = new Scanner(System.in);
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Matrix m1 = new Matrix(3, 3);
         Matrix m2 = new Matrix(3, 1);
-        // Matrix M;
+        Matrix M, l, r;
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
-        m1.readMatrix(scanner);
+        m1.readMatrix();
         // System.out.println();
         // m1.printMatrix();
         // System.out.println("matrix 2");
-        m2.readMatrix(scanner);
-        // System.out.println("augmented:");
-        // M = Matrix.createAugmented(m1, m2);
+        m2.readMatrix();
+        System.out.println("augmented:");
+        M = Matrix.createAugmented(m1, m2);
+        M.printMatrix();
+        r = Matrix.disassembleAugmented(M, false);
+        r.printMatrix();
+        l = Matrix.disassembleAugmented(M, true);
+        l.printMatrix();
         // M = Matrix.createMatrixIdentitas(3);
         // m2 = Matrix.createAugmented(M, m1);
         // m2.printMatrix();
@@ -52,8 +59,8 @@ public class Matrix {
         // System.out.println("transpose");
         // m1.transpose();
         // m1.printMatrix();
-        m1 = changeCol(m1, 1, m2);
-        m1.printMatrix();
+        // m1 = changeCol(m1, 1, m2);
+        // m1.printMatrix();
         scanner.close();
     }
 
@@ -82,14 +89,23 @@ public class Matrix {
         return result;
     }
 
-    public void readMatrix(Scanner scanner) {
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                matrix[i][j] = scanner.nextDouble();
+    public void readMatrix() {
+        // Set locale to US to ensure proper decimal point handling
+        inputScanner.useLocale(Locale.US);
+        
+        while (true) {
+            try {
+                for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        matrix[i][j] = inputScanner.nextDouble();
+                    }
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Input matriks tidak valid. Silakan masukkan angka dan ulangi input matriks!\n");
+                inputScanner.next();
             }
         }
-
     }
 
     public void printMatrix() {
@@ -292,6 +308,26 @@ public class Matrix {
         return M;
     }
 
+    public static Matrix disassembleAugmented(Matrix m, boolean left) {
+        int i, j;
+        if (left) {
+            Matrix M = new Matrix(m.getRow(), m.getCol() - 1);
+            for (i = 0; i < M.getRow(); i++) {
+                for (j = 0; j < M.getCol(); j++) {
+                    M.setElMT(i, j, m.getElmt(i, j));
+                }
+            }
+            return M;
+        } else {
+            Matrix M = new Matrix(m.getRow(), 1);
+            for (i = 0; i < M.getRow(); i++) {
+                M.setElMT(i, 0, m.getElmt(i, m.getCol() - 1));
+            }
+            return M;
+        }
+
+    }
+
     public static Matrix getHalfRigth(Matrix m) {
         // inputnya
         Matrix M = new Matrix(m.getRow(), m.getCol() / 2);
@@ -346,6 +382,16 @@ public class Matrix {
         return (getCol() == 2 && getRow() == 2);
     }
 
+    public boolean isSquare() {
+        return (getCol() == getRow());
+    }
+
+    public static boolean haveInverse(Matrix m) {
+        Matrix M = new Matrix(m.getRow(), m.getCol());
+        copyMatrix(m, M);
+        return (determinan.determinanReduksi(M) != 0 && m.isSquare());
+    }
+
     public static Matrix multiplyMatrixByConst(Matrix m, double k) {
         int i, j;
         for (i = 0; i < m.getRow(); i++) {
@@ -354,5 +400,16 @@ public class Matrix {
             }
         }
         return m;
+    }
+
+    public static void copyMatrix(Matrix m1, Matrix m2) {
+        // row col harus sama
+        // copy m1 , paste ke m2
+        int i, j;
+        for (i = 0; i < m1.getRow(); i++) {
+            for (j = 0; j < m1.getCol(); j++) {
+                m2.setElMT(i, j, m1.getElmt(i, j));
+            }
+        }
     }
 }

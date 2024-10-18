@@ -9,7 +9,7 @@ public class invers {
     public static void main(String[] args) {
         Matrix m = new Matrix(3, 3);
         Scanner scanner = new Scanner(System.in);
-        m.readMatrix(scanner);
+        m.readMatrix();
         showInversOBE(m);
         showInversAdjoin(m);
     }
@@ -59,6 +59,13 @@ public class invers {
         // A' = 1/det(A) * adj(A)
         M = Matrix.multiplyMatrixByConst(determinan.getAdjoin(m), (1 / determinan.determinanReduksi(m)));
         M.printMatrix();
+    }
+
+    public static Matrix getInversAdjoin(Matrix m) {
+        Matrix M;
+        // A' = 1/det(A) * adj(A)
+        M = Matrix.multiplyMatrixByConst(determinan.getAdjoin(m), (1 / determinan.determinanReduksi(m)));
+        return M;
     }
 
 }
