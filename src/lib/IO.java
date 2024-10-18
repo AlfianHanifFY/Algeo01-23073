@@ -282,4 +282,10 @@ public class IO {
         }
     }
 
+    public static String[] returnStringArr(String text) {
+        String[] s = new String[1];
+        s[0] = text;
+        return s;
+    }
+
 }
