@@ -1,5 +1,6 @@
 package lib;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Locale;
 
@@ -84,13 +85,22 @@ public class Matrix {
     }
 
     public void readMatrix() {
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                matrix[i][j] = inputScanner.nextDouble();
+        // Set locale to US to ensure proper decimal point handling
+        inputScanner.useLocale(Locale.US);
+        
+        while (true){
+            try {
+                for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        matrix[i][j] = inputScanner.nextDouble();
+                    }
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Input matriks tidak valid. Silakan masukkan angka dan ulangi input matriks!\n");
+                inputScanner.next();
             }
         }
-
     }
 
     public void printMatrix() {

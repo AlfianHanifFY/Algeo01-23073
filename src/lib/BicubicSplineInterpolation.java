@@ -4,20 +4,15 @@ import java.lang.Math;
 
 
 public class BicubicSplineInterpolation {
-    
-    public static void main() {
-        String fileName = IO.readFileName();
-        IO f = new IO(fileName);
-        double[] temp = f.readBicubicSplineData();
+
+    public static String[] main(double[] temp) {
         Matrix M = new Matrix(16, 1);
         Matrix X = new Matrix(16, 16);
         Matrix res = new Matrix(16, 1);
         double a, b, val = 0;
 
-        // Construct Matrix X
         constructX(X);
 
-        // Read input from file
         for (int i = 0; i < 16; i++) {
             M.setElMT(i, 0, temp[i]);
         }
@@ -28,7 +23,7 @@ public class BicubicSplineInterpolation {
         Matrix invX = invers.getInversOBE(X);
         res = Matrix.multiplyMatrix(invX, M);
 
-        // solve for x and y
+        // solve for a and b
         int idx = 0;
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
@@ -41,7 +36,7 @@ public class BicubicSplineInterpolation {
         s[0] = "f(" + a + "," + b + ") = " + val;
         System.out.println(s[0]);
         System.out.println();
-        // f.saveFile(s);
+        return s;
     }
 
     // Construct Matrix X
