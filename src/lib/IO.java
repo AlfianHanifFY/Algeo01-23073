@@ -288,4 +288,17 @@ public class IO {
         return s;
     }
 
+    public static String[] matrixToStringArr(Matrix m) {
+        String text = new String("");
+        String[] s = new String[m.getRow()];
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            text = "";
+            for (j = 0; i < m.getCol(); j++) {
+                text += String.format(Locale.US, "%.4f ", m.getElmt(i, j));
+            }
+            s[i] = text;
+        }
+        return s;
+    }
 }
