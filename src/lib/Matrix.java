@@ -382,6 +382,14 @@ public class Matrix {
         return (getCol() == 2 && getRow() == 2);
     }
 
+    public boolean isSquare() {
+        return (getCol() == getRow());
+    }
+
+    public static boolean haveInverse(Matrix m) {
+        return (determinan.determinanReduksi(m) != 0 && m.isSquare());
+    }
+
     public static Matrix multiplyMatrixByConst(Matrix m, double k) {
         int i, j;
         for (i = 0; i < m.getRow(); i++) {
