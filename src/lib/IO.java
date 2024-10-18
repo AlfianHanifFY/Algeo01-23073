@@ -166,7 +166,7 @@ public class IO {
 
     // Read bicubic spline data from keyboard
     public double[] readBicubicSplineDataFromKeyboard() {
-        Matrix m = new Matrix(4,4);
+        Matrix m = new Matrix(4, 4);
         double[] temp = new double[18];
         
         // Set locale to US to ensure proper decimal point handling
@@ -175,7 +175,7 @@ public class IO {
         System.out.println("\nMasukkan matriks 4x4: ");
         m.readMatrix();
         
-        int i,j,k = 0;
+        int i, j, k = 0;
         for (i = 0; i < 4; i++) {
             for (j = 0; j < 4; j++) {
                 temp[k] = m.getElmt(i, j);
@@ -185,7 +185,7 @@ public class IO {
         System.out.println();
 
         double a, b;
-        while (true){
+        while (true) {
             try {
                 System.out.print("Masukkan a: ");
                 a = inputScanner.nextDouble();
@@ -242,7 +242,9 @@ public class IO {
                 FileWriter writer = new FileWriter(outputFile);
                 for (int i = 0; i < content.length; i++) {
                     writer.write(content[i]);
-
+                    if (i != content.length - 1) {
+                        writer.write("\n");
+                    }
                 }
                 writer.close();
                 System.out.println("File " + outputFileName + " berhasil dibuat di directory test/output.");
