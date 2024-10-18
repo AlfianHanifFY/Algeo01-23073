@@ -1,69 +1,80 @@
 package lib;
 
+import java.lang.Math;
 import java.util.Scanner;
 import java.util.Locale;
 
 public class InterpolasiPolinomial {
-    public static void main(String[] args) {
+    public static String[] main(int pilihan) {
         Locale.setDefault(Locale.US); // Set Locale ke US agar input desimal menggunakan titik (.)
         Scanner scanner = new Scanner(System.in);
 
-        // Inisialisasi array
-        double[] x = new double[2];
-        double[] y = new double[2];
+        Matrix matrix;
+        int n;
+        double xi;
 
-        // Input kumpulan titik dan x yang ingin ditaksir
-        System.out.println("Masukkan titik-titik (x y) dan akhiri dengan satu nilai x:"); 
+        if (pilihan == 1) {
+            // Input dari keyboard
+            System.out.print("\nMasukkan jumlah titik: ");
+            n = validasiInputJumlahTitik(scanner); // Input jumlah titik
 
-        int count = 0; // Jumlah titik yang dimasukkan
-        double xi = 0.0; // x yang ingin dicari nilai y-nya
-        
-        while (true) {
-            String input = scanner.nextLine().trim();
-            String[] splitInput = input.split("\\s"); // Memecah hasil input string menjadi array
-            if (splitInput.length == 2) {
-                if (isNumeric(splitInput[0]) && isNumeric(splitInput[1])) {
-                    if (count == x.length) {
-                        // Menambah ukuran array jika sudah penuh
-                        x = resizeArray(x);
-                        y = resizeArray(y);
-                    }
-                    x[count] = Double.parseDouble(splitInput[0]);
-                    y[count] = Double.parseDouble(splitInput[1]);
-                    count++;
+            // Input matrix
+            matrix = new Matrix(n, 2);
+            System.out.print("\nMasukkan " + n + " titik (x y):\n");
+            matrix.readMatrix();
+
+            // Input nilai x yang ingin ditaksir
+            System.out.print("\nMasukkan nilai x yang ingin ditaksir: ");
+            xi = validasiInputDouble(scanner);
+
+        } else {
+            // Input dari file
+            String fileName = IO.readFileName();
+            IO io = new IO(fileName);
+            n = io.getRowCount() - 1; // Assign jumlah titik
+            double[] data = new double[(n * 2) + 1]; // Array sementara berisi nilai-nilai dalam file
+
+            io.openFile();
+            io.fileScanner.useLocale(Locale.US);
+
+            // Assign array sementara
+            for (int i = 0; i < (n * 2) + 1; i++) {
+                if (io.fileScanner.hasNextDouble()) {
+                    data[i] = io.fileScanner.nextDouble();
                 } else {
-                    System.out.println("Input tidak valid. Masukkan titik (x y) atau satu nilai x untuk mengakhiri.");
+                    System.out.println("Data tidak valid pada index " + i);
+                    System.exit(0);
                 }
-            } else if (splitInput.length == 1) {
-                if (isNumeric(splitInput[0])) {
-                    if (count < 2) {
-                        // Validasi: Setidaknya dua titik harus dimasukkan sebelum xi
-                        System.out.println("Masukkan setidaknya dua titik (x y) sebelum memasukkan nilai x untuk ditaksir.");
-                    } else {
-                        xi = Double.parseDouble(splitInput[0]);
-                        break;
-                    }
-                } else {
-                    System.out.println("Input tidak valid. Masukkan titik (x y) atau satu nilai x untuk mengakhiri.");
-                }
-            } else {
-                System.out.println("Input tidak valid. Masukkan titik (x y) atau satu nilai x untuk mengakhiri.");
             }
+
+            // Assign matrix
+            matrix = new Matrix(n, 2);
+            int k = 0;
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < 2; j++) {
+                    matrix.setElMT(i, j, data[k]);
+                    k += 1;
+                }
+            }
+
+            // Assign nilai x yang ingin ditaksir
+            xi = data[(n * 2)];
+            io.closeFile();
         }
 
         // Membuat matrix augmented
-        Matrix m = new Matrix(count, count+1);
-        for (int i = 0; i < count; i++) {
+        Matrix matrixAugmented = new Matrix(n, n + 1);
+        for (int i = 0; i < n; i++) {
             double elmt = 1;
-            for (int j = 0; j < count; j++) {
-                m.setElMT(i, j, elmt);
-                elmt = elmt * x[i];
-            m.setElMT(i, count, y[i]);
+            for (int j = 0; j < n; j++) {
+                matrixAugmented.setElMT(i, j, elmt);
+                elmt = elmt * matrix.getElmt(i, 0);
             }
+            matrixAugmented.setElMT(i, n, matrix.getElmt(i, 1));
         }
-        
-        double[] solutions = SPL.getSolution(m); // Mencari variabel-variabel solusi
-    
+
+        double[] solutions = SPL.getSolution(matrixAugmented); // Mencari variabel-variabel solusi
+
         // Mencari nilai y dari xi
         double result = 0;
         double pangkatXi = 1;
@@ -79,11 +90,12 @@ public class InterpolasiPolinomial {
         if (solutions.length != 2 && solutions.length != 1){ // Agar tidak tumpang tindih dengan kasus x^1 dan x^0
             if ((solutions[solutions.length - 1] != 0) && (solutions[solutions.length - 1] != 1) && (solutions[solutions.length - 1] != -1)) {
                 polynomial.append(String.format("%.4fx^%d", solutions[solutions.length - 1], solutions.length - 1));
-            } else if (solutions[solutions.length - 1] == 1){
+            } else if (solutions[solutions.length - 1] == 1){ // Jika koefisiennya bernilai 1, koefisien tidak perlu ditulis
                 polynomial.append(String.format("x^%d", solutions.length - 1));
-            } else if (solutions[solutions.length - 1] == -1){
+            } else if (solutions[solutions.length - 1] == -1){ // Jika koefisiennya bernilai -1, koefisiennya tidak perlu ditulis (cukup tanda minus)
                 polynomial.append(String.format("-x^%d", solutions.length - 1));
             }
+            // Catatan: Jika koefisiennya bernilai 0, maka tidak ditulis apapun
         }
 
         // x sisa (kecuali x^1 dan x^0)
@@ -157,26 +169,55 @@ public class InterpolasiPolinomial {
             }
         } 
 
-        System.out.printf("%s, f(%.1f) = %.4f%n", polynomial, xi, result);
+        // Menyimpan hasil dalam array String[]
+        String[] resultArray = new String[2];
+        resultArray[0] = polynomial.toString();
+        resultArray[1] = String.format(", f(%.1f) = %.4f", xi, result);
 
-        scanner.close();
-        }
-    
-    private static boolean isNumeric(String str) {
-        try {
-            Double.parseDouble(str); // Mencoba memparsing string ke double
-            return true; // Jika berhasil, berarti input valid
-        } catch (NumberFormatException e) {
-            return false; // Jika gagal, berarti input bukan angka
-        }
+        // Menggabungkan hasil menjadi satu string
+        String combinedResult = resultArray[0] + resultArray[1];
+
+        System.out.println();
+        System.out.println(combinedResult);
+        System.out.println();
+
+        return new String[]{combinedResult};
+
     }
 
-    private static double[] resizeArray(double[] oldArray) {
-        // Menambah ukuran array
-        int newSize = oldArray.length + 1;
-        double[] newArray = new double[newSize];
-        System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
-        return newArray;
+
+    // Validasi input integer
+    public static int validasiInputJumlahTitik(Scanner scanner) {
+        int value;
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (input.matches("\\d+")) {
+                value = Integer.parseInt(input);
+                if (value > 1) break;
+                else System.out.println("Input harus lebih dari 1.");
+            } else {
+                System.out.println("Input tidak valid. Masukkan angka bulat.");
+            }
+        }
+        return value;
     }
-    
+
+
+    // Validasi input double
+    public static double validasiInputDouble(Scanner scanner) {
+        double value;
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (input.matches("-?\\d+(\\.\\d+)?")) { // Regex untuk validasi double
+                value = Double.parseDouble(input);
+                if (value > 0) break; // Pastikan nilai lebih dari 0
+                else System.out.println("Input harus lebih dari 0.");
+            } else {
+                System.out.println("Input tidak valid. Masukkan angka desimal.");
+            }
+        }
+        return value;
+    }
+
+
 }
