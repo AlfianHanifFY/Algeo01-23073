@@ -399,7 +399,10 @@ public class Main {
 
     public static void polynomialInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
-
+        int inputType = inputTypeUI();
+        String[] s;
+        s = InterpolasiPolinomial.main(inputType);
+        IO.saveFile(s);
     }
 
     public static void bicubicSplineInterpolationUI() throws IOException, InterruptedException {
