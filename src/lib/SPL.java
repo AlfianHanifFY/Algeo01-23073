@@ -140,7 +140,6 @@ public class SPL {
         double[] res = new double[m.getCol() - 1];
         double val;
         m.generateEselon();
-        m.printMatrix();
 
         if (isNoSulution(m)) {
             String[] txt = new String[1];
