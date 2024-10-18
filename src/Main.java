@@ -132,8 +132,12 @@ public class Main {
                         fileName = IO.readFileName();
                         IO io = new IO(fileName);
                         System.out.println();
+                        // augmented
                         m = io.readMatrixFromFile();
 
+                        // Ax = B
+                        A = Matrix.disassembleAugmented(m, true);
+                        B = Matrix.disassembleAugmented(m, false);
                         // kalau mau tes
                         // m.printMatrix();
                         // System.exit(0);
