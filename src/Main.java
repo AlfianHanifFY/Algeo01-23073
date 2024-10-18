@@ -86,7 +86,8 @@ public class Main {
 
     public static void splUI() throws IOException, InterruptedException {
         int choice;
-        boolean run = true;
+        boolean run = true, valid = true;
+        String[] s;
 
         while (run) {
             clearScreen();
