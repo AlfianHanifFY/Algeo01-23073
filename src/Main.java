@@ -309,7 +309,26 @@ public class Main {
 
     public static void bicubicSplineInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
-        
+        // Header
+        int inputType = inputTypeUI();
+
+        double [] temp;
+
+        String[] s;
+
+        if (inputType == 1) {
+            IO io = new IO("");
+            temp = io.readBicubicSplineDataFromKeyboard();
+            s = BicubicSplineInterpolation.main(temp);
+        } else {
+            String fileName = IO.readFileName();
+            IO f = new IO(fileName);
+            temp = f.readBicubicSplineData();
+            s = BicubicSplineInterpolation.main(temp);
+            f.saveFile(s);
+        }
+
+        System.exit(0);
     }
 
     public static void regressionUI() throws IOException, InterruptedException {

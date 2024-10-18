@@ -9,7 +9,13 @@ public class IO {
     public static Scanner inputScanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        readMatrixFromKeyboard();
+        IO io = new IO("");
+        double[] temp = io.readBicubicSplineDataFromKeyboard();
+
+        for (int i = 0; i < 18; i++) {
+            System.out.println(temp[i]);
+        }
+
     }
     // Konstruktor
     public IO(String fileName) {
@@ -150,7 +156,47 @@ public class IO {
         return points;
     }
 
-    // Read bicubic spline data
+    // Read bicubic spline data from keyboard
+    public double[] readBicubicSplineDataFromKeyboard() {
+        Matrix m = new Matrix(4,4);
+        double[] temp = new double[18];
+        
+        // Set locale to US to ensure proper decimal point handling
+        inputScanner.useLocale(Locale.US);
+
+        System.out.println("\nMasukkan matriks 4x4: ");
+        m.readMatrix();
+        
+        int i,j,k = 0;
+        for (i = 0; i < 4; i++) {
+            for (j = 0; j < 4; j++) {
+                temp[k] = m.getElmt(i, j);
+                k++;
+            }
+        }
+        System.out.println();
+
+        double a, b;
+        while (true){
+            try {
+                System.out.print("Masukkan a: ");
+                a = inputScanner.nextDouble();
+                System.out.print("Masukkan b: ");
+                b = inputScanner.nextDouble();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Input tidak valid. Silakan masukkan angka!\n");
+                inputScanner.next();
+            }
+        }
+        
+        temp[16] = a;
+        temp[17] = b;
+
+        return temp;
+    }
+
+    // Read bicubic spline data from file
     public double[] readBicubicSplineData() {
         double[] splineData = new double[18];
 
