@@ -17,8 +17,8 @@ public class Main {
         menuUI();
     }
 
-    public static void loadingUI() throws InterruptedException{
-        int progressBarLength = 30; 
+    public static void loadingUI() throws InterruptedException {
+        int progressBarLength = 30;
         int totalSteps = 100;
 
         System.out.println();
@@ -30,7 +30,7 @@ public class Main {
             System.out.print("\rLoading: [");
             for (int i = 0; i < progressBarLength; i++) {
                 if (i < completedLength) {
-                    System.out.print("#"); 
+                    System.out.print("#");
                 } else {
                     System.out.print("-");
                 }
@@ -51,7 +51,7 @@ public class Main {
         }
     }
 
-    public static int inputTypeUI() throws IOException, InterruptedException{
+    public static int inputTypeUI() throws IOException, InterruptedException {
         boolean type = true;
         int inputType = 0;
 
@@ -83,7 +83,7 @@ public class Main {
         return inputType;
     }
 
-    public static void splUI() throws IOException, InterruptedException{
+    public static void splUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
 
@@ -165,7 +165,7 @@ public class Main {
         }
     }
 
-    public static void determinantUI() throws IOException, InterruptedException{
+    public static void determinantUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
 
@@ -233,7 +233,7 @@ public class Main {
         }
     }
 
-    public static void inverseMatrixUI() throws IOException, InterruptedException{
+    public static void inverseMatrixUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
 
@@ -304,7 +304,7 @@ public class Main {
 
     public static void polynomialInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
-        
+
     }
 
     public static void bicubicSplineInterpolationUI() throws IOException, InterruptedException {
@@ -312,7 +312,7 @@ public class Main {
         // Header
         int inputType = inputTypeUI();
 
-        double [] temp;
+        double[] temp;
 
         String[] s;
 
@@ -333,15 +333,15 @@ public class Main {
 
     public static void regressionUI() throws IOException, InterruptedException {
         clearScreen();
-    
+
     }
 
-    public static void imageInterpolationUI() throws IOException, InterruptedException{
+    public static void imageInterpolationUI() throws IOException, InterruptedException {
         clearScreen();
     }
 
-    public static void headerUI(){
-        
+    public static void headerUI() {
+
     }
 
     public static void menuUI() throws IOException, InterruptedException {
