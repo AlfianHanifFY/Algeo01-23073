@@ -159,7 +159,33 @@ public class Main {
                         case 3:
                             // header
                             // function balikan
-                            System.exit(0);
+                            // cek A kotak ga , cek dulu A punya balikan ga
+                            String text = new String("");
+                            Matrix eselon = new Matrix(m.getRow(), m.getCol());
+                            Matrix.copyMatrix(m, eselon);
+                            eselon.generateEselon();
+                            if (!Matrix.haveInverse(A) || !SPL.isUnique(eselon)) {
+                                valid = false;
+                                if (!Matrix.haveInverse(A)) {
+                                    System.out.println("\nMatrix A tidak memiliki inverse !");
+                                    text += "Matrix tidak memiliki inverse !";
+                                } else if (!SPL.isUnique(eselon)) {
+                                    System.out.println("\nMatrix tidak memiliki solusi unik !");
+                                    text += "Matrix tidak memiliki solusi unik !";
+                                } else {
+                                    System.out.println("\nMatrix tidak memiliki inverse dan solusi tidak unik!");
+                                    text += "Matrix tidak memiliki inverse dan solusi tidak unik !";
+                                }
+
+                            }
+                            if (valid) {
+                                s = SPL.balikanSolution(A, B);
+                            } else {
+                                System.out.print("\nMatrix tidak dapat diselesaikan dengan metode ini !");
+                                text += "\nMatrix tidak dapat diselesaikan dengan metode ini !";
+                                s = IO.returnStringArr(text);
+                            }
+                            IO.saveFile(s);
                             break;
                         case 4:
                             // header
