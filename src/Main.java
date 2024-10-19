@@ -373,6 +373,9 @@ public class Main {
 
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "█▀▄▀█ █▀▀ ▀█▀ █▀█ █▀▄ █▀▀\n" + //
+                    "█░▀░█ ██▄ ░█░ █▄█ █▄▀ ██▄\n");
             System.out.print("""
                     PILIH METODE
                     1. Metode OBE
@@ -380,7 +383,7 @@ public class Main {
                     3. Kembali
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("masukkan pilihan:\n>> ");
 
             try {
                 choice = inputScanner.nextInt();
