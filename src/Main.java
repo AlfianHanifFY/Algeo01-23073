@@ -490,6 +490,9 @@ public class Main {
         boolean run = true;
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "░░█ █▀▀ █▄░█ █ █▀   █▀█ █▀▀ █▀▀ █▀█ █▀▀ █▀ █\n" + //
+                    "█▄█ ██▄ █░▀█ █ ▄█   █▀▄ ██▄ █▄█ █▀▄ ██▄ ▄█ █\n");
             System.out.print("""
                     PILIH REGRESI
                     1. Regresi Linier Berganda
@@ -497,7 +500,7 @@ public class Main {
                     3. Kembali
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("masukkan pilihan:\n>> ");
             try {
                 choice = inputScanner.nextInt();
                 System.out.println();
