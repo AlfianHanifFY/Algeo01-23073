@@ -328,9 +328,9 @@ public class Main {
                             // header
                             // function det reduksi baris
                             if (m.isSquare()) {
-                            det = determinan.determinanReduksi(m);
-                            System.out.println("\nDeterminan matrix = " + det);
-                            s = IO.returnStringArr("Determinan matrix = " + det);
+                                det = determinan.determinanReduksi(m);
+                                System.out.println("\nDeterminan matrix = " + det);
+                                s = IO.returnStringArr("Determinan matrix = " + det);
                             } else {
                                 System.out.println("\nMatrix tidak memiliki determinan");
                                 s = IO.returnStringArr("Matrix tidak memiliki determinan ");
@@ -341,9 +341,9 @@ public class Main {
                             // header
                             // function det kofaktor
                             if (m.isSquare()) {
-                            det = determinan.getDeterminanKofaktor(m);
-                            System.out.println("\nDeterminan matrix = " + det);
-                            s = IO.returnStringArr("Determinan matrix = " + det);
+                                det = determinan.getDeterminanKofaktor(m);
+                                System.out.println("\nDeterminan matrix = " + det);
+                                s = IO.returnStringArr("Determinan matrix = " + det);
                             } else {
                                 System.out.println("\nMatrix tidak memiliki determinan");
                                 s = IO.returnStringArr("Matrix tidak memiliki determinan ");
@@ -546,11 +546,13 @@ public class Main {
     public static void menuUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
-
+        clearScreen();
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "█▀▄▀█ █▀▀ █▄░█ █░█\n" + //
+                    "█░▀░█ ██▄ █░▀█ █▄█\n");
             System.out.print("""
-                    MENU
                     1. Sistem Persamaan Linier
                     2. Determinan
                     3. Matriks Balikan
@@ -561,7 +563,7 @@ public class Main {
                     8. Keluar
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("Masukkan pilihan:\n>> ");
 
             try {
                 choice = inputScanner.nextInt();
