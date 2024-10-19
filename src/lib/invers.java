@@ -63,9 +63,11 @@ public class invers {
     }
 
     public static Matrix getInversAdjoin(Matrix m) {
-        Matrix M;
+        Matrix M, cm = new Matrix(m.getRow(), m.getCol());
         // A' = 1/det(A) * adj(A)
-        M = Matrix.multiplyMatrixByConst(determinan.getAdjoin(m), (1 / determinan.determinanReduksi(m)));
+        Matrix.copyMatrix(m, cm);
+        M = Matrix.multiplyMatrixByConst(determinan.getAdjoin(m), (1 / determinan.determinanReduksi(cm)));
+        M.printMatrix();
         return M;
     }
 
