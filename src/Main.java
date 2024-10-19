@@ -417,10 +417,10 @@ public class Main {
                             // header
                             // function inverse OBE
                             if (Matrix.haveInverse(m)) {
-                                invers.showInversOBE(m);
+                                System.err.println("\nMatrix Balikan:");
                                 s = IO.matrixToStringArr(invers.getInversOBE(m));
                             } else {
-                                System.out.println("Matrix tidak memiliki inverse !");
+                                System.out.println("\nMatrix tidak memiliki inverse !");
                                 s = IO.returnStringArr("Matrix tidak memiliki inverse !");
                             }
                             IO.saveFile(s);
@@ -429,10 +429,10 @@ public class Main {
                             // header
                             // function inverse adjoin
                             if (Matrix.haveInverse(m)) {
-                                invers.showInversAdjoin(m);
+                                System.err.println("\nMatrix Balikan:");
                                 s = IO.matrixToStringArr(invers.getInversAdjoin(m));
                             } else {
-                                System.out.println("Matrix tidak memiliki inverse !");
+                                System.out.println("\nMatrix tidak memiliki inverse !");
                                 s = IO.returnStringArr("Matrix tidak memiliki inverse !");
                             }
                             IO.saveFile(s);
