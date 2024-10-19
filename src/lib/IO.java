@@ -8,16 +8,6 @@ public class IO {
     public Scanner fileScanner;
     public static Scanner inputScanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        IO io = new IO("");
-        double[] temp = io.readBicubicSplineDataFromKeyboard();
-
-        for (int i = 0; i < 18; i++) {
-            System.out.println(temp[i]);
-        }
-
-    }
-
     // Konstruktor
     public IO(String fileName) {
         this.fileName = fileName;
