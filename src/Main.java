@@ -417,7 +417,10 @@ public class Main {
                             // header
                             // function inverse OBE
                             if (Matrix.haveInverse(m)) {
-                                System.err.println("\nMatrix Balikan:");
+                                Matrix nm = new Matrix(m.getRow(), m.getCol());
+                                Matrix.copyMatrix(m, nm);
+                                System.out.println("\nMatrix Balikan:");
+                                invers.showInversOBE(nm);
                                 s = IO.matrixToStringArr(invers.getInversOBE(m));
                             } else {
                                 System.out.println("\nMatrix tidak memiliki inverse !");
