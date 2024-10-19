@@ -67,7 +67,6 @@ public class invers {
         // A' = 1/det(A) * adj(A)
         Matrix.copyMatrix(m, cm);
         M = Matrix.multiplyMatrixByConst(determinan.getAdjoin(m), (1 / determinan.determinanReduksi(cm)));
-        M.printMatrix();
         return M;
     }
 
