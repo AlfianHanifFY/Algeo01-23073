@@ -124,6 +124,9 @@ public class Main {
 
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "█▀▄▀█ █▀▀ ▀█▀ █▀█ █▀▄ █▀▀\n" + //
+                    "█░▀░█ ██▄ ░█░ █▄█ █▄▀ ██▄\n");
             System.out.print("""
                     PILIH METODE
                     1. Metode Eliminasi Gauss
@@ -133,7 +136,7 @@ public class Main {
                     5. Kembali
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("Masukkan pilihan:\n>> ");
 
             try {
                 choice = inputScanner.nextInt();
