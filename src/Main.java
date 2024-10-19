@@ -26,9 +26,35 @@ public class Main {
         int progressBarLength = 30;
         int totalSteps = 100;
 
-        System.out.println();
+        System.out.println(
+                "████████╗██╗   ██╗██████╗ ███████╗███████╗     █████╗ ██╗      ██████╗ ███████╗ ██████╗        \n" + //
+                        "╚══██╔══╝██║   ██║██╔══██╗██╔════╝██╔════╝    ██╔══██╗██║     ██╔════╝ ██╔════╝██╔═══██╗       \n"
+                        + //
+                        "   ██║   ██║   ██║██████╔╝█████╗  ███████╗    ███████║██║     ██║  ███╗█████╗  ██║   ██║       \n"
+                        + //
+                        "   ██║   ██║   ██║██╔══██╗██╔══╝  ╚════██║    ██╔══██║██║     ██║   ██║██╔══╝  ██║   ██║       \n"
+                        + //
+                        "   ██║   ╚██████╔╝██████╔╝███████╗███████║    ██║  ██║███████╗╚██████╔╝███████╗╚██████╔╝       \n"
+                        + //
+                        "   ╚═╝    ╚═════╝ ╚═════╝ ╚══════╝╚══════╝    ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚══════╝ ╚═════╝        \n"
+                        + //
+                        "                                                                                               \n"
+                        + //
+                        "██████╗  █████╗ ██████╗ ██╗  ██╗██╗██████╗  █████╗ ███╗   ██╗    ███████╗██╗██████╗ ██╗██╗     \n"
+                        + //
+                        "██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝██║██╔══██╗██╔══██╗████╗  ██║    ██╔════╝██║██╔══██╗██║██║     \n"
+                        + //
+                        "██████╔╝███████║██████╔╝█████╔╝ ██║██████╔╝███████║██╔██╗ ██║    ███████╗██║██████╔╝██║██║     \n"
+                        + //
+                        "██╔═══╝ ██╔══██║██╔══██╗██╔═██╗ ██║██╔══██╗██╔══██║██║╚██╗██║    ╚════██║██║██╔═══╝ ██║██║     \n"
+                        + //
+                        "██║     ██║  ██║██║  ██║██║  ██╗██║██║  ██║██║  ██║██║ ╚████║    ███████║██║██║     ██║███████╗\n"
+                        + //
+                        "╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝    ╚══════╝╚═╝╚═╝     ╚═╝╚══════╝\n"
+                        + //
+                        "");
+        System.out.println("");
         System.out.print("Loading: [");
-
         for (int step = 1; step <= totalSteps; step++) {
             int completedLength = (step * progressBarLength) / totalSteps;
 
@@ -62,13 +88,16 @@ public class Main {
 
         while (type) {
             clearScreen();
-
+            System.out.println("\n" + //
+                    "▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀\n"
+                    + //
+                    "▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀\n");
             System.out.print("""
                     PILIH TIPE MASUKAN
                     1. Keyboard
                     2. File
                     """);
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("Masukkan pilihan:\n>> ");
             try {
                 inputType = inputScanner.nextInt();
 
@@ -95,6 +124,9 @@ public class Main {
 
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "█▀▄▀█ █▀▀ ▀█▀ █▀█ █▀▄ █▀▀\n" + //
+                    "█░▀░█ ██▄ ░█░ █▄█ █▄▀ ██▄\n");
             System.out.print("""
                     PILIH METODE
                     1. Metode Eliminasi Gauss
@@ -104,7 +136,7 @@ public class Main {
                     5. Kembali
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("Masukkan pilihan:\n>> ");
 
             try {
                 choice = inputScanner.nextInt();
@@ -121,16 +153,20 @@ public class Main {
                         // Baca dari Keyboard
                         // Ax = B
                         // kalo input matrix A berlebih bakal langsung masuk ke matrix B
-                        System.out.println("\nMatrix A : ");
+                        System.out
+                                .println(
+                                        "\n\n// **\nInput berupa dua matrix yang membentuk persamaan\nAx = B\nA\n**  //\n");
+                        System.out.println("\nMATRIX A ");
                         A = IO.readMatrixFromKeyboard();
 
-                        System.out.println("\nMatrix B : ");
+                        System.out.println("\nMATRIX B");
                         B = IO.readMxNMatrixFromKeyboard(A.getRow(), 1);
 
                         // augmented matrix
                         m = Matrix.createAugmented(A, B);
                         System.out.println("\nMatrix Augmented A dan B : ");
                         m.printMatrix();
+                        System.out.println();
 
                     } else {
                         // Baca dari File
@@ -190,6 +226,7 @@ public class Main {
                                 text += "\nMatrix tidak dapat diselesaikan dengan metode ini !";
                                 s = IO.returnStringArr(text);
                             }
+                            valid = true;
                             IO.saveFile(s);
                             break;
                         case 4:
@@ -221,6 +258,7 @@ public class Main {
                                 s = IO.returnStringArr(text2);
                             }
                             IO.saveFile(s);
+                            valid = true;
                             break;
                     }
 
@@ -247,6 +285,9 @@ public class Main {
         double det;
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "█▀▄▀█ █▀▀ ▀█▀ █▀█ █▀▄ █▀▀\n" + //
+                    "█░▀░█ ██▄ ░█░ █▄█ █▄▀ ██▄\n");
             System.out.print("""
                     PILIH METODE
                     1. Metode Reduksi Baris
@@ -254,7 +295,7 @@ public class Main {
                     3. Kembali
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("masukkan pilihan:\n>> ");
 
             try {
                 choice = inputScanner.nextInt();
@@ -286,17 +327,27 @@ public class Main {
                         case 1:
                             // header
                             // function det reduksi baris
-                            det = determinan.determinanReduksi(m);
-                            System.out.println("\nDeterminan matrix = " + det);
-                            s = IO.returnStringArr("Determinan matrix = " + det);
+                            if (m.isSquare()) {
+                                det = determinan.determinanReduksi(m);
+                                System.out.println("\nDeterminan matrix = " + det);
+                                s = IO.returnStringArr("Determinan matrix = " + det);
+                            } else {
+                                System.out.println("\nMatrix tidak memiliki determinan");
+                                s = IO.returnStringArr("Matrix tidak memiliki determinan ");
+                            }
                             IO.saveFile(s);
                             break;
                         case 2:
                             // header
                             // function det kofaktor
-                            det = determinan.getDeterminanKofaktor(m);
-                            System.out.println("\nDeterminan matrix = " + det);
-                            s = IO.returnStringArr("Determinan matrix = " + det);
+                            if (m.isSquare()) {
+                                det = determinan.getDeterminanKofaktor(m);
+                                System.out.println("\nDeterminan matrix = " + det);
+                                s = IO.returnStringArr("Determinan matrix = " + det);
+                            } else {
+                                System.out.println("\nMatrix tidak memiliki determinan");
+                                s = IO.returnStringArr("Matrix tidak memiliki determinan ");
+                            }
                             IO.saveFile(s);
                             break;
                     }
@@ -322,6 +373,9 @@ public class Main {
 
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "█▀▄▀█ █▀▀ ▀█▀ █▀█ █▀▄ █▀▀\n" + //
+                    "█░▀░█ ██▄ ░█░ █▄█ █▄▀ ██▄\n");
             System.out.print("""
                     PILIH METODE
                     1. Metode OBE
@@ -329,7 +383,7 @@ public class Main {
                     3. Kembali
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("masukkan pilihan:\n>> ");
 
             try {
                 choice = inputScanner.nextInt();
@@ -363,10 +417,13 @@ public class Main {
                             // header
                             // function inverse OBE
                             if (Matrix.haveInverse(m)) {
-                                invers.showInversOBE(m);
+                                Matrix nm = new Matrix(m.getRow(), m.getCol());
+                                Matrix.copyMatrix(m, nm);
+                                System.out.println("\nMatrix Balikan:");
+                                invers.showInversOBE(nm);
                                 s = IO.matrixToStringArr(invers.getInversOBE(m));
                             } else {
-                                System.out.println("Matrix tidak memiliki inverse !");
+                                System.out.println("\nMatrix tidak memiliki inverse !");
                                 s = IO.returnStringArr("Matrix tidak memiliki inverse !");
                             }
                             IO.saveFile(s);
@@ -375,10 +432,13 @@ public class Main {
                             // header
                             // function inverse adjoin
                             if (Matrix.haveInverse(m)) {
-                                invers.showInversAdjoin(m);
+                                Matrix nm = new Matrix(m.getRow(), m.getCol());
+                                Matrix.copyMatrix(m, nm);
+                                System.out.println("\nMatrix Balikan:");
+                                invers.showInversAdjoin(nm);
                                 s = IO.matrixToStringArr(invers.getInversAdjoin(m));
                             } else {
-                                System.out.println("Matrix tidak memiliki inverse !");
+                                System.out.println("\nMatrix tidak memiliki inverse !");
                                 s = IO.returnStringArr("Matrix tidak memiliki inverse !");
                             }
                             IO.saveFile(s);
@@ -436,6 +496,9 @@ public class Main {
         boolean run = true;
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "░░█ █▀▀ █▄░█ █ █▀   █▀█ █▀▀ █▀▀ █▀█ █▀▀ █▀ █\n" + //
+                    "█▄█ ██▄ █░▀█ █ ▄█   █▀▄ ██▄ █▄█ █▀▄ ██▄ ▄█ █\n");
             System.out.print("""
                     PILIH REGRESI
                     1. Regresi Linier Berganda
@@ -443,7 +506,7 @@ public class Main {
                     3. Kembali
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("masukkan pilihan:\n>> ");
             try {
                 choice = inputScanner.nextInt();
                 System.out.println();
@@ -489,11 +552,13 @@ public class Main {
     public static void menuUI() throws IOException, InterruptedException {
         int choice;
         boolean run = true;
-
+        clearScreen();
         while (run) {
             clearScreen();
+            System.out.println("\n" + //
+                    "█▀▄▀█ █▀▀ █▄░█ █░█\n" + //
+                    "█░▀░█ ██▄ █░▀█ █▄█\n");
             System.out.print("""
-                    MENU
                     1. Sistem Persamaan Linier
                     2. Determinan
                     3. Matriks Balikan
@@ -504,7 +569,7 @@ public class Main {
                     8. Keluar
                     """);
             System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("Masukkan pilihan:\n>> ");
 
             try {
                 choice = inputScanner.nextInt();
