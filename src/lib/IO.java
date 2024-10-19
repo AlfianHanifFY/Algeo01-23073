@@ -102,7 +102,7 @@ public class IO {
         }
 
         Matrix m = new Matrix(row, col);
-        System.out.println("\nMasukkan matriks: ");
+        System.out.println("Masukkan matriks: ");
         m.readMatrix();
 
         return m;
@@ -110,7 +110,7 @@ public class IO {
 
     public static Matrix readMxNMatrixFromKeyboard(int row, int col) {
         Matrix m = new Matrix(row, col);
-        System.out.println("\nMasukkan matriks " + row + " x " + col + " : ");
+        System.out.println("Masukkan matriks " + row + " x " + col + " : ");
         m.readMatrix();
         return m;
     }
@@ -247,20 +247,22 @@ public class IO {
     }
 
     // Save file
-    public static void saveFile(String[] stringArray) {
+    public static void saveFile(String[] stringArray) throws InterruptedException {
         while (true) {
             System.out.print("""
+                    \n
                     Apakah ingin menyimpan file?
                     1. Ya
                     2. Tidak
                     """);
-            System.out.println();
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("Masukkan pilihan:\n>> ");
 
             try {
                 int choice = inputScanner.nextInt();
                 if (choice == 1) {
                     writeStringArrayToFile(stringArray);
+                    System.out.println("Berhasil menyimpan output !");
+                    Thread.sleep(3000);
                     break;
                 } else if (choice == 2) {
                     break;
