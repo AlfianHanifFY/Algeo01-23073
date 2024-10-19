@@ -88,13 +88,16 @@ public class Main {
 
         while (type) {
             clearScreen();
-
+            System.out.println("\n" + //
+                    "▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀\n"
+                    + //
+                    "▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀\n");
             System.out.print("""
                     PILIH TIPE MASUKAN
                     1. Keyboard
                     2. File
                     """);
-            System.out.print("Masukkan pilihan: ");
+            System.out.print("Masukkan pilihan:\n>> ");
             try {
                 inputType = inputScanner.nextInt();
 
