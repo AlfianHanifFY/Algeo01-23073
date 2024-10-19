@@ -153,16 +153,20 @@ public class Main {
                         // Baca dari Keyboard
                         // Ax = B
                         // kalo input matrix A berlebih bakal langsung masuk ke matrix B
-                        System.out.println("\nMatrix A : ");
+                        System.out
+                                .println(
+                                        "\n\n// **\nInput berupa dua matrix yang membentuk persamaan\nAx = B\nA\n**  //\n");
+                        System.out.println("\nMATRIX A ");
                         A = IO.readMatrixFromKeyboard();
 
-                        System.out.println("\nMatrix B : ");
+                        System.out.println("\nMATRIX B");
                         B = IO.readMxNMatrixFromKeyboard(A.getRow(), 1);
 
                         // augmented matrix
                         m = Matrix.createAugmented(A, B);
                         System.out.println("\nMatrix Augmented A dan B : ");
                         m.printMatrix();
+                        System.out.println();
 
                     } else {
                         // Baca dari File
