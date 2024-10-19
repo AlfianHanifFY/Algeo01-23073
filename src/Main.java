@@ -327,17 +327,27 @@ public class Main {
                         case 1:
                             // header
                             // function det reduksi baris
+                            if (m.isSquare()) {
                             det = determinan.determinanReduksi(m);
                             System.out.println("\nDeterminan matrix = " + det);
                             s = IO.returnStringArr("Determinan matrix = " + det);
+                            } else {
+                                System.out.println("\nMatrix tidak memiliki determinan");
+                                s = IO.returnStringArr("Matrix tidak memiliki determinan ");
+                            }
                             IO.saveFile(s);
                             break;
                         case 2:
                             // header
                             // function det kofaktor
+                            if (m.isSquare()) {
                             det = determinan.getDeterminanKofaktor(m);
                             System.out.println("\nDeterminan matrix = " + det);
                             s = IO.returnStringArr("Determinan matrix = " + det);
+                            } else {
+                                System.out.println("\nMatrix tidak memiliki determinan");
+                                s = IO.returnStringArr("Matrix tidak memiliki determinan ");
+                            }
                             IO.saveFile(s);
                             break;
                     }
