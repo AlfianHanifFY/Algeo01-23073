@@ -432,7 +432,10 @@ public class Main {
                             // header
                             // function inverse adjoin
                             if (Matrix.haveInverse(m)) {
-                                System.err.println("\nMatrix Balikan:");
+                                Matrix nm = new Matrix(m.getRow(), m.getCol());
+                                Matrix.copyMatrix(m, nm);
+                                System.out.println("\nMatrix Balikan:");
+                                invers.showInversAdjoin(nm);
                                 s = IO.matrixToStringArr(invers.getInversAdjoin(m));
                             } else {
                                 System.out.println("\nMatrix tidak memiliki inverse !");
