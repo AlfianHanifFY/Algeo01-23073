@@ -195,7 +195,7 @@ public class IO {
     }
 
     // Read bicubic spline data from file
-    public double[] readBicubicSplineData() {
+    public double[] readBicubicSplineDataFromFile() {
         double[] splineData = new double[18];
 
         openFile();

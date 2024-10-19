@@ -423,7 +423,7 @@ public class Main {
         } else {
             String fileName = IO.readFileName();
             IO f = new IO(fileName);
-            temp = f.readBicubicSplineData();
+            temp = f.readBicubicSplineDataFromFile();
         }
         s = BicubicSplineInterpolation.mainBicubicInterpolation(temp);
         IO.saveFile(s);
