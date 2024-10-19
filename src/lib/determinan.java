@@ -84,6 +84,10 @@ public class determinan {
     }
 
     public static Matrix getAdjoin(Matrix m) {
+        if (m.getRow() == 1) {
+            m.setElMT(0, 0, 1);
+            return m;
+        }
         m = getMatrixKofaktor(m);
         m.transpose();
         return (m);
