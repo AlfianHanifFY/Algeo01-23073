@@ -226,6 +226,7 @@ public class Main {
                                 text += "\nMatrix tidak dapat diselesaikan dengan metode ini !";
                                 s = IO.returnStringArr(text);
                             }
+                            valid = true;
                             IO.saveFile(s);
                             break;
                         case 4:
@@ -257,6 +258,7 @@ public class Main {
                                 s = IO.returnStringArr(text2);
                             }
                             IO.saveFile(s);
+                            valid = true;
                             break;
                     }
 
