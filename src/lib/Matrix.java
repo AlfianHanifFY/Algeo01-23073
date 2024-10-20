@@ -19,9 +19,10 @@ public class Matrix {
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
-        m1.readMatrix();
-        m1.generateEselon();
-        m1.printMatrix();
+        // m1.readMatrix();
+        // m1.generateEselon();
+        l = createHilbert(3);
+        l.printMatrix();
         // System.out.println();
         // m1.printMatrix();
         // System.out.println("matrix 2");
