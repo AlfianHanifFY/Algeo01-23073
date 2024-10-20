@@ -415,4 +415,34 @@ public class Matrix {
             }
         }
     }
+
+    public static Matrix createHilbert(int n) {
+        Matrix m = new Matrix(n, n);
+        int i, j;
+        double a, b, k;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                a = i;
+                b = j;
+                k = (1 / (a + b + 1));
+                m.setElMT(i, j, k);
+            }
+        }
+        return m;
+    }
+
+    public static Matrix createHilbertSol(int n) {
+        Matrix m = new Matrix(n, 1);
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                if (i == 0) {
+                    m.setElMT(i, j, 1);
+                } else {
+                    m.setElMT(i, j, 0);
+                }
+            }
+        }
+        return m;
+    }
 }
