@@ -14,14 +14,14 @@ public class SPL {
         Matrix m1 = new Matrix(3, 4);
         Matrix A = new Matrix(3, 3);
         Matrix B = new Matrix(3, 1);
-        // m1.readMatrix(scanner);
-        A.readMatrix();
-        B.readMatrix();
-        // gaussSolution(m1);
-        // gaussJordanSolution(m1);
-        balikanSolution(A, B);
-        cramerSolution(A, B);
-        scanner.close();
+        m1.readMatrix();
+        // A.readMatrix();
+        // B.readMatrix();
+        gaussSolution(m1);
+        gaussJordanSolution(m1);
+        // balikanSolution(A, B);
+        // cramerSolution(A, B);
+        // scanner.close();
     }
 
     public static double[] getSolution(Matrix m) {
@@ -137,6 +137,7 @@ public class SPL {
     public static String[] gaussSolution(Matrix m) {
         // SOLUSI BANYAKNYA MASIH KEOS -- NANTI DI CEK
         int i, j, n, ex = 0;
+        double k;
         double[] res = new double[m.getCol() - 1];
         double val;
         m.generateEselon();
@@ -149,7 +150,14 @@ public class SPL {
         } else if (isLotSolution(m)) {
             String[] txt = new String[m.getCol()];
             System.out.println("Banyak Solusi : ");
-            m.generateEselonReduksi();
+            for (i = 1; i < m.getRow(); i++) {
+                for (j = i - 1; j >= 0; j--) {
+                    if (m.rowLength(i) != m.getCol()) {
+                        k = m.getElmt(j, m.rowLength(i));
+                        m.plusKRow(j, -k, i);
+                    }
+                }
+            }
             for (i = 0; i < m.getCol() - 1; i++) {
                 n = i - ex;
                 if (m.rowLength(n) == m.getCol()) {

@@ -13,24 +13,27 @@ public class Matrix {
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Matrix m1 = new Matrix(3, 3);
+        Matrix m1 = new Matrix(1, 2);
         Matrix m2 = new Matrix(3, 1);
         Matrix M, l, r;
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
-        m1.readMatrix();
+        // m1.readMatrix();
+        // m1.generateEselon();
+        l = createHilbert(3);
+        l.printMatrix();
         // System.out.println();
         // m1.printMatrix();
         // System.out.println("matrix 2");
-        m2.readMatrix();
-        System.out.println("augmented:");
-        M = Matrix.createAugmented(m1, m2);
-        M.printMatrix();
-        r = Matrix.disassembleAugmented(M, false);
-        r.printMatrix();
-        l = Matrix.disassembleAugmented(M, true);
-        l.printMatrix();
+        // m2.readMatrix();
+        // System.out.println("augmented:");
+        // M = Matrix.createAugmented(m1, m2);
+        // M.printMatrix();
+        // r = Matrix.disassembleAugmented(M, false);
+        // r.printMatrix();
+        // l = Matrix.disassembleAugmented(M, true);
+        // l.printMatrix();
         // M = Matrix.createMatrixIdentitas(3);
         // m2 = Matrix.createAugmented(M, m1);
         // m2.printMatrix();
@@ -112,7 +115,7 @@ public class Matrix {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 // format 2 angka dibelakang koma
-                System.out.print(String.format(Locale.US, "%.2f ", matrix[i][j]));
+                System.out.print(String.format(Locale.US, "%.4f ", matrix[i][j]));
             }
             System.out.print("\n");
         }
@@ -411,5 +414,35 @@ public class Matrix {
                 m2.setElMT(i, j, m1.getElmt(i, j));
             }
         }
+    }
+
+    public static Matrix createHilbert(int n) {
+        Matrix m = new Matrix(n, n);
+        int i, j;
+        double a, b, k;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                a = i;
+                b = j;
+                k = (1 / (a + b + 1));
+                m.setElMT(i, j, k);
+            }
+        }
+        return m;
+    }
+
+    public static Matrix createHilbertSol(int n) {
+        Matrix m = new Matrix(n, 1);
+        int i, j;
+        for (i = 0; i < m.getRow(); i++) {
+            for (j = 0; j < m.getCol(); j++) {
+                if (i == 0) {
+                    m.setElMT(i, j, 1);
+                } else {
+                    m.setElMT(i, j, 0);
+                }
+            }
+        }
+        return m;
     }
 }
