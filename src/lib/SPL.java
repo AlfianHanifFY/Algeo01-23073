@@ -82,6 +82,9 @@ public class SPL {
                         }
                     }
                     txt[i] = restxt;
+                    if (n == m.getRow() - 1) {
+                        ex += 1;
+                    }
 
                 }
                 System.out.println();
@@ -166,6 +169,7 @@ public class SPL {
                 if (m.rowLength(n) == m.getCol()) {
                     txt[i] = String.format("x" + (i + 1) + " = " + (char) (97 + i));
                     System.out.print("x" + (i + 1) + " = " + (char) (97 + i));
+                    ex += 1;
                 } else if (i != m.rowLength(n)) {
                     txt[i] = String.format("x" + (i + 1) + " = " + (char) (97 + i));
                     System.out.print("x" + (i + 1) + " = " + (char) (97 + i));
@@ -189,6 +193,9 @@ public class SPL {
                         }
                     }
                     txt[i] = restxt;
+                    if (n == m.getRow() - 1) {
+                        ex += 1;
+                    }
                 }
                 System.out.println();
             }
