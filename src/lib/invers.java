@@ -7,11 +7,11 @@ public class invers {
 
     // buat nge tes
     public static void main(String[] args) {
-        Matrix m = new Matrix(3, 3);
-        Scanner scanner = new Scanner(System.in);
-        m.readMatrix();
-        showInversOBE(m);
-        showInversAdjoin(m);
+        // Matrix m = new Matrix(3, 3);
+        // Scanner scanner = new Scanner(System.in);
+        // m.readMatrix();
+        // showInversOBE(m);
+        // showInversAdjoin(m);
     }
 
     // func and proc

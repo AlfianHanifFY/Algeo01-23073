@@ -12,17 +12,17 @@ public class Matrix {
 
     // ==== ini buat nge tes co ==== //
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Matrix m1 = new Matrix(1, 2);
-        Matrix m2 = new Matrix(3, 1);
-        Matrix M, l, r;
+        // Scanner scanner = new Scanner(System.in);
+        // Matrix m1 = new Matrix(1, 2);
+        // Matrix m2 = new Matrix(3, 1);
+        // Matrix M, l, r;
         // Matrix res;
         // int a, b;
         // System.out.println("matrix 1");
         // m1.readMatrix();
         // m1.generateEselon();
-        l = createHilbert(6);
-        l.printMatrix();
+        // l = createHilbert(6);
+        // l.printMatrix();
         // System.out.println();
         // m1.printMatrix();
         // System.out.println("matrix 2");
@@ -64,7 +64,7 @@ public class Matrix {
         // m1.printMatrix();
         // m1 = changeCol(m1, 1, m2);
         // m1.printMatrix();
-        scanner.close();
+        // scanner.close();
     }
 
     // Konstruktor
@@ -93,7 +93,6 @@ public class Matrix {
     }
 
     public void readMatrix() {
-        // Set locale to US to ensure proper decimal point handling
         inputScanner.useLocale(Locale.US);
 
         while (true) {
@@ -136,8 +135,6 @@ public class Matrix {
     public void setElMT(int row, int col, double val) {
         this.matrix[row][col] = val;
     }
-
-    // OBE
 
     // swap lane
     public void swapRow(int row1, int row2) {
@@ -228,7 +225,6 @@ public class Matrix {
     }
 
     public int sortRowByZero() {
-        // pokoknya nanti urut berdasarkan jumlah 0 dari yang dikit sampe banyak
         int i, j, swapCount = 0;
         for (i = 0; i < getRow(); i++) {
             for (j = i; j < getRow(); j++) {

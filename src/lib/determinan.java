@@ -5,14 +5,14 @@ import java.lang.Math;
 
 public class determinan {
     public static void main(String[] args) {
-        Matrix m = new Matrix(3, 3);
-        int x;
-        Scanner scanner = new Scanner(System.in);
-        m.readMatrix();
+        // Matrix m = new Matrix(3, 3);
+        // int x;
+        // Scanner scanner = new Scanner(System.in);
+        // m.readMatrix();
         // System.out.println(getDeterminanKofaktor(m));
         // System.out.println(determinanReduksi(m));
-        m = getMatrixKofaktor(m);
-        m.printMatrix();
+        // m = getMatrixKofaktor(m);
+        // m.printMatrix();
     }
 
     public static double determinanReduksi(Matrix m) {
@@ -35,16 +35,14 @@ public class determinan {
             }
         }
         determinan *= Math.pow(-1, swapCount);
-        // di buletin biar ga keos angkanya
+
         return Math.round(determinan * 10000) / 10000;
     }
 
-    // Function to calculate the determinant of a 2x2 matrix
     public static double determinan2x2(Matrix m) {
         return m.getElmt(0, 0) * m.getElmt(1, 1) - m.getElmt(0, 1) * m.getElmt(1, 0);
     }
 
-    // Function to get the minor matrix by removing a specified row and column
     public static Matrix getMinorEntri(Matrix m, int row, int col) {
         int minorRow = 0, minorCol;
 
@@ -93,26 +91,21 @@ public class determinan {
         return (m);
     }
 
-    // Function to calculate the determinant using the cofactor expansion
     public static double getDeterminanKofaktor(Matrix m) {
         double det = 0;
 
-        // Base case: if it's a 1x1 matrix, return the only element
         if (m.getCol() == 1 && m.getRow() == 1) {
             return m.getElmt(0, 0);
         }
 
-        // Base case: if it's a 2x2 matrix, use the simple determinant formula
         if (m.isSquare2x2()) {
             return determinan2x2(m);
         }
 
-        // Recursive case: expand along the first column
         for (int i = 0; i < m.getRow(); i++) {
-            // Get the minor matrix for the element at (i, 0)
+
             Matrix minor = getMinorEntri(m, i, 0);
 
-            // Calculate the determinant recursively and apply the cofactor
             det += Math.pow(-1, i) * m.getElmt(i, 0) * getDeterminanKofaktor(minor);
         }
 
