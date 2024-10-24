@@ -35,13 +35,10 @@ public class SPL {
         return res;
     }
 
-    // func and proc
     public static String[] gaussJordanSolution(Matrix m) {
-        // co ini harus dalam bentuk matrix augmented
         int i, j, ex = 0, n;
         double val;
         m.generateEselonReduksi();
-        // karna udh eselon reduksi, jadi tinggal spam elmt terakhir row
         if (isNoSulution(m)) {
             String[] txt = new String[1];
             txt[0] = "Tidak ada solusi ! ";
@@ -93,7 +90,6 @@ public class SPL {
             String[] txt = new String[m.getRow()];
             System.out.println("Solusi : ");
             for (i = 0; i < m.getRow(); i++) {
-                // format biar ga floating point ... (keos)
                 txt[i] = String.format(Locale.US, "x%d = %.4f", (i + 1), m.getElmt(i, m.getCol() - 1));
                 System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), m.getElmt(i, m.getCol() - 1));
             }
@@ -139,7 +135,6 @@ public class SPL {
     }
 
     public static String[] gaussSolution(Matrix m) {
-        // SOLUSI BANYAKNYA MASIH KEOS -- NANTI DI CEK
         int i, j, n, ex = 0;
         double k;
         double[] res = new double[m.getCol() - 1];
