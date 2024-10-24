@@ -402,8 +402,6 @@ public class Matrix {
     }
 
     public static void copyMatrix(Matrix m1, Matrix m2) {
-        // row col harus sama
-        // copy m1 , paste ke m2
         int i, j;
         for (i = 0; i < m1.getRow(); i++) {
             for (j = 0; j < m1.getCol(); j++) {
