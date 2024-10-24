@@ -10,17 +10,18 @@ public class InterpolasiPolinomial {
         Scanner scanner = new Scanner(System.in);
 
         Matrix matrix;
-        int n;
+        int jumlahTitik;
         double xi;
 
         if (pilihan == 1) {
             // Input dari keyboard
-            System.out.print("\nMasukkan jumlah titik: ");
-            n = validasiInputJumlahTitik(scanner); // Input jumlah titik
+            System.out.print("\nMasukkan derajat persamaan: ");
+            int n = validasiInputDerajat(scanner); // Input derajat persamaan
+            jumlahTitik = n + 1; // Assign jumlah titik
 
             // Input matrix
-            matrix = new Matrix(n, 2);
-            System.out.print("\nMasukkan " + n + " titik (x y):\n");
+            matrix = new Matrix(jumlahTitik, 2);
+            System.out.print("\nMasukkan " + jumlahTitik + " titik (x y):\n");
             matrix.readMatrix();
 
             // Input nilai x yang ingin ditaksir
@@ -31,14 +32,14 @@ public class InterpolasiPolinomial {
             // Input dari file
             String fileName = IO.readFileName();
             IO io = new IO(fileName);
-            n = io.getRowCount() - 1; // Assign jumlah titik
-            double[] data = new double[(n * 2) + 1]; // Array sementara berisi nilai-nilai dalam file
+            jumlahTitik = io.getRowCount() - 1; // Assign jumlah titik
+            double[] data = new double[(jumlahTitik * 2) + 1]; // Array sementara berisi nilai-nilai dalam file
 
             io.openFile();
             io.fileScanner.useLocale(Locale.US);
 
             // Assign array sementara
-            for (int i = 0; i < (n * 2) + 1; i++) {
+            for (int i = 0; i < (jumlahTitik * 2) + 1; i++) {
                 if (io.fileScanner.hasNextDouble()) {
                     data[i] = io.fileScanner.nextDouble();
                 } else {
@@ -48,9 +49,9 @@ public class InterpolasiPolinomial {
             }
 
             // Assign matrix
-            matrix = new Matrix(n, 2);
+            matrix = new Matrix(jumlahTitik, 2);
             int k = 0;
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < jumlahTitik; i++) {
                 for (int j = 0; j < 2; j++) {
                     matrix.setElMT(i, j, data[k]);
                     k += 1;
@@ -58,19 +59,19 @@ public class InterpolasiPolinomial {
             }
 
             // Assign nilai x yang ingin ditaksir
-            xi = data[(n * 2)];
+            xi = data[(jumlahTitik * 2)];
             io.closeFile();
         }
 
         // Membuat matrix augmented
-        Matrix matrixAugmented = new Matrix(n, n + 1);
-        for (int i = 0; i < n; i++) {
+        Matrix matrixAugmented = new Matrix(jumlahTitik, jumlahTitik + 1);
+        for (int i = 0; i < jumlahTitik; i++) {
             double elmt = 1;
-            for (int j = 0; j < n; j++) {
+            for (int j = 0; j < jumlahTitik; j++) {
                 matrixAugmented.setElMT(i, j, elmt);
                 elmt = elmt * matrix.getElmt(i, 0);
             }
-            matrixAugmented.setElMT(i, n, matrix.getElmt(i, 1));
+            matrixAugmented.setElMT(i, jumlahTitik, matrix.getElmt(i, 1));
         }
 
         double[] solutions = SPL.getSolution(matrixAugmented); // Mencari variabel-variabel solusi
@@ -188,14 +189,14 @@ public class InterpolasiPolinomial {
 
 
     // Validasi input integer
-    public static int validasiInputJumlahTitik(Scanner scanner) {
+    public static int validasiInputDerajat(Scanner scanner) {
         int value;
         while (true) {
             String input = scanner.nextLine().trim();
             if (input.matches("\\d+")) {
                 value = Integer.parseInt(input);
-                if (value > 1) break;
-                else System.out.println("Input harus lebih dari 1.");
+                if (value > 0) break;
+                else System.out.println("Input harus lebih dari 0.");
             } else {
                 System.out.println("Input tidak valid. Masukkan angka bulat.");
             }
