@@ -4,21 +4,19 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class SPL {
-    // ga punya atribut
 
-    // buat nge tes
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        double[] res;
-        int i;
-        Matrix m1 = new Matrix(3, 4);
-        Matrix A = new Matrix(3, 3);
-        Matrix B = new Matrix(3, 1);
-        m1.readMatrix();
+        // Scanner scanner = new Scanner(System.in);
+        // double[] res;
+        // int i;
+        // Matrix m1 = new Matrix(3, 4);
+        // Matrix A = new Matrix(3, 3);
+        // Matrix B = new Matrix(3, 1);
+        // m1.readMatrix();
         // A.readMatrix();
         // B.readMatrix();
-        gaussSolution(m1);
-        gaussJordanSolution(m1);
+        // gaussSolution(m1);
+        // gaussJordanSolution(m1);
         // balikanSolution(A, B);
         // cramerSolution(A, B);
         // scanner.close();
