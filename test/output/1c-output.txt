@@ -1,2 +1,0 @@
-Matrix tidak memiliki inverse !
-Matrix tidak dapat diselesaikan dengan metode ini !
