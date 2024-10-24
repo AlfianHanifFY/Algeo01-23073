@@ -21,7 +21,7 @@ public class Matrix {
         // System.out.println("matrix 1");
         // m1.readMatrix();
         // m1.generateEselon();
-        l = createHilbert(3);
+        l = createHilbert(6);
         l.printMatrix();
         // System.out.println();
         // m1.printMatrix();
