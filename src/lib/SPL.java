@@ -51,7 +51,7 @@ public class SPL {
             return txt;
         } else if (isLotSolution(m)) {
             String[] txt = new String[m.getCol() - 1];
-            System.out.println("Banyak Solusi : ");
+            System.out.println("Solusi : ");
             m.generateEselonReduksi();
             for (i = 0; i < m.getCol() - 1; i++) {
                 n = i - ex;
@@ -90,7 +90,7 @@ public class SPL {
             return txt;
         } else if (isUnique(m)) {
             String[] txt = new String[m.getRow()];
-            System.out.println("Solusi unik : ");
+            System.out.println("Solusi : ");
             for (i = 0; i < m.getRow(); i++) {
                 // format biar ga floating point ... (keos)
                 txt[i] = String.format(Locale.US, "x%d = %.4f", (i + 1), m.getElmt(i, m.getCol() - 1));
@@ -152,7 +152,7 @@ public class SPL {
             return txt;
         } else if (isLotSolution(m)) {
             String[] txt = new String[m.getCol() - 1];
-            System.out.println("Banyak Solusi : ");
+            System.out.println("Solusi : ");
             for (i = 1; i < m.getRow(); i++) {
                 for (j = i - 1; j >= 0; j--) {
                     if (m.rowLength(i) != m.getCol()) {
@@ -195,7 +195,7 @@ public class SPL {
             return txt;
         } else if (isUnique(m)) {
             String[] txt = new String[m.getRow()];
-            System.out.println("Solusi unik : ");
+            System.out.println("Solusi : ");
             for (i = m.getRow() - 1; i >= 0; i--) {
                 val = 0;
                 for (j = m.rowLength(i) + 1; j < m.getCol() - 1; j++) {
