@@ -118,8 +118,8 @@ public class Main {
     }
 
     public static void splUI() throws IOException, InterruptedException {
-        int choice;
-        boolean run = true, valid = true;
+        int choice, mchoice;
+        boolean run = true, valid = true, type = true;
         String[] s;
 
         while (run) {
@@ -150,23 +150,68 @@ public class Main {
 
                     Matrix A, B, m;
                     if (inputType == 1) {
+
+                        System.out.println("Pilih Jenis Matrix :\n1. Matriks MxN\n2. Matrix Hilbert\n");
+                        while (type) {
+                            clearScreen();
+                            System.out.println("\n" + //
+                                    "▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀\n"
+                                    + //
+                                    "▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀ ▀▀\n");
+                            System.out.print("""
+                                    PILIH TIPE MATRIX
+                                    1. Matrix MxN
+                                    2. Matrix Hilbert
+                                    """);
+                            System.out.print("Masukkan pilihan:\n>> ");
+                            try {
+                                inputType = inputScanner.nextInt();
+
+                                if (inputType == 1 || inputType == 2) {
+                                    type = false;
+                                } else {
+                                    System.out.println("\nInput tidak valid. Silakan masukkan angka (1-2)!\n");
+                                    inputScanner.nextLine();
+                                    Thread.sleep(1000);
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("\nInput tidak valid. Silakan masukkan angka (1-2)!\n");
+                                inputScanner.nextLine();
+                                Thread.sleep(1000);
+                            }
+                        }
+
+                        if (inputType == 1) {
+                            System.out
+                                    .println(
+                                            "\n\n// **\nInput berupa dua matrix yang membentuk persamaan\nAx = B\n**  //\n");
+                            System.out.println("\nMATRIX A ");
+                            A = IO.readMatrixFromKeyboard();
+
+                            System.out.println("\nMATRIX B");
+                            B = IO.readMxNMatrixFromKeyboard(A.getRow(), 1);
+
+                            // augmented matrix
+                            m = Matrix.createAugmented(A, B);
+                            System.out.println("\nMatrix Augmented A dan B : ");
+                            m.printMatrix();
+                            System.out.println();
+                        } else {
+                            int n;
+                            System.out.println("Masukkan nilai n :");
+                            n = inputScanner.nextInt();
+                            A = Matrix.createHilbert(n);
+                            B = Matrix.createHilbertSol(n);
+
+                            // augmented matrix
+                            m = Matrix.createAugmented(A, B);
+                            System.out.println("\nMatrix Augmented A dan B : ");
+                            m.printMatrix();
+                            System.out.println();
+                        }
                         // Baca dari Keyboard
                         // Ax = B
                         // kalo input matrix A berlebih bakal langsung masuk ke matrix B
-                        System.out
-                                .println(
-                                        "\n\n// **\nInput berupa dua matrix yang membentuk persamaan\nAx = B\nA\n**  //\n");
-                        System.out.println("\nMATRIX A ");
-                        A = IO.readMatrixFromKeyboard();
-
-                        System.out.println("\nMATRIX B");
-                        B = IO.readMxNMatrixFromKeyboard(A.getRow(), 1);
-
-                        // augmented matrix
-                        m = Matrix.createAugmented(A, B);
-                        System.out.println("\nMatrix Augmented A dan B : ");
-                        m.printMatrix();
-                        System.out.println();
 
                     } else {
                         // Baca dari File
