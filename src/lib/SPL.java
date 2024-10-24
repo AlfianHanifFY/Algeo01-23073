@@ -50,17 +50,18 @@ public class SPL {
             System.out.println("Tidak ada solusi ! ");
             return txt;
         } else if (isLotSolution(m)) {
-            String[] txt = new String[m.getCol()];
+            String[] txt = new String[m.getCol() - 1];
             System.out.println("Banyak Solusi : ");
             m.generateEselonReduksi();
             for (i = 0; i < m.getCol() - 1; i++) {
                 n = i - ex;
                 if (m.rowLength(n) == m.getCol()) {
-                    txt[n] = String.format("x" + (n + 1) + " = " + (char) (97 + i));
-                    System.out.print("x" + (n + 1) + " = " + (char) (97 + i));
+                    txt[i] = String.format("x" + (i + 1) + " = " + (char) (97 + i));
+                    System.out.print("x" + (i + 1) + " = " + (char) (97 + i));
+
                 } else if (i != m.rowLength(n)) {
-                    txt[n] = String.format("x" + (n + 1) + " = " + (char) (97 + i));
-                    System.out.print("x" + (n + 1) + " = " + (char) (97 + i));
+                    txt[i] = String.format("x" + (i + 1) + " = " + (char) (97 + i));
+                    System.out.print("x" + (i + 1) + " = " + (char) (97 + i));
                     ex += 1;
                 } else {
                     val = m.getElmt(n, m.getCol() - 1);
@@ -80,17 +81,19 @@ public class SPL {
 
                         }
                     }
-                    txt[n] = restxt;
+                    txt[i] = restxt;
+
                 }
                 System.out.println();
             }
+
             return txt;
         } else if (isUnique(m)) {
             String[] txt = new String[m.getRow()];
             System.out.println("Solusi unik : ");
             for (i = 0; i < m.getRow(); i++) {
                 // format biar ga floating point ... (keos)
-                txt[i] = String.format(Locale.US, "x%d = %.4f%n", (i + 1), m.getElmt(i, m.getCol() - 1));
+                txt[i] = String.format(Locale.US, "x%d = %.4f", (i + 1), m.getElmt(i, m.getCol() - 1));
                 System.out.printf(Locale.US, "x%d = %.4f%n", (i + 1), m.getElmt(i, m.getCol() - 1));
             }
             return txt;
@@ -148,7 +151,7 @@ public class SPL {
             System.out.println("Tidak ada solusi ! ");
             return txt;
         } else if (isLotSolution(m)) {
-            String[] txt = new String[m.getCol()];
+            String[] txt = new String[m.getCol() - 1];
             System.out.println("Banyak Solusi : ");
             for (i = 1; i < m.getRow(); i++) {
                 for (j = i - 1; j >= 0; j--) {
@@ -161,11 +164,11 @@ public class SPL {
             for (i = 0; i < m.getCol() - 1; i++) {
                 n = i - ex;
                 if (m.rowLength(n) == m.getCol()) {
-                    txt[n] = String.format("x" + (n + 1) + " = " + (char) (97 + i));
-                    System.out.print("x" + (n + 1) + " = " + (char) (97 + i));
+                    txt[i] = String.format("x" + (i + 1) + " = " + (char) (97 + i));
+                    System.out.print("x" + (i + 1) + " = " + (char) (97 + i));
                 } else if (i != m.rowLength(n)) {
-                    txt[n] = String.format("x" + (n + 1) + " = " + (char) (97 + i));
-                    System.out.print("x" + (n + 1) + " = " + (char) (97 + i));
+                    txt[i] = String.format("x" + (i + 1) + " = " + (char) (97 + i));
+                    System.out.print("x" + (i + 1) + " = " + (char) (97 + i));
                     ex += 1;
                 } else {
                     val = m.getElmt(n, m.getCol() - 1);
@@ -185,7 +188,7 @@ public class SPL {
 
                         }
                     }
-                    txt[n] = restxt;
+                    txt[i] = restxt;
                 }
                 System.out.println();
             }
